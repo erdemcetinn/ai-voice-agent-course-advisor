@@ -1,0 +1,9 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.terraform/
+terraform.tfvars
+*.tfstate*
+data/index.npy
+.eski-dokumanlar/
