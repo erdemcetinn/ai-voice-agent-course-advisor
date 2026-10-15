@@ -43,8 +43,8 @@ Faz 8  Ekstralar (opsiyonel)     Terraform, CI, web arayüzü
 - **Yeni kavram:** **Embedding modeli** ile **sohbet modeli** farklı şeyler. Sohbet modeli metin üretir. Embedding modeli metni bir sayı listesine çevirir ve bu sayılar metnin anlamını temsil eder.
 - **Kontrol:** Konsolun "Playground" ekranında Claude'a bir soru sor, cevap gelsin.
 
-### 0.4 Proje klasörü ve Python ortamı
-- **Ne yapıyoruz:** `git init`, Python sanal ortamı (`python3.12 -m venv .venv`), `requirements.txt` (başlangıçta `boto3`, `requests`, `beautifulsoup4`, `numpy`, `pytest`).
+### 0.4 Proje klasörü ve Python ortamı ✅
+- **Ne yapıyoruz:** `git init`, Python sanal ortamı (`python3.11 -m venv .venv`, bilgisayarda 3.12 yok, 3.11 Lambda ile de uyumlu), `requirements.txt` (başlangıçta `boto3`, `requests`, `beautifulsoup4`, `numpy`, `pytest`).
 - **Neden:** Sanal ortam bu projenin kütüphanelerini bilgisayarındaki diğer projelerden ayırır. Git her adımı kaydeder ve bozarsan geri dönebilirsin.
 - **Kontrol:** `python -c "import boto3, numpy, bs4"` hata vermesin.
 
