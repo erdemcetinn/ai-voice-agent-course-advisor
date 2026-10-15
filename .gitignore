@@ -7,3 +7,4 @@ terraform.tfvars
 *.tfstate*
 data/index.npy
 .eski-dokumanlar/
+data/raw/

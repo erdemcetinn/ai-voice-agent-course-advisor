@@ -1,0 +1,579 @@
+{
+  "meta": {
+    "catalog_year": "2026-2027",
+    "program_url": "https://catalog.northeastern.edu/graduate/professional-studies/masters-degree-programs/informatics-mps/",
+    "scraped_at": "2026-10-14",
+    "program_course_count": 43,
+    "prereq_only_course_count": 4,
+    "missing_program_codes": [],
+    "missing_prereq_codes": [
+      "ALY 6000",
+      "ALY 6010",
+      "DGM 6105",
+      "DGM 6168",
+      "EAI 6000",
+      "EAI 6010",
+      "ITC 6000",
+      "ITC 6010",
+      "ITC 6020",
+      "ITC 6035",
+      "ITC 6300",
+      "ITC 6400",
+      "PJM 5900",
+      "TCC 6120"
+    ]
+  },
+  "courses": {
+    "AAI 6600": {
+      "code": "AAI 6600",
+      "title": "Applied Artificial Intelligence",
+      "credits": 3,
+      "description": "Introduces artificial intelligence, tracing its historical evolution and foundational principles. Delves into search algorithms for problem solving, knowledge representation, reasoning, planning, and decision making. Also covers probabilistic learning and the foundational aspects of machine learning. Emphasizes real-world applications to offer students an opportunity to obtain an in-depth understanding of AI's transformative potential, paving the way for more advanced studies in the field.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aai/"
+    },
+    "ALY 6105": {
+      "code": "ALY 6105",
+      "title": "Introduction to Applied Statistics",
+      "credits": 3,
+      "description": "Offers an overview of analytics concepts and practices across a diverse range of industries and organizational contexts. Analyzes real-world datasets using the advanced scripting, programming languages, and supporting libraries. Utilizes one of several predominant data analysis languages to explore datasets and analyze the relationships between their features. Provides a foundation in applied statistics, the mathematical language of data analysis, and begins to build the requisite mathematical acumen that serves as the foundational pillar of future study.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "ALY 6115": {
+      "code": "ALY 6115",
+      "title": "Foundations of Data Analytics",
+      "credits": 3,
+      "description": "Introduces statistics for business analytics from an analysis-of-data viewpoint. Topics include frequency distributions; measures of location (mean, median, mode); measures of dispersion; variance; graphic presentation; elementary probability; populations and samples; sampling distributions; categorical data; regression; correlation; and analysis of variance. Explores the use of statistical and data analysis software. Lab sessions emphasize hands-on application of probability and statistics and data problem solving using advanced analytic tools.",
+      "prereq_text": "ALY 6105 (may be taken concurrently) with a minimum grade of C- or ALY 6000 with a minimum grade of C-",
+      "prereq_codes": [
+        "ALY 6105",
+        "ALY 6000"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "ALY 6125": {
+      "code": "ALY 6125",
+      "title": "Intermediate Analytics",
+      "credits": 3,
+      "description": "Explores an end-to-end, data-driven, statistical, and predictive modeling approach with applications and case studies for predictive analytics. Applies all the data and modeling steps in a full modeling cycle, including exploratory data analysis and data cleansing for outlier imputation, data normalization, and commonly applied modeling techniques such as regression models, regularization techniques and model training, validation, testing, and selection.",
+      "prereq_text": "ALY 6115 with a minimum grade of C- or ALY 6010 with a minimum grade of C-",
+      "prereq_codes": [
+        "ALY 6115",
+        "ALY 6010"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "ALY 6145": {
+      "code": "ALY 6145",
+      "title": "Communication and Visualization with Data",
+      "credits": 3,
+      "description": "Presents a hands-on overview of principles needed to effectively design and create data visualizations, transforming raw data into actionable insights. Explores key informational design concepts, emphasizing the relationship between information and audience in the context of communicating complex quantitative information. Offers students an opportunity to use a variety of tools and techniques to conduct exploratory data visualization, design dashboards and scorecards, and present findings to hypothetical stakeholders. Evaluates ethical questions and biases related to the communication and visualization of data. Investigates techniques used to represent geospatial data as well as network and graph techniques.",
+      "prereq_text": "ALY 6115 with a minimum grade of C- or (ALY 6000 with a minimum grade of C- ; ALY 6010 with a minimum grade of C- )",
+      "prereq_codes": [
+        "ALY 6115",
+        "ALY 6000",
+        "ALY 6010"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "ALY 6420": {
+      "code": "ALY 6420",
+      "title": "Introduction to Queries",
+      "credits": 2,
+      "description": "Introduces the fundamentals of relational databases, different types of data, and how to query them. Offers instruction in writing complex queries that pull, join, filter, and summarize complex data from multiple sources. Analyzes cleaning, transforming, and aggregating data, and touches on advanced topics such as window functions and complex data types. Assesses the efficiency of queries and emphasizes the importance of minimizing runtime. Demonstrates how to integrate database access with common analytical programming languages. Applies these techniques to real-world case studies similar to those offered in case interview scenarios.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "ALY 6610": {
+      "code": "ALY 6610",
+      "title": "Data Mining Applications",
+      "credits": 3,
+      "description": "Introduces the theories, concepts, and methods for intensive data analysis methods and data mining techniques, such as supervised and unsupervised learning, classification methods, decision trees, clustering, association rule mining, text mining, and natural language processing. Investigates Exploratory Data Analysis, the interpretation of hidden patterns in data using statistical and visualization techniques. Offers students an opportunity to apply modern data mining techniques for effective large-scale data pattern recognition and insight discovery. Student teams evaluate, analyze, and report data for the methods used and insights discovered during case studies.",
+      "prereq_text": "ALY 6115 with a minimum grade of C- or (ALY 6000 with a minimum grade of C- ; ALY 6010 with a minimum grade of C- ) or (EAI 6000 with a minimum grade of C- ; EAI 6010 with a minimum grade of C- )",
+      "prereq_codes": [
+        "ALY 6115",
+        "ALY 6000",
+        "ALY 6010",
+        "EAI 6000",
+        "EAI 6010"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "ALY 6620": {
+      "code": "ALY 6620",
+      "title": "Big Data and Cloud Computing",
+      "credits": 3,
+      "description": "Explores advanced tools for interacting with large-scale data and the challenges and benefits Big Data provides. Introduces tools and methods of analytics for extracting, transforming, and loading to facilitate analysis. Examines questions of ethics, governance, privacy, and security of data stored in elastic clouds and analyzed on distributed clusters. Offers students an opportunity to apply theoretical concepts to create data solutions supported by large-scale data collection and management. Introduces concepts of distributed file systems, large-scale data streaming, and techniques of analysis in large-scale data systems.",
+      "prereq_text": "ALY 6115 with a minimum grade of C- or (ALY 6000 with a minimum grade of C- ; ALY 6010 with a minimum grade of C- ) or (EAI 6000 with a minimum grade of C- ; EAI 6010 with a minimum grade of C- )",
+      "prereq_codes": [
+        "ALY 6115",
+        "ALY 6000",
+        "ALY 6010",
+        "EAI 6000",
+        "EAI 6010"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+    },
+    "COP 6945": {
+      "code": "COP 6945",
+      "title": "Co-op Work Experience—Full Time",
+      "credits": 0,
+      "description": "Offers students an opportunity to engage in work experience that relates to their field of study. May be repeated up to five times.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/cop/"
+    },
+    "COP 6946": {
+      "code": "COP 6946",
+      "title": "Global Co-op Work Experience—Full Time",
+      "credits": 0,
+      "description": "Offers students an opportunity to engage in a global work experience that relates to their field of study. May be repeated up to 5 times.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/cop/"
+    },
+    "COP 6954": {
+      "code": "COP 6954",
+      "title": "Co-op Work Experience - Half-Time",
+      "credits": 0,
+      "description": "Provides eligible students with an opportunity for work experience. May be repeated without limit.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/cop/"
+    },
+    "DGM 5050": {
+      "code": "DGM 5050",
+      "title": "Web Creation Boot Camp",
+      "credits": 2,
+      "description": "Introduces core web design technologies such as HTML5 and CSS3. Explores fundamentals of web page creation and file management through practical applications. Students work individually to develop projects that explore creative text, multimedia presentation, and basic interactivity on the web.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "DGM 5060": {
+      "code": "DGM 5060",
+      "title": "Visual Design Foundations",
+      "credits": 2,
+      "description": "Introduces basic graphic design principles and their practical applications including typography and the design of text, image, and interface layouts and grids. Covers the use of color systems and spatial relationships to convey complex information. Introduces design system software such as Figma.",
+      "prereq_text": "DGM 5050 with a minimum grade of C- or DGM 6105 with a minimum grade of C-",
+      "prereq_codes": [
+        "DGM 5050",
+        "DGM 6105"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "DGM 5105": {
+      "code": "DGM 5105",
+      "title": "Foundations of Programming for Digital Media",
+      "credits": 2,
+      "description": "Introduces intermediate programming concepts for working with complex data such as arrays and objects. Examines basic object-oriented design techniques. Explores the fundamentals of selecting and working with programming libraries and APIs to develop interactive multimedia applications within a web-based framework that can be deployed to desktop computers, phones, or even watches. Students work individually and in groups to explore these concepts through experimentation and personal expression.",
+      "prereq_text": "DGM 5050 (may be taken concurrently) with a minimum grade of C- ; DGM 5100 (may be taken concurrently) with a minimum grade of C-",
+      "prereq_codes": [
+        "DGM 5050",
+        "DGM 5100"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "DGM 6115": {
+      "code": "DGM 6115",
+      "title": "Data Collection, Analysis, and Visualization",
+      "credits": 3,
+      "description": "Explores advanced data collection and visualization techniques for the analysis and assessment of both qualitative and quantitative data. Introduces and expands on structures, methodologies, best practices, and trends in data visualization. Evaluates and represents data through the design, creation, and adaptation of a variety of formats, charts, maps, and graphic tools. Builds on HCI design principles and qualitative user research methods explored in prior coursework while introducing students to various visualization tools such as Figma. Prior understanding and experience with basic programming and formal logic are required.",
+      "prereq_text": "DGM 5060 with a minimum grade of C- ; DGM 5105 with a minimum grade of C-",
+      "prereq_codes": [
+        "DGM 5060",
+        "DGM 5105"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "DGM 6255": {
+      "code": "DGM 6255",
+      "title": "Usability and Human Interaction",
+      "credits": 3,
+      "description": "Surveys the theory and practice of human-computer interaction and the development of user interfaces. Introduces interaction design methods and principles. Explores the creation of usable solutions for digital products, systems, and services through the observation and understanding of human behavior. Topics include cognitive foundations of interaction design, user research and problem analysis, target audience identification, and current and evolving research techniques. Students create a product, system, or service prototype design.",
+      "prereq_text": "DGM 5060 with a minimum grade of C- or DGM 6105 with a minimum grade of C-",
+      "prereq_codes": [
+        "DGM 5060",
+        "DGM 6105"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "DGM 6600": {
+      "code": "DGM 6600",
+      "title": "Information Design for Digital Media",
+      "credits": 3,
+      "description": "Surveys the design principles and disciplines that inform information design for digital media, including user-centered design approaches to technology, human behavior and interaction, information architecture, content organization, responsive design, accessibility, design systems, and emerging technologies. Studies how to present digital content in accessible, user-friendly ways that enable users to easily find and grasp the information they seek. Aims to build a foundation for solving information design challenges and creating purposeful experiences for digital-based media, making complex information relationships engaging for audiences in the digital arena.",
+      "prereq_text": "DGM 5050 with a minimum grade of C- ; DGM 5060 with a minimum grade of C- or DGM 6168 (may be taken concurrently) with a minimum grade of C- or TCC 6120 (may be taken concurrently) with a minimum grade of C-",
+      "prereq_codes": [
+        "DGM 5050",
+        "DGM 5060",
+        "DGM 6168",
+        "TCC 6120"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "DGM 6610": {
+      "code": "DGM 6610",
+      "title": "Prototyping and Usability Testing",
+      "credits": 3,
+      "description": "Examines the fundamentals of prototyping at different levels of fidelity and how to conduct usability tests to improve user experiences. Offers students an opportunity to obtain a comprehensive understanding of the principles, techniques, and methodologies for designing and evaluating user-centered prototypes. Students create interactive prototypes that support business and user goals, conduct usability tests to identify and address usability issues, and iterate to improve designs based on usability test findings.",
+      "prereq_text": "( DGM 6255 with a minimum grade of C- ; DGM 6600 with a minimum grade of C- ) or DGM 6168 with a minimum grade of C-",
+      "prereq_codes": [
+        "DGM 6255",
+        "DGM 6600",
+        "DGM 6168"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+    },
+    "INT 6200": {
+      "code": "INT 6200",
+      "title": "Experiential Project Preparation",
+      "credits": 1,
+      "description": "Designed to prepare students for an experiential learning placement. Offers students an opportunity to better understand key components of networks, business professionalism, and effective communication. Offers instruction in resumé writing; defining one's career field; assessing skills and abilities related to developing a career; building cultural agility, knowledge, and skills; and developing a comprehensive, strategic job search plan, along with effective career documents. Emphasizes alignment of academic goals with professional outcomes, course curriculum, and experiential learning opportunities.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/int/"
+    },
+    "INT 6940": {
+      "code": "INT 6940",
+      "title": "Experiential Learning Projects for Professionals",
+      "credits": 3,
+      "description": "Offers students an opportunity to apply knowledge and skills gained through their master’s program to work on challenging short-term projects under faculty supervision. Students are matched with discipline-specific consulting projects provided by a wide range of sponsoring organizations in the private and nonprofit sectors. Students develop a project plan, conduct research, develop and deliver recommendations to sponsoring organizations, and reflect on lessons learned. Mapping academic course concepts and skills to the consultative process is a primary learning goal.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/int/"
+    },
+    "INT 6943": {
+      "code": "INT 6943",
+      "title": "Integrative Experiential Learning",
+      "credits": 3,
+      "description": "Offers students an opportunity to apply knowledge and skills on challenging short‐term projects under faculty supervision. Matches students with discipline‐specific consulting projects provided by a wide range of sponsoring organizations in the private and nonprofit sectors for a truly unique experiential learning opportunity. Students research, develop, and deliver a project plan. Designed to map course concepts and skills to the consultative process.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/int/"
+    },
+    "ITC 6105": {
+      "code": "ITC 6105",
+      "title": "Foundations of Informatics",
+      "credits": 3,
+      "description": "Introduces the fundamental properties of information, technologies, and people within an increasingly complex infrastructure and social system.Discusses complex social issues, including IT policy choices, ethical issues, and how to be a socially responsible IT professional. Seeks to prepare students with a broad perspective and highly applied specific contexts that help direct them to future career concentrations. Offers students an opportunity to learn theoretical foundations of the informatics field; to develop design thinking for digital innovation; and to explore IT applications and solutions in various specific settings, including business, education, healthcare, and government.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6150": {
+      "code": "ITC 6150",
+      "title": "Database Application and Management",
+      "credits": 3,
+      "description": "Covers the design and use of both operational and analytical database systems. Critically examines key concepts and techniques—including data modeling, indexing, normalization, advanced SQL, data architecture design, and data application implementation—after establishing a theoretical foundation into the advanced principles of data management and the practical application of database systems. Explores in-depth fundamental concepts, cutting-edge techniques, and emerging trends in data management and database technologies. In today’s digital age, efficient data management is essential for organizations to glean meaningful insights and support informed decision making for their stakeholders.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6205": {
+      "code": "ITC 6205",
+      "title": "IT Strategy and Governance",
+      "credits": 3,
+      "description": "Focuses on the strategic use of information technology from a business perspective at the enterprise level. Covers business fundamentals and a strategic framework for technology-intensive enterprises, aligning technology products strategy, core competencies, and evolution within the technology industry. Covers strategic IT management including policy and governance, accountability frameworks, financial analysis, risk management, and legal compliance issues.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6250": {
+      "code": "ITC 6250",
+      "title": "Interactive System Design and Web Development",
+      "credits": 3,
+      "description": "Introduces fundamental principles of cognitive and social psychology relevant to the design and use of interactive systems and applications. Examines how to apply user-centered approaches for exploring user experiences, conduct user requirement analysis, develop user interface design, and prototyping. Practices the skills to construct and maintain an information system, applying state-of-the-art development tools and languages to develop web applications.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6405": {
+      "code": "ITC 6405",
+      "title": "Systems and Network Administration",
+      "credits": 2,
+      "description": "Focuses on the skills, tools, and best practices required to provide and support computing infrastructure and services. Aims to prepare the student to be responsible, from an ethical and legal perspective, for the infrastructure and computing system administration in an organization. Offers students an opportunity to obtain advanced technology enterprise infrastructure skills to support data centers and administer websites, as well as to resolve incidents, conduct troubleshooting, practice system backup and disaster recovery skills, and address system security issues.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6415": {
+      "code": "ITC 6415",
+      "title": "IT Policy, Ethics, and Social Responsibility",
+      "credits": 2,
+      "description": "Delves deep into the ethical dimensions of information technology. Includes aspects of social responsibility in the areas of generative artificial intelligence systems, social and interactive media, and disruptive innovations focusing on their creative capabilities and the implications they pose for society. As these technologies or systems become increasingly sophisticated, questions arise regarding their ethical implications including issues of authorship, intellectual property, cultural appropriation, and the potential disruption of industries. Aims to critically analyze and navigate the ethical challenges, fostering the knowledge and tools to evaluate, respond to, and shape the responsible use of these technologies.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6435": {
+      "code": "ITC 6435",
+      "title": "Ethical Hacking",
+      "credits": 2,
+      "description": "Exposes students to the different phases of hacking, specific skills for penetration/intrusion testing, and demonstrates hands-on techniques in ethical hacking. Offers students an opportunity to gain technical capabilities to secure information systems, conduct network scanning and enumeration, and learn social engineering skills and techniques to protect networks from hackers.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6480": {
+      "code": "ITC 6480",
+      "title": "Amazon Web Service (AWS) Cloud Architecting",
+      "credits": 4,
+      "description": "Exposes students to advanced technical topics to assist in the development of expertise in AWS cloud computing. Offers students an opportunity to gain the skills needed to pursue certification as an AWS Certified Solutions Architect–Associate, one of the most valuable IT certificates. Includes reading materials provided by AWS Academy, guided instruction in the classroom, hands-on labs operated by AWS, project work, and free practice exam if students wish to pursue certification after completing the course. Successful students have the ability to demonstrate knowledge and skills of how to architect and deploy secure and robust applications on AWS technologies.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6610": {
+      "code": "ITC 6610",
+      "title": "Foundations of Information Security",
+      "credits": 3,
+      "description": "Introduces fundamental concepts, principles, and domains of information security. Reviews essential IT components: systems, networks, data, development, cloud, and cryptography. Presents an overview of identity and access management, platform and network security, data protection and privacy, web application security, cloud security, security risk management and governance, security operations, security testing, security awareness and training, security management, and security frameworks.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6620": {
+      "code": "ITC 6620",
+      "title": "Information Security Risk Management",
+      "credits": 3,
+      "description": "Focuses on applying risk management to information security. Covers the security risk management life cycle including risk profiling, threat modeling, risk assessment, risk mitigation, and risk monitoring. Explores security controls, risk analysis techniques, vulnerability management, security governance, and industry standards and frameworks. Offers students an opportunity to practice risk assessments, propose mitigation plans, and present their risk management approaches.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6630": {
+      "code": "ITC 6630",
+      "title": "Cloud Security Planning and Design",
+      "credits": 3,
+      "description": "Presents a comprehensive overview of the principles and practices of cloud computing security. Topics include the fundamentals of cloud computing security; the latest threats and attack vectors targeting cloud-based systems; and best practices for securing cloud infrastructure, applications, and data. Covers technical tools to protect data, data privacy, information systems, and enterprise networks from external compromise. Explores the field of cybersecurity: the body of technologies, processes, and practices designed to protect networks, devices, programs, and data from attack, damage, or unauthorized access. Examines the components of a well-architected cybersecurity framework, identifies the tools required, and guides students to create plans that will protect the digital assets of the enterprise.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6640": {
+      "code": "ITC 6640",
+      "title": "Security Operations and Analytics",
+      "credits": 3,
+      "description": "Focuses on the knowledge and skills necessary for security operations and analytics based on real-time experience. Offers students an opportunity to identify attack tactics, techniques, and procedures; describe the services and workflows of a security operations center; analyze security data; learn threat detection and incident response process; and practice modern security operations solutions.",
+      "prereq_text": "ITC 6300 with a minimum grade of C- or ITC 6610 with a minimum grade of C-",
+      "prereq_codes": [
+        "ITC 6300",
+        "ITC 6610"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6650": {
+      "code": "ITC 6650",
+      "title": "Cloud Computing Fundamentals, Applications, and Management",
+      "credits": 3,
+      "description": "Explores cloud computing, merging theoretical and practical facets from distributed computing to advanced cloud concepts, as cloud computing reshapes the IT landscape. Delves into frameworks, techniques, and IT solutions tailored for various cloud models. Emphasizes key cloud characteristics such as virtualization, deployment models, web services, and security, while offering insights into advanced concepts, programming models, and the challenges of hybrid computing. Addresses the challenges and opportunities in cloud computing. Focuses mainly on cloud architectures, models, security, development, and services, drawing from contemporary cloud offerings and research.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6660": {
+      "code": "ITC 6660",
+      "title": "Enterprise Information Architecture",
+      "credits": 3,
+      "description": "Introduces the theory, framework/model, methodology, and tools that enhance the ability of businesses and organizations to produce information needed to make critical decisions and support business functions. Data and information management is critical to modern businesses and hybrid/cloud technologies. Covers how to discover, access, and understand data and to integrate IT and information resources. Presents best practices using cases studies in a more practical, comprehensive approach to delivering the subject matter involving the application of tools and methodologies.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6670": {
+      "code": "ITC 6670",
+      "title": "Cloud Data Architecture, Engineering, and Analytics",
+      "credits": 3,
+      "description": "Offers a comprehensive exploration of cloud data architecture, engineering, and analytics, with a deep dive into both artificial intelligence and traditional analytics methodologies. Introduces students to a blend of advanced techniques, tools, and applications that enable the extraction and interpretation of vast data sources (e.g., social media and e-commerce platforms) through AI-powered and standard analytics approaches on cloud platforms. Focuses on integration of AI with cloud systems, as well as the enduring relevance and efficacy of standard analytics techniques in data interpretation, visualization, and decision making. Offers comprehensive insights into the importance of cloud security, potential risks, AI-powered measures, and traditional analytics strategies to safeguard and interpret sensitive data in cloud environments.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6680": {
+      "code": "ITC 6680",
+      "title": "CISSP Preparation",
+      "credits": 2,
+      "description": "Covers all eight domains that comprise the body of knowledge covered by the Certified Information Systems Security Professional certification, governed by the International Information Systems Security Certifications Consortium, or ISC2. It is universally recognized as a critical component in the selection process for experienced information security professionals. Offers students an opportunity to obtain the knowledge and technical concepts required to achieve this certification.",
+      "prereq_text": "ITC 6610 with a minimum grade of C- ; ITC 6620 with a minimum grade of C-",
+      "prereq_codes": [
+        "ITC 6610",
+        "ITC 6620"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6711": {
+      "code": "ITC 6711",
+      "title": "Foundations of AI System and Data Management",
+      "credits": 3,
+      "description": "Presents how modern AI systems are architected, built, and maintained through robust data engineering practices. Explores the technical building blocks that support scalable, intelligent applications in cloud-native environments, ranging from data ingestion and transformation pipelines to model deployment and integration. Emphasizes the intersection of generative AI, data infrastructure, and enterprise system design. Offers students an opportunity to gain hands-on experience in designing modular, API-driven architectures and building data workflows that enable machine learning and gen AI capabilities. Topics include data modeling, distributed processing, embedding pipelines, RESTful integration, and the basics of LLM operations.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6721": {
+      "code": "ITC 6721",
+      "title": "Data Engineering for Intelligent Systems",
+      "credits": 3,
+      "description": "Presents the design and implementation of data architectures that power intelligent systems, including machine learning applications and generative AI solutions. Explores principles and tools of modern data engineering: building reliable, scalable pipelines that support real-time and batch processing; unstructured and structured data; and AI-ready data workflows. Topics include data ingestion, transformation, and orchestration using contemporary frameworks; integration with cloud-based storage and computer systems; and deployment of data pipelines that feed into AI/ML models and large language models. Emphasizes embedding pipelines, feature stores, vector databases, and operational data workflows that support AI at scale.",
+      "prereq_text": "AAI 6600 with a minimum grade of C- or ALY 6420 with a minimum grade of C- or ITC 6150 with a minimum grade of C-",
+      "prereq_codes": [
+        "AAI 6600",
+        "ALY 6420",
+        "ITC 6150"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6730": {
+      "code": "ITC 6730",
+      "title": "Operations and LLM Operations for Scalable AI",
+      "credits": 3,
+      "description": "Covers deployment, management, and scaling machine learning and large language model systems in real-world, cloud-native environments. Emphasizes operationalization over model design, focusing on building reliable, reproducible, and governed AI systems. Offers students an opportunity to gain hands-on experience with pretrained models, automated training pipelines, deployment strategies, model monitoring, and version control while applying DevOps-inspired principles to the AI life cycle. Addresses the distinct challenges of generative AI including prompt management, embeddings, and retrieval-augmented generation.",
+      "prereq_text": "AAI 6600 with a minimum grade of C- or ALY 6420 with a minimum grade of C- or ITC 6711 with a minimum grade of C-",
+      "prereq_codes": [
+        "AAI 6600",
+        "ALY 6420",
+        "ITC 6711"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6980": {
+      "code": "ITC 6980",
+      "title": "Informatics Capstone",
+      "credits": 4,
+      "description": "Offers students an opportunity to work on a major IT project sponsored by a real-world business, education institution, government department, or nonprofit organization. Students apply informatics knowledge and software skills to develop an IT product that reflects their master’s program learning experience. Projects focus on information systems, technology, and data management and explore issues involving research and development or business and market strategies. Requires students working in teams to generate a polished report and a cogent final presentation. Strongly encourages students to create a portfolio that can be shown to potential employers or current supervisors.",
+      "prereq_text": "( ITC 6105 with a minimum grade of C- ; ITC 6150 with a minimum grade of C- ; ITC 6205 with a minimum grade of C- ; ITC 6250 with a minimum grade of C- ; PJM 6440 with a minimum grade of C- ) or ( INT 6940 with a minimum grade of C- ; ITC 6000 with a minimum grade of C- ; ITC 6010 with a minimum grade of C- ; ITC 6020 with a minimum grade of C- ; ITC 6035 with a minimum grade of C- ; ITC 6400 with a minimum grade of C- )",
+      "prereq_codes": [
+        "ITC 6105",
+        "ITC 6150",
+        "ITC 6205",
+        "ITC 6250",
+        "PJM 6440",
+        "INT 6940",
+        "ITC 6000",
+        "ITC 6010",
+        "ITC 6020",
+        "ITC 6035",
+        "ITC 6400"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "ITC 6983": {
+      "code": "ITC 6983",
+      "title": "Special Topics in Informatics",
+      "credits": {
+        "min": 1,
+        "max": 4
+      },
+      "description": "Covers special topics within the realm of informatics.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+    },
+    "PJM 6100": {
+      "code": "PJM 6100",
+      "title": "Foundations of Project Management",
+      "credits": 3,
+      "description": "Studies foundational knowledge and concepts in modern project management. Presents insights into various project management methodologies while providing a structured approach to understanding key principles, models, methods, and processes required to manage various project types in the business environment. Introduces project management software programs. Emphasizes the practical application of project management tools to enhance efficiency and productivity. Strongly recommended for students with little or no formal project management experience.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+    },
+    "PJM 6120": {
+      "code": "PJM 6120",
+      "title": "Project Scope, Schedule and Cost Planning",
+      "credits": 3,
+      "description": "Integrates scope, schedule, and cost planning to offer students a deep dive into project definition, stakeholder needs assessment, cost estimation, and schedule development. Explores practical tools for translating needs into measurable project scope documents, creating resource-loaded schedules, managing trade-offs, and controlling scope creep. Emphasizes developing budget baselines, handling variances, managing project costs, and utilizing earned value analysis for cost and schedule oversight. Offers students an opportunity to obtain the skills to optimize project plans, manage bottlenecks, and establish contingencies, enhancing project management proficiency.",
+      "prereq_text": "PJM 6100 with a minimum grade of C- or PJM 5900 with a minimum grade of C-",
+      "prereq_codes": [
+        "PJM 6100",
+        "PJM 5900"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+    },
+    "PJM 6200": {
+      "code": "PJM 6200",
+      "title": "Project Risk Management",
+      "credits": 3,
+      "description": "Explores project risk management in-depth. Emphasizes essential principles, models, methods, and processes for optimizing project outcomes. Introduces the power of quantitative risk assessment, informed decisions through evidence-based approaches, and probabilistic estimates. Provides hands-on experiences with practical risk analytics using state-of-the-art technology. Emphasizes crafting robust risk management plans that prioritize continuous risk monitoring and the proactive management of sustainability risks. Offers students an opportunity to learn how to navigate project uncertainties to increase the likelihood of project success.",
+      "prereq_text": "PJM 6100 with a minimum grade of C- or PJM 5900 with a minimum grade of C-",
+      "prereq_codes": [
+        "PJM 6100",
+        "PJM 5900"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+    },
+    "PJM 6300": {
+      "code": "PJM 6300",
+      "title": "Project Quality Management",
+      "credits": 3,
+      "description": "Introduces project quality management principles, processes, models, and methods necessary to deliver quality projects and products within organizations. Discusses how to integrate PQM processes into the overall project plan and how to prepare a PQM plan. Offers students an opportunity to work together in a team environment to complete a PQM plan for a project. Topics include quality planning, quality assurance, quality control, statistical process control, process capability analysis, cost of quality, quality analytics, and quality management systems.",
+      "prereq_text": "PJM 6100 with a minimum grade of C- or PJM 5900 with a minimum grade of C-",
+      "prereq_codes": [
+        "PJM 6100",
+        "PJM 5900"
+      ],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+    },
+    "PJM 6440": {
+      "code": "PJM 6440",
+      "title": "Leading and Managing Technical Projects",
+      "credits": 2,
+      "description": "Offers students an opportunity to learn about leadership and management skills and strategies needed to succeed in a demanding technical project environment. Many project managers understand the technical aspects of a particular project environment but lack these critical management and leadership skills. Topics covered include understanding the technical environment, managing and motivating team members, understanding organizational culture and interpersonal strategies, and developing a personal leadership approach.",
+      "prereq_text": null,
+      "prereq_codes": [],
+      "attributes": [],
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+    }
+  }
+}

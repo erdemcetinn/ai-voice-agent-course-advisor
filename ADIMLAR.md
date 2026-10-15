@@ -59,7 +59,7 @@ Program: **CPS, MPS in Informatics (Boston), 2026-2027 kataloğu.** Dersler **IT
 - Ön koşullarda adı geçen ama programda olmayan dersler (ALY 6420, AAI 6600 gibi)
 - "Herhangi bir CPS lisansüstü dersi" seçmeli kuralı için CPS'in bütün derslerini indirmiyoruz, bunu bir **kural** olarak tutuyoruz.
 
-### 1.1 Katalogu indir: `scripts/scrape_catalog.py`
+### 1.1 Katalogu indir: `scripts/scrape_catalog.py` ✅
 - **Ne yapıyoruz:** İki tür sayfa indiriyoruz:
   1. [Program sayfası](https://catalog.northeastern.edu/graduate/professional-studies/masters-degree-programs/informatics-mps/): ders listeleri ve kurallar
   2. Programda geçen her bölümün ders açıklama sayfası (ör. [ITC](https://catalog.northeastern.edu/course-descriptions/itc/)): her ders için kod, ad, kredi, açıklama ve ön koşul metni
@@ -67,6 +67,8 @@ Program: **CPS, MPS in Informatics (Boston), 2026-2027 kataloğu.** Dersler **IT
 - **Yeni kavram:** **Web scraping.** HTML bir ağaç yapısı. BeautifulSoup ile "her ders bloğunu bul, içinden başlığı al" gibi komutlar veriyoruz.
 - **Not:** Krediler bazen "1-4" gibi aralık oluyor. Bunu `{"min": 1, "max": 4}` olarak tutuyoruz.
 - **Kontrol:** Program sayfasında geçen her ders kodu `courses` içinde bulunuyor. Eksik olanları betik listeliyor. Birkaç dersi sitedekiyle elle karşılaştır.
+- **Sonuç (14 Ekim):** 47 ders (programdan 43, ön koşullardan 4: AAI 6600, ALY 6420, DGM 5050, DGM 5105). 16 test geçiyor.
+- **Öğrendiğimiz:** Katalog artık var olmayan derslere (ITC 6300, eski çeyrek sistemindeki ITC 6000 gibi) link vermiyor. Bu yüzden ön koşuldaki kodları linklerden değil metinden okuyoruz. Bu 14 eski kodun hepsi "veya" ile yeni bir dersin alternatifi olarak geçiyor, yeni sistemdeki öğrenci için engel değil. Liste `meta.missing_prereq_codes` alanında.
 
 ### 1.2 Ön koşulları ayrıştır
 - **Ne yapıyoruz:** `"ITC 6610 with a minimum grade of C- ; ITC 6620 with a minimum grade of C-"` gibi metinleri yapıya çeviriyoruz:
@@ -76,6 +78,9 @@ Program: **CPS, MPS in Informatics (Boston), 2026-2027 kataloğu.** Dersler **IT
   Katalogda `;` "ve", `or` "veya" anlamına geliyor. Parantezler iç içe grup kuruyor. En zor örnek capstone (ITC 6980): "(5 zorunlu dersin hepsi) veya (eski çeyrek sistemindeki 6 dersin hepsi)".
 - **Neden:** Hesap makinesi (Faz 5) metin okuyamaz, yapı okur. Bu adım düz metni kurala çeviriyor.
 - **Yeni kavram:** **Ayrıştırma (parsing)** ve düzenli ifadeler (regex). İç içe parantezler için **ağaç yapısı.**
+- **1.1'de bulunan zorluklar:**
+  - `(may be taken concurrently)`: o ders aynı dönemde de alınabilir. Yapıda `"concurrent": true` olarak tutulmalı.
+  - Parantezsiz karışık ifadeler: DGM 6600 `"DGM 5050 ; DGM 5060 or DGM 6168 or TCC 6120"`. Büyük ihtimalle "DGM 5050 **ve** (diğerlerinden biri)" demek, yani `;` (ve) `or`'dan daha zayıf bağlıyor. Ayrıştırıcı bu önceliği kullanmalı ve bu ders için ayrı bir test olmalı.
 - **Kontrol:** Her ders için ayrıştırılan ön koşulu orijinal metinle yan yana yazdıran küçük bir test. Ayrıştırılamayanları ayrı listele ve elle bak. Orijinal metin de `prereq_text` alanında saklanıyor.
 
 ### 1.3 Mezuniyet şartlarını program sayfasından çıkar
