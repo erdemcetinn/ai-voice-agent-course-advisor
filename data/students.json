@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "synthetic": true,
+    "note": "Uydurma öğrenciler. Gerçek kişi ya da kayıt değildir."
+  },
+  "students": {
+    "s001": {
+      "student_id": "s001",
+      "name": "Maya Okafor",
+      "pin": "4821",
+      "option": "Information Security Management",
+      "terms": [
+        {
+          "term": 1,
+          "courses": [
+            {
+              "course": "ITC 6105",
+              "grade": "A"
+            },
+            {
+              "course": "ITC 6610",
+              "grade": "A-"
+            }
+          ]
+        }
+      ]
+    },
+    "s002": {
+      "student_id": "s002",
+      "name": "Daniel Reyes",
+      "pin": "7350",
+      "option": "Cloud Computing Application and Management",
+      "terms": [
+        {
+          "term": 1,
+          "courses": [
+            {
+              "course": "ITC 6105",
+              "grade": "B+"
+            },
+            {
+              "course": "ITC 6150",
+              "grade": "B"
+            }
+          ]
+        },
+        {
+          "term": 2,
+          "courses": [
+            {
+              "course": "ITC 6205",
+              "grade": "A-"
+            },
+            {
+              "course": "ITC 6650",
+              "grade": "B+"
+            }
+          ]
+        },
+        {
+          "term": 3,
+          "courses": [
+            {
+              "course": "ITC 6250",
+              "grade": "B"
+            },
+            {
+              "course": "ITC 6630",
+              "grade": "A"
+            },
+            {
+              "course": "PJM 6440",
+              "grade": "B+"
+            }
+          ]
+        }
+      ]
+    },
+    "s003": {
+      "student_id": "s003",
+      "name": "Lena Fischer",
+      "pin": "2694",
+      "option": "Analytics",
+      "terms": [
+        {
+          "term": 1,
+          "courses": [
+            {
+              "course": "ITC 6105",
+              "grade": "A"
+            },
+            {
+              "course": "ALY 6105",
+              "grade": "A-"
+            },
+            {
+              "course": "ITC 6150",
+              "grade": "B+"
+            }
+          ]
+        },
+        {
+          "term": 2,
+          "courses": [
+            {
+              "course": "ALY 6115",
+              "grade": "A"
+            },
+            {
+              "course": "ITC 6205",
+              "grade": "B+"
+            },
+            {
+              "course": "PJM 6440",
+              "grade": "A"
+            }
+          ]
+        },
+        {
+          "term": 3,
+          "courses": [
+            {
+              "course": "ALY 6145",
+              "grade": "A-"
+            },
+            {
+              "course": "ALY 6610",
+              "grade": "B+"
+            },
+            {
+              "course": "ITC 6250",
+              "grade": "A-"
+            }
+          ]
+        },
+        {
+          "term": 4,
+          "courses": [
+            {
+              "course": "ITC 6415",
+              "grade": "A"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

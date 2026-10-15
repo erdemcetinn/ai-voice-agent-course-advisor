@@ -147,4 +147,3 @@ Kaynak: [program sayfası, 2026-2027 kataloğu](https://catalog.northeastern.edu
   | ITC 6980 | (ITC 6105, 6150, 6205, 6250, PJM 6440 hepsi) veya (INT 6940, ITC 6000, 6010, 6020, 6035, 6400 hepsi; eski çeyrek sistemi) |
 
 - **Katalogda olmayan bilgiler:** bir dersin iki konsantrasyona sayılıp sayılmadığı (ITC 6630 Cloud ve Security'de var), transfer kredisi, ders tekrarı, dersin hangi dönem açıldığı.
-- **Doğrulanacak:** Lisansüstü not skalasında C- ile F arasında not var mı (sentetik öğrencilerde F kullanmamızın sebebi).

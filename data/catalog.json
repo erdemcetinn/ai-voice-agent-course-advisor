@@ -2,7 +2,7 @@
   "meta": {
     "catalog_year": "2026-2027",
     "program_url": "https://catalog.northeastern.edu/graduate/professional-studies/masters-degree-programs/informatics-mps/",
-    "scraped_at": "2026-10-14",
+    "scraped_at": "2026-10-15",
     "program_course_count": 43,
     "prereq_only_course_count": 4,
     "missing_program_codes": [],
@@ -23,6 +23,132 @@
       "TCC 6120"
     ]
   },
+  "program": {
+    "name": "MPS in Informatics (Boston)",
+    "total_credits": 34,
+    "min_gpa": 3.0,
+    "required": [
+      "ITC 6105",
+      "ITC 6150",
+      "ITC 6205",
+      "ITC 6250",
+      "PJM 6440",
+      "ITC 6980"
+    ],
+    "options": [
+      {
+        "name": "AI Systems and Data Management",
+        "kind": "concentration",
+        "required": [
+          "ITC 6711",
+          "ITC 6721",
+          "ITC 6730",
+          "ITC 6670"
+        ],
+        "choose": [],
+        "restricted_elective_credits": 4,
+        "any_cps_graduate_credits": 0
+      },
+      {
+        "name": "Analytics",
+        "kind": "concentration",
+        "required": [
+          "ALY 6105",
+          "ALY 6115",
+          "ALY 6145"
+        ],
+        "choose": [
+          {
+            "credits": 3,
+            "from": [
+              "ALY 6125",
+              "ALY 6610",
+              "ALY 6620"
+            ]
+          }
+        ],
+        "restricted_elective_credits": 4,
+        "any_cps_graduate_credits": 0
+      },
+      {
+        "name": "Cloud Computing Application and Management",
+        "kind": "concentration",
+        "required": [
+          "ITC 6630",
+          "ITC 6650",
+          "ITC 6660",
+          "ITC 6670"
+        ],
+        "choose": [],
+        "restricted_elective_credits": 4,
+        "any_cps_graduate_credits": 0
+      },
+      {
+        "name": "Human-Centered Informatics",
+        "kind": "concentration",
+        "required": [
+          "DGM 5060",
+          "DGM 6115",
+          "DGM 6255",
+          "DGM 6600",
+          "DGM 6610"
+        ],
+        "choose": [],
+        "restricted_elective_credits": 2,
+        "any_cps_graduate_credits": 0
+      },
+      {
+        "name": "Information Security Management",
+        "kind": "concentration",
+        "required": [
+          "ITC 6610",
+          "ITC 6620",
+          "ITC 6630",
+          "ITC 6640"
+        ],
+        "choose": [],
+        "restricted_elective_credits": 4,
+        "any_cps_graduate_credits": 0
+      },
+      {
+        "name": "Project Management",
+        "kind": "concentration",
+        "required": [
+          "PJM 6100",
+          "PJM 6120",
+          "PJM 6200",
+          "PJM 6300"
+        ],
+        "choose": [],
+        "restricted_elective_credits": 4,
+        "any_cps_graduate_credits": 0
+      },
+      {
+        "name": "Electives Option",
+        "kind": "electives",
+        "required": [],
+        "choose": [],
+        "restricted_elective_credits": 4,
+        "any_cps_graduate_credits": 12
+      }
+    ],
+    "restricted_electives": [
+      "INT 6940",
+      "ITC 6405",
+      "ITC 6415",
+      "ITC 6435",
+      "ITC 6480",
+      "ITC 6680",
+      "ITC 6983"
+    ],
+    "notes": [
+      "PJM 6100 is for students with fewer than three years of experience directing or leading project tasks. Students who do not complete PJM 6100 may substitute project management electives.",
+      "ITC 6670 appears in both AI Systems and Cloud concentrations; ITC 6630 appears in both Cloud and Information Security.",
+      "Co-op (INT 6200 + a COP course) requires 1 additional credit beyond the 34 required credits.",
+      "INT 6943 Integrative Experiential Learning (3 credits) may substitute for 3 credits of restricted electives.",
+      "Electives option: the 12 credits may be any CPS graduate-level courses or unused courses in the program."
+    ]
+  },
   "courses": {
     "AAI 6600": {
       "code": "AAI 6600",
@@ -32,7 +158,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aai/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aai/",
+      "prereq": null
     },
     "ALY 6105": {
       "code": "ALY 6105",
@@ -42,7 +169,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": null
     },
     "ALY 6115": {
       "code": "ALY 6115",
@@ -55,7 +183,21 @@
         "ALY 6000"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": {
+        "or": [
+          {
+            "course": "ALY 6105",
+            "min_grade": "C-",
+            "concurrent": true
+          },
+          {
+            "course": "ALY 6000",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "ALY 6125": {
       "code": "ALY 6125",
@@ -68,7 +210,21 @@
         "ALY 6010"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": {
+        "or": [
+          {
+            "course": "ALY 6115",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ALY 6010",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "ALY 6145": {
       "code": "ALY 6145",
@@ -82,7 +238,30 @@
         "ALY 6010"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": {
+        "or": [
+          {
+            "course": "ALY 6115",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "and": [
+              {
+                "course": "ALY 6000",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ALY 6010",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          }
+        ]
+      }
     },
     "ALY 6420": {
       "code": "ALY 6420",
@@ -92,7 +271,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": null
     },
     "ALY 6610": {
       "code": "ALY 6610",
@@ -108,7 +288,44 @@
         "EAI 6010"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": {
+        "or": [
+          {
+            "course": "ALY 6115",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "and": [
+              {
+                "course": "ALY 6000",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ALY 6010",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          },
+          {
+            "and": [
+              {
+                "course": "EAI 6000",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "EAI 6010",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          }
+        ]
+      }
     },
     "ALY 6620": {
       "code": "ALY 6620",
@@ -124,7 +341,44 @@
         "EAI 6010"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/aly/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/aly/",
+      "prereq": {
+        "or": [
+          {
+            "course": "ALY 6115",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "and": [
+              {
+                "course": "ALY 6000",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ALY 6010",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          },
+          {
+            "and": [
+              {
+                "course": "EAI 6000",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "EAI 6010",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          }
+        ]
+      }
     },
     "COP 6945": {
       "code": "COP 6945",
@@ -134,7 +388,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/cop/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/cop/",
+      "prereq": null
     },
     "COP 6946": {
       "code": "COP 6946",
@@ -144,7 +399,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/cop/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/cop/",
+      "prereq": null
     },
     "COP 6954": {
       "code": "COP 6954",
@@ -154,7 +410,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/cop/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/cop/",
+      "prereq": null
     },
     "DGM 5050": {
       "code": "DGM 5050",
@@ -164,7 +421,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": null
     },
     "DGM 5060": {
       "code": "DGM 5060",
@@ -177,7 +435,21 @@
         "DGM 6105"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": {
+        "or": [
+          {
+            "course": "DGM 5050",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "DGM 6105",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "DGM 5105": {
       "code": "DGM 5105",
@@ -190,7 +462,21 @@
         "DGM 5100"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": {
+        "and": [
+          {
+            "course": "DGM 5050",
+            "min_grade": "C-",
+            "concurrent": true
+          },
+          {
+            "course": "DGM 5100",
+            "min_grade": "C-",
+            "concurrent": true
+          }
+        ]
+      }
     },
     "DGM 6115": {
       "code": "DGM 6115",
@@ -203,7 +489,21 @@
         "DGM 5105"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": {
+        "and": [
+          {
+            "course": "DGM 5060",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "DGM 5105",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "DGM 6255": {
       "code": "DGM 6255",
@@ -216,7 +516,21 @@
         "DGM 6105"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": {
+        "or": [
+          {
+            "course": "DGM 5060",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "DGM 6105",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "DGM 6600": {
       "code": "DGM 6600",
@@ -231,7 +545,35 @@
         "TCC 6120"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": {
+        "and": [
+          {
+            "course": "DGM 5050",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "or": [
+              {
+                "course": "DGM 5060",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "DGM 6168",
+                "min_grade": "C-",
+                "concurrent": true
+              },
+              {
+                "course": "TCC 6120",
+                "min_grade": "C-",
+                "concurrent": true
+              }
+            ]
+          }
+        ]
+      }
     },
     "DGM 6610": {
       "code": "DGM 6610",
@@ -245,7 +587,30 @@
         "DGM 6168"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/dgm/",
+      "prereq": {
+        "or": [
+          {
+            "and": [
+              {
+                "course": "DGM 6255",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "DGM 6600",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          },
+          {
+            "course": "DGM 6168",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "INT 6200": {
       "code": "INT 6200",
@@ -255,7 +620,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/int/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/int/",
+      "prereq": null
     },
     "INT 6940": {
       "code": "INT 6940",
@@ -265,7 +631,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/int/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/int/",
+      "prereq": null
     },
     "INT 6943": {
       "code": "INT 6943",
@@ -275,7 +642,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/int/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/int/",
+      "prereq": null
     },
     "ITC 6105": {
       "code": "ITC 6105",
@@ -285,7 +653,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6150": {
       "code": "ITC 6150",
@@ -295,7 +664,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6205": {
       "code": "ITC 6205",
@@ -305,7 +675,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6250": {
       "code": "ITC 6250",
@@ -315,7 +686,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6405": {
       "code": "ITC 6405",
@@ -325,7 +697,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6415": {
       "code": "ITC 6415",
@@ -335,7 +708,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6435": {
       "code": "ITC 6435",
@@ -345,7 +719,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6480": {
       "code": "ITC 6480",
@@ -355,7 +730,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6610": {
       "code": "ITC 6610",
@@ -365,7 +741,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6620": {
       "code": "ITC 6620",
@@ -375,7 +752,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6630": {
       "code": "ITC 6630",
@@ -385,7 +763,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6640": {
       "code": "ITC 6640",
@@ -398,7 +777,21 @@
         "ITC 6610"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": {
+        "or": [
+          {
+            "course": "ITC 6300",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ITC 6610",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "ITC 6650": {
       "code": "ITC 6650",
@@ -408,7 +801,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6660": {
       "code": "ITC 6660",
@@ -418,7 +812,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6670": {
       "code": "ITC 6670",
@@ -428,7 +823,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6680": {
       "code": "ITC 6680",
@@ -441,7 +837,21 @@
         "ITC 6620"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": {
+        "and": [
+          {
+            "course": "ITC 6610",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ITC 6620",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "ITC 6711": {
       "code": "ITC 6711",
@@ -451,7 +861,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "ITC 6721": {
       "code": "ITC 6721",
@@ -465,7 +876,26 @@
         "ITC 6150"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": {
+        "or": [
+          {
+            "course": "AAI 6600",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ALY 6420",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ITC 6150",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "ITC 6730": {
       "code": "ITC 6730",
@@ -479,7 +909,26 @@
         "ITC 6711"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": {
+        "or": [
+          {
+            "course": "AAI 6600",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ALY 6420",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "ITC 6711",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "ITC 6980": {
       "code": "ITC 6980",
@@ -501,7 +950,74 @@
         "ITC 6400"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": {
+        "or": [
+          {
+            "and": [
+              {
+                "course": "ITC 6105",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6150",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6205",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6250",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "PJM 6440",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          },
+          {
+            "and": [
+              {
+                "course": "INT 6940",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6000",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6010",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6020",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6035",
+                "min_grade": "C-",
+                "concurrent": false
+              },
+              {
+                "course": "ITC 6400",
+                "min_grade": "C-",
+                "concurrent": false
+              }
+            ]
+          }
+        ]
+      }
     },
     "ITC 6983": {
       "code": "ITC 6983",
@@ -514,7 +1030,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/itc/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/itc/",
+      "prereq": null
     },
     "PJM 6100": {
       "code": "PJM 6100",
@@ -524,7 +1041,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/",
+      "prereq": null
     },
     "PJM 6120": {
       "code": "PJM 6120",
@@ -537,7 +1055,21 @@
         "PJM 5900"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/",
+      "prereq": {
+        "or": [
+          {
+            "course": "PJM 6100",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "PJM 5900",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "PJM 6200": {
       "code": "PJM 6200",
@@ -550,7 +1082,21 @@
         "PJM 5900"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/",
+      "prereq": {
+        "or": [
+          {
+            "course": "PJM 6100",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "PJM 5900",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "PJM 6300": {
       "code": "PJM 6300",
@@ -563,7 +1109,21 @@
         "PJM 5900"
       ],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/",
+      "prereq": {
+        "or": [
+          {
+            "course": "PJM 6100",
+            "min_grade": "C-",
+            "concurrent": false
+          },
+          {
+            "course": "PJM 5900",
+            "min_grade": "C-",
+            "concurrent": false
+          }
+        ]
+      }
     },
     "PJM 6440": {
       "code": "PJM 6440",
@@ -573,7 +1133,8 @@
       "prereq_text": null,
       "prereq_codes": [],
       "attributes": [],
-      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/"
+      "url": "https://catalog.northeastern.edu/course-descriptions/pjm/",
+      "prereq": null
     }
   }
 }

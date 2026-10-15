@@ -3,7 +3,7 @@
 Bir öğrenci telefon numarasını arıyor ve soruyor: *"Gelecek dönem hangi dersleri alabilirim?"*
 Sistem, Northeastern'in gerçek ders kataloğuna ve öğrencinin kendi transkriptine bakarak cevap veriyor.
 
-> **Durum:** Faz 0 bitti (hesap, bütçe, Bedrock erişimi, git, Python ortamı). Sırada Faz 1: veri (14 Ekim 2026).
+> **Durum:** Faz 0 ve Faz 1 bitti (AWS hazırlığı, katalog, ön koşullar, mezuniyet kuralları, sentetik öğrenciler). Sırada Faz 2: tool'lar (15 Ekim 2026).
 > Adım adım yapılış rehberi: **[ADIMLAR.md](ADIMLAR.md)**
 > Araştırmada doğrulanan teknik bilgiler: **[ARASTIRMA.md](ARASTIRMA.md)**
 
@@ -71,7 +71,7 @@ Terminalde ise saniyeler içinde deneyebiliyoruz. Beyni terminalde doğru çalı
 | Ne için | Teknoloji | Neden bu |
 |---|---|---|
 | Dil | **Python 3.11** | AWS kütüphaneleri (boto3) ve veri işleme için en rahat dil |
-| Katalog verisini çekmek | **requests + BeautifulSoup** | Katalog sayfası düz HTML. Sayfayı indirip içinden ders bilgisini ayıklamak için en basit araçlar |
+| Ön koşulları kurala çevirmek | **Python + regex** | Katalogdaki "ITC 6610 ; ITC 6620" gibi metinleri planlayıcının okuyabileceği ve/veya yapısına çeviriyor |
 | Metin yolunda LLM | **Amazon Bedrock, Converse API, Claude** | AWS içinde LLM çağırmanın standart yolu. Converse API, tool kullanımını (modelin "şu fonksiyonu çağır" demesini) destekliyor |
 | Metni sayıya çevirmek | **Bedrock, Titan Text Embeddings V2** | Arama için her metnin "parmak izini" (embedding) çıkarıyor. AWS içinde, ucuz |
 | Benzer metni bulmak | **numpy** | Yaklaşık 45 ders, birkaç yüz parça metin var. Bu kadar az veride basit bir matematik işlemi (kosinüs benzerliği) milisaniyede sonuç veriyor. Veri binleri geçerse FAISS'e geçeriz |
@@ -104,6 +104,8 @@ Terminalde ise saniyeler içinde deneyebiliyoruz. Beyni terminalde doğru çalı
 | Ders kataloğu, ön koşullar, mezuniyet şartları | **Gerçek ve herkese açık:** [CPS MPS in Informatics, 2026-27 kataloğu](https://catalog.northeastern.edu/graduate/professional-studies/masters-degree-programs/informatics-mps/) |
 | Öğrenci transkriptleri, notlar, isimler, numaralar | **Tamamen uydurma (sentetik):** bir betikle üretiliyor |
 
+**Katalog verisi hakkında:** Bu bir öğrenme projesi olduğu için ders bilgilerini herkese açık katalogdan aldık ve her ön koşulu elle doğruladık. Gerçek bir kurulumda bu verinin sahibi okulun kayıt ofisi (registrar) olur ve veri doğrudan onun sisteminden gelmelidir.
+
 Gerçek öğrenci verisi hiç kullanılmıyor. ABD'de öğrenci kayıtları FERPA yasasıyla korunuyor, sentetik veri bu riski tamamen ortadan kaldırıyor.
 
 Yine de sistem gerçek veriyle çalışıyormuş gibi korunuyor:
@@ -125,7 +127,7 @@ Yine de sistem gerçek veriyle çalışıyormuş gibi korunuyor:
 │   ├── catalog.json           # mezuniyet kuralları + ~45 ders (ITC, PJM, ALY, DGM, INT)
 │   └── students.json          # 3 sentetik öğrenci
 ├── scripts/
-│   ├── scrape_catalog.py      # kataloğu indir ve ayrıştır
+│   ├── parse_prereqs.py       # ön koşul metnini ve/veya yapısına çevir
 │   ├── check_prereqs.py       # ön koşullarda döngü var mı kontrol et
 │   ├── generate_students.py   # sentetik öğrenci üret
 │   └── build_index.py         # katalogu parçala, embedding çıkar, kaydet
