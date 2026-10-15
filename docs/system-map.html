@@ -1,0 +1,222 @@
+<title>Course Advisor System Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: one column, a schematic like a campus wayfinding board, then the real trace as a numbered sequence. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1d2430;
+  --muted: #5b6676;
+  --line: #c9d0da;
+  --accent: #1f6f78;      /* built and running */
+  --accent-soft: #dcefef;
+  --model: #7a4b9c;       /* the LLM */
+  --model-soft: #efe6f6;
+  --planned: #9aa3b0;     /* not built yet */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161c; --surface: #1a2029; --fg: #e4e8ee; --muted: #9aa5b4; --line: #364152;
+    --accent: #5cc0c7; --accent-soft: #1d3638; --model: #c39be0; --model-soft: #2e2438; --planned: #6b7584;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161c; --surface: #1a2029; --fg: #e4e8ee; --muted: #9aa5b4; --line: #364152;
+  --accent: #5cc0c7; --accent-soft: #1d3638; --model: #c39be0; --model-soft: #2e2438; --planned: #6b7584;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 48px;
+}
+main { max-width: 860px; margin: 0 auto; display: grid; gap: 36px; }
+header { display: grid; gap: 8px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 65ch; }
+.lead { color: var(--muted); font-size: 16px; }
+code, .mono { font-family: var(--font-mono); font-size: .92em; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 14px; height: 14px; border-radius: 3px; border: 2px solid var(--accent); background: var(--accent-soft); }
+.swatch.model { border-color: var(--model); background: var(--model-soft); }
+.swatch.planned { border: 2px dashed var(--planned); background: transparent; }
+
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; padding: 12px; }
+.diagram svg { display: block; width: 100%; min-width: 640px; height: auto; }
+svg .box { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+svg .box.data { fill: var(--accent-soft); }
+svg .box.model { fill: var(--model-soft); stroke: var(--model); }
+svg .box.user { fill: var(--bg); stroke: var(--fg); }
+svg .box.planned { fill: none; stroke: var(--planned); stroke-dasharray: 6 5; }
+svg .t { fill: var(--fg); font-family: var(--font-body); font-size: 14px; font-weight: 600; }
+svg .s { fill: var(--muted); font-family: var(--font-mono); font-size: 11.5px; }
+svg .lbl { fill: var(--muted); font-family: var(--font-body); font-size: 12px; }
+svg .t.planned, svg .s.planned { fill: var(--planned); }
+svg .edge { stroke: var(--fg); stroke-width: 1.6; fill: none; opacity: .75; }
+svg .edge.model { stroke: var(--model); opacity: 1; }
+svg .edge.planned { stroke: var(--planned); stroke-dasharray: 5 4; opacity: 1; }
+svg .head { fill: var(--fg); opacity: .75; }
+svg .head.model { fill: var(--model); opacity: 1; }
+svg .head.planned { fill: var(--planned); opacity: 1; }
+
+.trace { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: step; }
+.trace li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; position: relative; padding-bottom: 20px; }
+.trace li::before {
+  counter-increment: step; content: counter(step);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  background: var(--surface); border: 2px solid var(--accent); color: var(--accent); z-index: 1;
+}
+.trace li.model::before { border-color: var(--model); color: var(--model); }
+.trace li:not(:last-child)::after { content: ""; position: absolute; left: 14px; top: 28px; bottom: 0; width: 2px; background: var(--line); }
+.step { display: grid; gap: 4px; min-width: 0; }
+.who { font-size: 12px; font-family: var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.bubble { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-family: var(--font-mono); font-size: 13px; overflow-wrap: anywhere; }
+.bubble .ms { color: var(--accent); }
+
+.later { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.later div { border: 2px dashed var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; min-width: 0; }
+.later b { font-weight: 600; }
+.later .phase { font-family: var(--font-mono); font-size: 12px; color: var(--planned); }
+.later p { color: var(--muted); font-size: 14px; }
+</style>
+
+<main>
+  <header>
+    <div class="eyebrow">Course Advisor · end of phase 3 · October 15, 2026</div>
+    <h1>How the system works today</h1>
+    <p class="lead">Every question typed in the terminal travels the path below. The LLM only talks and decides which tool to call. Our Python code runs the tools.</p>
+  </header>
+
+  <section style="display:grid;gap:12px">
+    <div class="legend">
+      <span><i class="swatch"></i>Our code and data (running)</span>
+      <span><i class="swatch model"></i>AWS Bedrock models</span>
+      <span><i class="swatch planned"></i>Not built yet</span>
+    </div>
+    <div class="diagram" role="img" aria-label="System diagram: terminal, tool loop, Claude Haiku, two tools and data files">
+      <svg viewBox="0 0 760 624" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head model" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head planned" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+
+        <!-- You -->
+        <rect class="box user" x="120" y="16" width="240" height="60" rx="8"/>
+        <text class="t" x="240" y="42" text-anchor="middle">You (terminal)</text>
+        <text class="s" x="240" y="62" text-anchor="middle">src/cli.py --student s001</text>
+
+        <!-- user <-> loop -->
+        <line class="edge" x1="225" y1="76" x2="225" y2="128" marker-end="url(#a)"/>
+        <line class="edge" x1="255" y1="128" x2="255" y2="76" marker-end="url(#a)"/>
+        <text class="lbl" x="216" y="106" text-anchor="end">question</text>
+        <text class="lbl" x="264" y="106">answer</text>
+
+        <!-- Loop -->
+        <rect class="box" x="120" y="130" width="240" height="70" rx="8"/>
+        <text class="t" x="240" y="158" text-anchor="middle">Tool loop</text>
+        <text class="s" x="240" y="178" text-anchor="middle">src/agent/loop.py · max 5 turns</text>
+
+        <!-- Model -->
+        <rect class="box model" x="520" y="130" width="220" height="70" rx="8"/>
+        <text class="t" x="630" y="158" text-anchor="middle">Claude Haiku 4.5</text>
+        <text class="s" x="630" y="178" text-anchor="middle">Bedrock Converse API</text>
+
+        <!-- loop <-> model -->
+        <line class="edge model" x1="360" y1="150" x2="518" y2="150" marker-end="url(#am)"/>
+        <line class="edge model" x1="520" y1="182" x2="362" y2="182" marker-end="url(#am)"/>
+        <text class="lbl" x="440" y="142" text-anchor="middle">messages + tool definitions</text>
+        <text class="lbl" x="440" y="198" text-anchor="middle">text or tool request</text>
+
+        <!-- loop -> tools -->
+        <text class="s" x="252" y="224">run_tool()</text>
+        <path class="edge" d="M200,200 L200,236 L120,236 L120,268" marker-end="url(#a)"/>
+        <path class="edge" d="M240,200 L240,236 L380,236 L380,268" marker-end="url(#a)"/>
+        <path class="edge planned" d="M280,200 L280,226 L640,226 L640,268" marker-end="url(#ap)"/>
+
+        <!-- Tools -->
+        <rect class="box" x="20" y="270" width="200" height="74" rx="8"/>
+        <text class="t" x="120" y="298" text-anchor="middle">get_transcript</text>
+        <text class="s" x="120" y="318" text-anchor="middle">Records clerk</text>
+        <text class="s" x="120" y="334" text-anchor="middle">ID comes from the session</text>
+
+        <rect class="box" x="260" y="270" width="240" height="74" rx="8"/>
+        <text class="t" x="380" y="298" text-anchor="middle">search_catalog</text>
+        <text class="s" x="380" y="318" text-anchor="middle">Librarian</text>
+        <text class="s" x="380" y="334" text-anchor="middle">src/tools/catalog_search.py</text>
+
+        <rect class="box planned" x="540" y="270" width="200" height="74" rx="8"/>
+        <text class="t planned" x="640" y="298" text-anchor="middle">plan_next_semester</text>
+        <text class="s planned" x="640" y="318" text-anchor="middle">Calculator</text>
+        <text class="s planned" x="640" y="334" text-anchor="middle">Phase 5</text>
+
+        <!-- transcript -> students -->
+        <line class="edge" x1="120" y1="344" x2="120" y2="418" marker-end="url(#a)"/>
+        <rect class="box data" x="20" y="420" width="200" height="66" rx="8"/>
+        <text class="t" x="120" y="446" text-anchor="middle">students.json</text>
+        <text class="s" x="120" y="466" text-anchor="middle">3 synthetic students</text>
+
+        <!-- search branches -->
+        <path class="edge" d="M330,344 L330,418" marker-end="url(#a)"/>
+        <text class="lbl" x="322" y="390" text-anchor="end">has a code</text>
+        <text class="s" x="322" y="405" text-anchor="end">"ITC 6680"</text>
+        <path class="edge" d="M440,344 L440,380 L520,380 L520,398" marker-end="url(#a)"/>
+        <text class="lbl" x="450" y="372">no code</text>
+
+        <rect class="box data" x="250" y="420" width="160" height="66" rx="8"/>
+        <text class="t" x="330" y="446" text-anchor="middle">catalog.json</text>
+        <text class="s" x="330" y="466" text-anchor="middle">47 courses, rules</text>
+
+        <rect class="box model" x="430" y="400" width="180" height="62" rx="8"/>
+        <text class="t" x="520" y="426" text-anchor="middle">Titan Embed V2</text>
+        <text class="s" x="520" y="446" text-anchor="middle">query → 1024 numbers</text>
+
+        <line class="edge" x1="520" y1="462" x2="520" y2="508" marker-end="url(#a)"/>
+        <text class="s" x="530" y="490">m @ q, top 5</text>
+
+        <rect class="box data" x="430" y="510" width="180" height="66" rx="8"/>
+        <text class="t" x="520" y="536" text-anchor="middle">index.npy + chunks.json</text>
+        <text class="s" x="520" y="556" text-anchor="middle">76 chunks × 1024</text>
+
+        <!-- planner data (planned) -->
+        <path class="edge planned" d="M640,344 L640,612" />
+        <text class="s planned" x="630" y="598" text-anchor="end">will read the prerequisite</text>
+        <text class="s planned" x="630" y="612" text-anchor="end">trees in catalog.json</text>
+      </svg>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:16px">
+    <h2>One question, step by step</h2>
+    <p class="lead">From a real session with synthetic student s001 (Maya). The model was called three times; the tools took 3 ms in total.</p>
+    <ol class="trace">
+      <li><div class="step"><span class="who">You → loop</span><div class="bubble">Can I take ITC 6680 next semester?</div></div></li>
+      <li class="model"><div class="step"><span class="who">Haiku · call 1</span><div class="bubble">A tool request instead of an answer: get_transcript</div></div></li>
+      <li><div class="step"><span class="who">Loop runs · get_transcript("s001")</span><div class="bubble">ITC 6105 (A), ITC 6610 (A-) · 6 / 34 credits · GPA 3.83 <span class="ms">· 2 ms</span></div></div></li>
+      <li class="model"><div class="step"><span class="who">Haiku · call 2</span><div class="bubble">Tool request: search_catalog("ITC 6680")</div></div></li>
+      <li><div class="step"><span class="who">Loop runs · code found, exact lookup</span><div class="bubble">CISSP Preparation · prerequisites: ITC 6610 ; ITC 6620 · restricted elective <span class="ms">· 1 ms</span></div></div></li>
+      <li class="model"><div class="step"><span class="who">Haiku · call 3</span><div class="bubble">You cannot take ITC 6680 next semester. You have completed ITC 6610, but you have not yet taken ITC 6620.</div></div></li>
+    </ol>
+    <p>Right now <b>Haiku checks the prerequisites itself</b>. On an earlier run it answered the same question with a self-contradicting reply. Phase 4 measures how often that happens; phase 5 hands the check to a deterministic planner.</p>
+  </section>
+
+  <section style="display:grid;gap:16px">
+    <h2>What's next</h2>
+    <div class="later">
+      <div><span class="phase">Phase 4</span><b>Evaluation</b><p>Score the agent on questions with known answers. The "LLM alone" baseline.</p></div>
+      <div><span class="phase">Phase 5</span><b>Planner</b><p>Python checks prerequisites and credits, then the evaluation runs again.</p></div>
+      <div><span class="phase">Phase 6</span><b>Cloud</b><p>Data moves to S3 and DynamoDB, the tools to a single Lambda.</p></div>
+      <div><span class="phase">Phase 7</span><b>Phone</b><p>Amazon Connect replaces the loop and reaches the tools through AgentCore Gateway.</p></div>
+    </div>
+  </section>
+</main>

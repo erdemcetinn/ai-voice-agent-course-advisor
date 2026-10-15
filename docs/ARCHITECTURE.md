@@ -12,6 +12,7 @@ For the overview, see the [README](../README.md).
 7. [Data model](#7-data-model)
 8. [Security boundaries](#8-security-boundaries)
 9. [Open questions](#9-open-questions)
+10. [Future: an agent that acts](#10-future-an-agent-that-acts)
 
 ---
 
@@ -33,7 +34,7 @@ The model never sees the tool's code, only its definition. The quality of the de
 
 ## 2. The tool loop
 
-In the terminal path, `src/agent/loop.py` (phase 3) sits between the model and the tools:
+In the terminal path, `src/agent/loop.py` sits between the model and the tools. It uses Claude Haiku 4.5 on Bedrock with temperature 0:
 
 ```text
 1. Send the conversation and the tool definitions to Bedrock (Converse API)
@@ -110,7 +111,7 @@ Chunks follow natural boundaries instead of a fixed size:
 
 The two files line up row by row. Row *i* of `index.npy` is the embedding of row *i* of `chunks.json`. The numbers only answer "which rows are closest?"; the texts are what reaches the model.
 
-### Searching (every call, `src/tools/catalog_search.py`, phase 2.3)
+### Searching (every call, `src/tools/catalog_search.py`)
 
 ```text
 query has a course code ("ITC 6680")  -> exact lookup in catalog.json, no embedding
@@ -162,3 +163,15 @@ The catalog is static and read as a whole, so it lives in a file (S3 in the clou
 These are unverified and will be tested in phase 7:
 - How AgentCore Gateway passes the requested tool name to a Lambda target.
 - Whether Connect's "override input values" can fill a tool parameter from a contact attribute (the authenticated student ID).
+
+## 10. Future: an agent that acts
+
+Today the agent only reads. Letting it register a student for courses would add one tool, `register_course(course_code)`, backed by the registrar's system. The tool is the easy part; the safety design is the real work:
+
+- **The model never acts alone.** It proposes; the student confirms explicitly (on the phone, with a keypad press rather than a spoken "yes" that speech recognition can mishear); only then does the code act.
+- **Python re-checks right before the write:** prerequisites, seats, registration holds. The model saying "eligible" is not enough.
+- **The session supplies the student ID**, exactly like `get_transcript`.
+- **Every action is logged and reversible** (who, when, which course, which confirmation; a drop path exists).
+
+Prompt injection matters more here. In a read-only agent the worst case is a wrong answer; in an agent that writes, it is a real change to a real record. A demo with a mock registration system is planned as an optional extra.
+

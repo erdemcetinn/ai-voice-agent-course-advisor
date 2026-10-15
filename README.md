@@ -3,7 +3,7 @@
 A student calls a phone number and asks: *"Which courses can I take next semester?"*
 The agent answers from Northeastern's real course catalog and the student's own transcript, and it never guesses on the rules.
 
-> **Status (October 2026):** data layer and first tool done, retrieval index next.
+> **Status (October 2026):** the agent answers in the terminal with real catalog data. Evaluation set next.
 > Built on AWS: Amazon Bedrock, Amazon Connect, AgentCore Gateway, Lambda, DynamoDB, S3.
 
 ---
@@ -61,8 +61,8 @@ Iterating in a terminal takes seconds; iterating over phone calls takes minutes.
 |---|---|---|
 | 0 | AWS setup: region, budget alarm, Bedrock model access, Python env | ✅ |
 | 1 | Data: 47 real courses, parsed prerequisite trees, graduation rules, cycle check, 3 synthetic students | ✅ |
-| 2 | Tools: `get_transcript` ✅, embedding index (code written, not run yet), `search_catalog` | ⏳ |
-| 3 | Tool loop and terminal chat | ⏳ |
+| 2 | Tools: `get_transcript`, Titan V2 embedding index (76 chunks), `search_catalog` (exact code lookup + semantic search) | ✅ |
+| 3 | Tool loop (Bedrock Converse, Claude Haiku 4.5) and terminal chat | ✅ |
 | 4 | Evaluation set, baseline with the LLM alone | ⏳ |
 | 5 | Deterministic planner, re-run the evaluation | ⏳ |
 | 6 | Move to AWS: S3, DynamoDB, Lambda | ⏳ |
@@ -94,6 +94,9 @@ python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python -m scripts.check_prereqs       # prerequisite graph has no cycles
 .venv/bin/python -m scripts.generate_students   # validates the 3 synthetic students
 .venv/bin/python -c "from src.tools.transcript import get_transcript; print(get_transcript('s001'))"
+
+# chat with the agent (needs AWS credentials and Bedrock access in us-east-1)
+source env.sh && .venv/bin/python -m src.cli --student s001
 ```
 
 ---
@@ -132,7 +135,9 @@ No real student data is used (student records in the US are protected by FERPA).
 │   └── build_index.py        chunks the catalog and embeds it with Titan V2
 ├── src/                      runtime code (later deployed to Lambda)
 │   ├── embeddings.py         shared Titan embedding call
-│   └── tools/transcript.py   get_transcript
+│   ├── agent/                tools.py (tool definitions), prompts.py, loop.py (tool loop)
+│   ├── cli.py                terminal chat
+│   └── tools/                transcript.py (get_transcript), catalog_search.py (search_catalog)
 └── tests/
 ```
 

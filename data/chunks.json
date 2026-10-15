@@ -1,0 +1,382 @@
+[
+  {
+    "id": "program#rules",
+    "course": null,
+    "text": "MPS in Informatics (Boston) graduation requirements: 34 credits total, minimum GPA 3.0. Students complete the required courses plus one concentration or the electives option. PJM 6100 is for students with fewer than three years of experience directing or leading project tasks. Students who do not complete PJM 6100 may substitute project management electives. ITC 6670 appears in both AI Systems and Cloud concentrations; ITC 6630 appears in both Cloud and Information Security. Co-op (INT 6200 + a COP course) requires 1 additional credit beyond the 34 required credits. INT 6943 Integrative Experiential Learning (3 credits) may substitute for 3 credits of restricted electives. Electives option: the 12 credits may be any CPS graduate-level courses or unused courses in the program."
+  },
+  {
+    "id": "program#required",
+    "course": null,
+    "text": "MPS in Informatics (Boston) required courses for every student: ITC 6105, ITC 6150, ITC 6205, ITC 6250, PJM 6440, ITC 6980."
+  },
+  {
+    "id": "program#option#AI Systems and Data Management",
+    "course": null,
+    "text": "MPS in Informatics (Boston), AI Systems and Data Management (concentration). Required: ITC 6711, ITC 6721, ITC 6730, ITC 6670. 4 credits of restricted electives."
+  },
+  {
+    "id": "program#option#Analytics",
+    "course": null,
+    "text": "MPS in Informatics (Boston), Analytics (concentration). Required: ALY 6105, ALY 6115, ALY 6145. Choose 3 credits from: ALY 6125, ALY 6610, ALY 6620. 4 credits of restricted electives."
+  },
+  {
+    "id": "program#option#Cloud Computing Application and Management",
+    "course": null,
+    "text": "MPS in Informatics (Boston), Cloud Computing Application and Management (concentration). Required: ITC 6630, ITC 6650, ITC 6660, ITC 6670. 4 credits of restricted electives."
+  },
+  {
+    "id": "program#option#Human-Centered Informatics",
+    "course": null,
+    "text": "MPS in Informatics (Boston), Human-Centered Informatics (concentration). Required: DGM 5060, DGM 6115, DGM 6255, DGM 6600, DGM 6610. 2 credits of restricted electives."
+  },
+  {
+    "id": "program#option#Information Security Management",
+    "course": null,
+    "text": "MPS in Informatics (Boston), Information Security Management (concentration). Required: ITC 6610, ITC 6620, ITC 6630, ITC 6640. 4 credits of restricted electives."
+  },
+  {
+    "id": "program#option#Project Management",
+    "course": null,
+    "text": "MPS in Informatics (Boston), Project Management (concentration). Required: PJM 6100, PJM 6120, PJM 6200, PJM 6300. 4 credits of restricted electives."
+  },
+  {
+    "id": "program#option#Electives Option",
+    "course": null,
+    "text": "MPS in Informatics (Boston), Electives Option (electives). Required: none. 12 credits of any CPS graduate-level courses. 4 credits of restricted electives."
+  },
+  {
+    "id": "program#restricted",
+    "course": null,
+    "text": "MPS in Informatics (Boston) restricted electives: INT 6940, ITC 6405, ITC 6415, ITC 6435, ITC 6480, ITC 6680, ITC 6983."
+  },
+  {
+    "id": "AAI 6600#overview",
+    "course": "AAI 6600",
+    "text": "AAI 6600 Applied Artificial Intelligence (3 credits). Introduces artificial intelligence, tracing its historical evolution and foundational principles. Delves into search algorithms for problem solving, knowledge representation, reasoning, planning, and decision making. Also covers probabilistic learning and the foundational aspects of machine learning. Emphasizes real-world applications to offer students an opportunity to obtain an in-depth understanding of AI's transformative potential, paving the way for more advanced studies in the field."
+  },
+  {
+    "id": "ALY 6105#overview",
+    "course": "ALY 6105",
+    "text": "ALY 6105 Introduction to Applied Statistics (3 credits). Offers an overview of analytics concepts and practices across a diverse range of industries and organizational contexts. Analyzes real-world datasets using the advanced scripting, programming languages, and supporting libraries. Utilizes one of several predominant data analysis languages to explore datasets and analyze the relationships between their features. Provides a foundation in applied statistics, the mathematical language of data analysis, and begins to build the requisite mathematical acumen that serves as the foundational pillar of future study."
+  },
+  {
+    "id": "ALY 6115#overview",
+    "course": "ALY 6115",
+    "text": "ALY 6115 Foundations of Data Analytics (3 credits). Introduces statistics for business analytics from an analysis-of-data viewpoint. Topics include frequency distributions; measures of location (mean, median, mode); measures of dispersion; variance; graphic presentation; elementary probability; populations and samples; sampling distributions; categorical data; regression; correlation; and analysis of variance. Explores the use of statistical and data analysis software. Lab sessions emphasize hands-on application of probability and statistics and data problem solving using advanced analytic tools."
+  },
+  {
+    "id": "ALY 6115#prereq",
+    "course": "ALY 6115",
+    "text": "ALY 6115 Foundations of Data Analytics prerequisites: ALY 6105 (may be taken concurrently) with a minimum grade of C- or ALY 6000 with a minimum grade of C-"
+  },
+  {
+    "id": "ALY 6125#overview",
+    "course": "ALY 6125",
+    "text": "ALY 6125 Intermediate Analytics (3 credits). Explores an end-to-end, data-driven, statistical, and predictive modeling approach with applications and case studies for predictive analytics. Applies all the data and modeling steps in a full modeling cycle, including exploratory data analysis and data cleansing for outlier imputation, data normalization, and commonly applied modeling techniques such as regression models, regularization techniques and model training, validation, testing, and selection."
+  },
+  {
+    "id": "ALY 6125#prereq",
+    "course": "ALY 6125",
+    "text": "ALY 6125 Intermediate Analytics prerequisites: ALY 6115 with a minimum grade of C- or ALY 6010 with a minimum grade of C-"
+  },
+  {
+    "id": "ALY 6145#overview",
+    "course": "ALY 6145",
+    "text": "ALY 6145 Communication and Visualization with Data (3 credits). Presents a hands-on overview of principles needed to effectively design and create data visualizations, transforming raw data into actionable insights. Explores key informational design concepts, emphasizing the relationship between information and audience in the context of communicating complex quantitative information. Offers students an opportunity to use a variety of tools and techniques to conduct exploratory data visualization, design dashboards and scorecards, and present findings to hypothetical stakeholders. Evaluates ethical questions and biases related to the communication and visualization of data. Investigates techniques used to represent geospatial data as well as network and graph techniques."
+  },
+  {
+    "id": "ALY 6145#prereq",
+    "course": "ALY 6145",
+    "text": "ALY 6145 Communication and Visualization with Data prerequisites: ALY 6115 with a minimum grade of C- or (ALY 6000 with a minimum grade of C- ; ALY 6010 with a minimum grade of C- )"
+  },
+  {
+    "id": "ALY 6420#overview",
+    "course": "ALY 6420",
+    "text": "ALY 6420 Introduction to Queries (2 credits). Introduces the fundamentals of relational databases, different types of data, and how to query them. Offers instruction in writing complex queries that pull, join, filter, and summarize complex data from multiple sources. Analyzes cleaning, transforming, and aggregating data, and touches on advanced topics such as window functions and complex data types. Assesses the efficiency of queries and emphasizes the importance of minimizing runtime. Demonstrates how to integrate database access with common analytical programming languages. Applies these techniques to real-world case studies similar to those offered in case interview scenarios."
+  },
+  {
+    "id": "ALY 6610#overview",
+    "course": "ALY 6610",
+    "text": "ALY 6610 Data Mining Applications (3 credits). Introduces the theories, concepts, and methods for intensive data analysis methods and data mining techniques, such as supervised and unsupervised learning, classification methods, decision trees, clustering, association rule mining, text mining, and natural language processing. Investigates Exploratory Data Analysis, the interpretation of hidden patterns in data using statistical and visualization techniques. Offers students an opportunity to apply modern data mining techniques for effective large-scale data pattern recognition and insight discovery. Student teams evaluate, analyze, and report data for the methods used and insights discovered during case studies."
+  },
+  {
+    "id": "ALY 6610#prereq",
+    "course": "ALY 6610",
+    "text": "ALY 6610 Data Mining Applications prerequisites: ALY 6115 with a minimum grade of C- or (ALY 6000 with a minimum grade of C- ; ALY 6010 with a minimum grade of C- ) or (EAI 6000 with a minimum grade of C- ; EAI 6010 with a minimum grade of C- )"
+  },
+  {
+    "id": "ALY 6620#overview",
+    "course": "ALY 6620",
+    "text": "ALY 6620 Big Data and Cloud Computing (3 credits). Explores advanced tools for interacting with large-scale data and the challenges and benefits Big Data provides. Introduces tools and methods of analytics for extracting, transforming, and loading to facilitate analysis. Examines questions of ethics, governance, privacy, and security of data stored in elastic clouds and analyzed on distributed clusters. Offers students an opportunity to apply theoretical concepts to create data solutions supported by large-scale data collection and management. Introduces concepts of distributed file systems, large-scale data streaming, and techniques of analysis in large-scale data systems."
+  },
+  {
+    "id": "ALY 6620#prereq",
+    "course": "ALY 6620",
+    "text": "ALY 6620 Big Data and Cloud Computing prerequisites: ALY 6115 with a minimum grade of C- or (ALY 6000 with a minimum grade of C- ; ALY 6010 with a minimum grade of C- ) or (EAI 6000 with a minimum grade of C- ; EAI 6010 with a minimum grade of C- )"
+  },
+  {
+    "id": "COP 6945#overview",
+    "course": "COP 6945",
+    "text": "COP 6945 Co-op Work Experience—Full Time (0 credits). Offers students an opportunity to engage in work experience that relates to their field of study. May be repeated up to five times."
+  },
+  {
+    "id": "COP 6946#overview",
+    "course": "COP 6946",
+    "text": "COP 6946 Global Co-op Work Experience—Full Time (0 credits). Offers students an opportunity to engage in a global work experience that relates to their field of study. May be repeated up to 5 times."
+  },
+  {
+    "id": "COP 6954#overview",
+    "course": "COP 6954",
+    "text": "COP 6954 Co-op Work Experience - Half-Time (0 credits). Provides eligible students with an opportunity for work experience. May be repeated without limit."
+  },
+  {
+    "id": "DGM 5050#overview",
+    "course": "DGM 5050",
+    "text": "DGM 5050 Web Creation Boot Camp (2 credits). Introduces core web design technologies such as HTML5 and CSS3. Explores fundamentals of web page creation and file management through practical applications. Students work individually to develop projects that explore creative text, multimedia presentation, and basic interactivity on the web."
+  },
+  {
+    "id": "DGM 5060#overview",
+    "course": "DGM 5060",
+    "text": "DGM 5060 Visual Design Foundations (2 credits). Introduces basic graphic design principles and their practical applications including typography and the design of text, image, and interface layouts and grids. Covers the use of color systems and spatial relationships to convey complex information. Introduces design system software such as Figma."
+  },
+  {
+    "id": "DGM 5060#prereq",
+    "course": "DGM 5060",
+    "text": "DGM 5060 Visual Design Foundations prerequisites: DGM 5050 with a minimum grade of C- or DGM 6105 with a minimum grade of C-"
+  },
+  {
+    "id": "DGM 5105#overview",
+    "course": "DGM 5105",
+    "text": "DGM 5105 Foundations of Programming for Digital Media (2 credits). Introduces intermediate programming concepts for working with complex data such as arrays and objects. Examines basic object-oriented design techniques. Explores the fundamentals of selecting and working with programming libraries and APIs to develop interactive multimedia applications within a web-based framework that can be deployed to desktop computers, phones, or even watches. Students work individually and in groups to explore these concepts through experimentation and personal expression."
+  },
+  {
+    "id": "DGM 5105#prereq",
+    "course": "DGM 5105",
+    "text": "DGM 5105 Foundations of Programming for Digital Media prerequisites: DGM 5050 (may be taken concurrently) with a minimum grade of C- ; DGM 5100 (may be taken concurrently) with a minimum grade of C-"
+  },
+  {
+    "id": "DGM 6115#overview",
+    "course": "DGM 6115",
+    "text": "DGM 6115 Data Collection, Analysis, and Visualization (3 credits). Explores advanced data collection and visualization techniques for the analysis and assessment of both qualitative and quantitative data. Introduces and expands on structures, methodologies, best practices, and trends in data visualization. Evaluates and represents data through the design, creation, and adaptation of a variety of formats, charts, maps, and graphic tools. Builds on HCI design principles and qualitative user research methods explored in prior coursework while introducing students to various visualization tools such as Figma. Prior understanding and experience with basic programming and formal logic are required."
+  },
+  {
+    "id": "DGM 6115#prereq",
+    "course": "DGM 6115",
+    "text": "DGM 6115 Data Collection, Analysis, and Visualization prerequisites: DGM 5060 with a minimum grade of C- ; DGM 5105 with a minimum grade of C-"
+  },
+  {
+    "id": "DGM 6255#overview",
+    "course": "DGM 6255",
+    "text": "DGM 6255 Usability and Human Interaction (3 credits). Surveys the theory and practice of human-computer interaction and the development of user interfaces. Introduces interaction design methods and principles. Explores the creation of usable solutions for digital products, systems, and services through the observation and understanding of human behavior. Topics include cognitive foundations of interaction design, user research and problem analysis, target audience identification, and current and evolving research techniques. Students create a product, system, or service prototype design."
+  },
+  {
+    "id": "DGM 6255#prereq",
+    "course": "DGM 6255",
+    "text": "DGM 6255 Usability and Human Interaction prerequisites: DGM 5060 with a minimum grade of C- or DGM 6105 with a minimum grade of C-"
+  },
+  {
+    "id": "DGM 6600#overview",
+    "course": "DGM 6600",
+    "text": "DGM 6600 Information Design for Digital Media (3 credits). Surveys the design principles and disciplines that inform information design for digital media, including user-centered design approaches to technology, human behavior and interaction, information architecture, content organization, responsive design, accessibility, design systems, and emerging technologies. Studies how to present digital content in accessible, user-friendly ways that enable users to easily find and grasp the information they seek. Aims to build a foundation for solving information design challenges and creating purposeful experiences for digital-based media, making complex information relationships engaging for audiences in the digital arena."
+  },
+  {
+    "id": "DGM 6600#prereq",
+    "course": "DGM 6600",
+    "text": "DGM 6600 Information Design for Digital Media prerequisites: DGM 5050 with a minimum grade of C- ; DGM 5060 with a minimum grade of C- or DGM 6168 (may be taken concurrently) with a minimum grade of C- or TCC 6120 (may be taken concurrently) with a minimum grade of C-"
+  },
+  {
+    "id": "DGM 6610#overview",
+    "course": "DGM 6610",
+    "text": "DGM 6610 Prototyping and Usability Testing (3 credits). Examines the fundamentals of prototyping at different levels of fidelity and how to conduct usability tests to improve user experiences. Offers students an opportunity to obtain a comprehensive understanding of the principles, techniques, and methodologies for designing and evaluating user-centered prototypes. Students create interactive prototypes that support business and user goals, conduct usability tests to identify and address usability issues, and iterate to improve designs based on usability test findings."
+  },
+  {
+    "id": "DGM 6610#prereq",
+    "course": "DGM 6610",
+    "text": "DGM 6610 Prototyping and Usability Testing prerequisites: ( DGM 6255 with a minimum grade of C- ; DGM 6600 with a minimum grade of C- ) or DGM 6168 with a minimum grade of C-"
+  },
+  {
+    "id": "INT 6200#overview",
+    "course": "INT 6200",
+    "text": "INT 6200 Experiential Project Preparation (1 credits). Designed to prepare students for an experiential learning placement. Offers students an opportunity to better understand key components of networks, business professionalism, and effective communication. Offers instruction in resumé writing; defining one's career field; assessing skills and abilities related to developing a career; building cultural agility, knowledge, and skills; and developing a comprehensive, strategic job search plan, along with effective career documents. Emphasizes alignment of academic goals with professional outcomes, course curriculum, and experiential learning opportunities."
+  },
+  {
+    "id": "INT 6940#overview",
+    "course": "INT 6940",
+    "text": "INT 6940 Experiential Learning Projects for Professionals (3 credits). Offers students an opportunity to apply knowledge and skills gained through their master’s program to work on challenging short-term projects under faculty supervision. Students are matched with discipline-specific consulting projects provided by a wide range of sponsoring organizations in the private and nonprofit sectors. Students develop a project plan, conduct research, develop and deliver recommendations to sponsoring organizations, and reflect on lessons learned. Mapping academic course concepts and skills to the consultative process is a primary learning goal."
+  },
+  {
+    "id": "INT 6943#overview",
+    "course": "INT 6943",
+    "text": "INT 6943 Integrative Experiential Learning (3 credits). Offers students an opportunity to apply knowledge and skills on challenging short‐term projects under faculty supervision. Matches students with discipline‐specific consulting projects provided by a wide range of sponsoring organizations in the private and nonprofit sectors for a truly unique experiential learning opportunity. Students research, develop, and deliver a project plan. Designed to map course concepts and skills to the consultative process."
+  },
+  {
+    "id": "ITC 6105#overview",
+    "course": "ITC 6105",
+    "text": "ITC 6105 Foundations of Informatics (3 credits). Introduces the fundamental properties of information, technologies, and people within an increasingly complex infrastructure and social system.Discusses complex social issues, including IT policy choices, ethical issues, and how to be a socially responsible IT professional. Seeks to prepare students with a broad perspective and highly applied specific contexts that help direct them to future career concentrations. Offers students an opportunity to learn theoretical foundations of the informatics field; to develop design thinking for digital innovation; and to explore IT applications and solutions in various specific settings, including business, education, healthcare, and government."
+  },
+  {
+    "id": "ITC 6150#overview",
+    "course": "ITC 6150",
+    "text": "ITC 6150 Database Application and Management (3 credits). Covers the design and use of both operational and analytical database systems. Critically examines key concepts and techniques—including data modeling, indexing, normalization, advanced SQL, data architecture design, and data application implementation—after establishing a theoretical foundation into the advanced principles of data management and the practical application of database systems. Explores in-depth fundamental concepts, cutting-edge techniques, and emerging trends in data management and database technologies. In today’s digital age, efficient data management is essential for organizations to glean meaningful insights and support informed decision making for their stakeholders."
+  },
+  {
+    "id": "ITC 6205#overview",
+    "course": "ITC 6205",
+    "text": "ITC 6205 IT Strategy and Governance (3 credits). Focuses on the strategic use of information technology from a business perspective at the enterprise level. Covers business fundamentals and a strategic framework for technology-intensive enterprises, aligning technology products strategy, core competencies, and evolution within the technology industry. Covers strategic IT management including policy and governance, accountability frameworks, financial analysis, risk management, and legal compliance issues."
+  },
+  {
+    "id": "ITC 6250#overview",
+    "course": "ITC 6250",
+    "text": "ITC 6250 Interactive System Design and Web Development (3 credits). Introduces fundamental principles of cognitive and social psychology relevant to the design and use of interactive systems and applications. Examines how to apply user-centered approaches for exploring user experiences, conduct user requirement analysis, develop user interface design, and prototyping. Practices the skills to construct and maintain an information system, applying state-of-the-art development tools and languages to develop web applications."
+  },
+  {
+    "id": "ITC 6405#overview",
+    "course": "ITC 6405",
+    "text": "ITC 6405 Systems and Network Administration (2 credits). Focuses on the skills, tools, and best practices required to provide and support computing infrastructure and services. Aims to prepare the student to be responsible, from an ethical and legal perspective, for the infrastructure and computing system administration in an organization. Offers students an opportunity to obtain advanced technology enterprise infrastructure skills to support data centers and administer websites, as well as to resolve incidents, conduct troubleshooting, practice system backup and disaster recovery skills, and address system security issues."
+  },
+  {
+    "id": "ITC 6415#overview",
+    "course": "ITC 6415",
+    "text": "ITC 6415 IT Policy, Ethics, and Social Responsibility (2 credits). Delves deep into the ethical dimensions of information technology. Includes aspects of social responsibility in the areas of generative artificial intelligence systems, social and interactive media, and disruptive innovations focusing on their creative capabilities and the implications they pose for society. As these technologies or systems become increasingly sophisticated, questions arise regarding their ethical implications including issues of authorship, intellectual property, cultural appropriation, and the potential disruption of industries. Aims to critically analyze and navigate the ethical challenges, fostering the knowledge and tools to evaluate, respond to, and shape the responsible use of these technologies."
+  },
+  {
+    "id": "ITC 6435#overview",
+    "course": "ITC 6435",
+    "text": "ITC 6435 Ethical Hacking (2 credits). Exposes students to the different phases of hacking, specific skills for penetration/intrusion testing, and demonstrates hands-on techniques in ethical hacking. Offers students an opportunity to gain technical capabilities to secure information systems, conduct network scanning and enumeration, and learn social engineering skills and techniques to protect networks from hackers."
+  },
+  {
+    "id": "ITC 6480#overview",
+    "course": "ITC 6480",
+    "text": "ITC 6480 Amazon Web Service (AWS) Cloud Architecting (4 credits). Exposes students to advanced technical topics to assist in the development of expertise in AWS cloud computing. Offers students an opportunity to gain the skills needed to pursue certification as an AWS Certified Solutions Architect–Associate, one of the most valuable IT certificates. Includes reading materials provided by AWS Academy, guided instruction in the classroom, hands-on labs operated by AWS, project work, and free practice exam if students wish to pursue certification after completing the course. Successful students have the ability to demonstrate knowledge and skills of how to architect and deploy secure and robust applications on AWS technologies."
+  },
+  {
+    "id": "ITC 6610#overview",
+    "course": "ITC 6610",
+    "text": "ITC 6610 Foundations of Information Security (3 credits). Introduces fundamental concepts, principles, and domains of information security. Reviews essential IT components: systems, networks, data, development, cloud, and cryptography. Presents an overview of identity and access management, platform and network security, data protection and privacy, web application security, cloud security, security risk management and governance, security operations, security testing, security awareness and training, security management, and security frameworks."
+  },
+  {
+    "id": "ITC 6620#overview",
+    "course": "ITC 6620",
+    "text": "ITC 6620 Information Security Risk Management (3 credits). Focuses on applying risk management to information security. Covers the security risk management life cycle including risk profiling, threat modeling, risk assessment, risk mitigation, and risk monitoring. Explores security controls, risk analysis techniques, vulnerability management, security governance, and industry standards and frameworks. Offers students an opportunity to practice risk assessments, propose mitigation plans, and present their risk management approaches."
+  },
+  {
+    "id": "ITC 6630#overview",
+    "course": "ITC 6630",
+    "text": "ITC 6630 Cloud Security Planning and Design (3 credits). Presents a comprehensive overview of the principles and practices of cloud computing security. Topics include the fundamentals of cloud computing security; the latest threats and attack vectors targeting cloud-based systems; and best practices for securing cloud infrastructure, applications, and data. Covers technical tools to protect data, data privacy, information systems, and enterprise networks from external compromise. Explores the field of cybersecurity: the body of technologies, processes, and practices designed to protect networks, devices, programs, and data from attack, damage, or unauthorized access. Examines the components of a well-architected cybersecurity framework, identifies the tools required, and guides students to create plans that will protect the digital assets of the enterprise."
+  },
+  {
+    "id": "ITC 6640#overview",
+    "course": "ITC 6640",
+    "text": "ITC 6640 Security Operations and Analytics (3 credits). Focuses on the knowledge and skills necessary for security operations and analytics based on real-time experience. Offers students an opportunity to identify attack tactics, techniques, and procedures; describe the services and workflows of a security operations center; analyze security data; learn threat detection and incident response process; and practice modern security operations solutions."
+  },
+  {
+    "id": "ITC 6640#prereq",
+    "course": "ITC 6640",
+    "text": "ITC 6640 Security Operations and Analytics prerequisites: ITC 6300 with a minimum grade of C- or ITC 6610 with a minimum grade of C-"
+  },
+  {
+    "id": "ITC 6650#overview",
+    "course": "ITC 6650",
+    "text": "ITC 6650 Cloud Computing Fundamentals, Applications, and Management (3 credits). Explores cloud computing, merging theoretical and practical facets from distributed computing to advanced cloud concepts, as cloud computing reshapes the IT landscape. Delves into frameworks, techniques, and IT solutions tailored for various cloud models. Emphasizes key cloud characteristics such as virtualization, deployment models, web services, and security, while offering insights into advanced concepts, programming models, and the challenges of hybrid computing. Addresses the challenges and opportunities in cloud computing. Focuses mainly on cloud architectures, models, security, development, and services, drawing from contemporary cloud offerings and research."
+  },
+  {
+    "id": "ITC 6660#overview",
+    "course": "ITC 6660",
+    "text": "ITC 6660 Enterprise Information Architecture (3 credits). Introduces the theory, framework/model, methodology, and tools that enhance the ability of businesses and organizations to produce information needed to make critical decisions and support business functions. Data and information management is critical to modern businesses and hybrid/cloud technologies. Covers how to discover, access, and understand data and to integrate IT and information resources. Presents best practices using cases studies in a more practical, comprehensive approach to delivering the subject matter involving the application of tools and methodologies."
+  },
+  {
+    "id": "ITC 6670#overview",
+    "course": "ITC 6670",
+    "text": "ITC 6670 Cloud Data Architecture, Engineering, and Analytics (3 credits). Offers a comprehensive exploration of cloud data architecture, engineering, and analytics, with a deep dive into both artificial intelligence and traditional analytics methodologies. Introduces students to a blend of advanced techniques, tools, and applications that enable the extraction and interpretation of vast data sources (e.g., social media and e-commerce platforms) through AI-powered and standard analytics approaches on cloud platforms. Focuses on integration of AI with cloud systems, as well as the enduring relevance and efficacy of standard analytics techniques in data interpretation, visualization, and decision making. Offers comprehensive insights into the importance of cloud security, potential risks, AI-powered measures, and traditional analytics strategies to safeguard and interpret sensitive data in cloud environments."
+  },
+  {
+    "id": "ITC 6680#overview",
+    "course": "ITC 6680",
+    "text": "ITC 6680 CISSP Preparation (2 credits). Covers all eight domains that comprise the body of knowledge covered by the Certified Information Systems Security Professional certification, governed by the International Information Systems Security Certifications Consortium, or ISC2. It is universally recognized as a critical component in the selection process for experienced information security professionals. Offers students an opportunity to obtain the knowledge and technical concepts required to achieve this certification."
+  },
+  {
+    "id": "ITC 6680#prereq",
+    "course": "ITC 6680",
+    "text": "ITC 6680 CISSP Preparation prerequisites: ITC 6610 with a minimum grade of C- ; ITC 6620 with a minimum grade of C-"
+  },
+  {
+    "id": "ITC 6711#overview",
+    "course": "ITC 6711",
+    "text": "ITC 6711 Foundations of AI System and Data Management (3 credits). Presents how modern AI systems are architected, built, and maintained through robust data engineering practices. Explores the technical building blocks that support scalable, intelligent applications in cloud-native environments, ranging from data ingestion and transformation pipelines to model deployment and integration. Emphasizes the intersection of generative AI, data infrastructure, and enterprise system design. Offers students an opportunity to gain hands-on experience in designing modular, API-driven architectures and building data workflows that enable machine learning and gen AI capabilities. Topics include data modeling, distributed processing, embedding pipelines, RESTful integration, and the basics of LLM operations."
+  },
+  {
+    "id": "ITC 6721#overview",
+    "course": "ITC 6721",
+    "text": "ITC 6721 Data Engineering for Intelligent Systems (3 credits). Presents the design and implementation of data architectures that power intelligent systems, including machine learning applications and generative AI solutions. Explores principles and tools of modern data engineering: building reliable, scalable pipelines that support real-time and batch processing; unstructured and structured data; and AI-ready data workflows. Topics include data ingestion, transformation, and orchestration using contemporary frameworks; integration with cloud-based storage and computer systems; and deployment of data pipelines that feed into AI/ML models and large language models. Emphasizes embedding pipelines, feature stores, vector databases, and operational data workflows that support AI at scale."
+  },
+  {
+    "id": "ITC 6721#prereq",
+    "course": "ITC 6721",
+    "text": "ITC 6721 Data Engineering for Intelligent Systems prerequisites: AAI 6600 with a minimum grade of C- or ALY 6420 with a minimum grade of C- or ITC 6150 with a minimum grade of C-"
+  },
+  {
+    "id": "ITC 6730#overview",
+    "course": "ITC 6730",
+    "text": "ITC 6730 Operations and LLM Operations for Scalable AI (3 credits). Covers deployment, management, and scaling machine learning and large language model systems in real-world, cloud-native environments. Emphasizes operationalization over model design, focusing on building reliable, reproducible, and governed AI systems. Offers students an opportunity to gain hands-on experience with pretrained models, automated training pipelines, deployment strategies, model monitoring, and version control while applying DevOps-inspired principles to the AI life cycle. Addresses the distinct challenges of generative AI including prompt management, embeddings, and retrieval-augmented generation."
+  },
+  {
+    "id": "ITC 6730#prereq",
+    "course": "ITC 6730",
+    "text": "ITC 6730 Operations and LLM Operations for Scalable AI prerequisites: AAI 6600 with a minimum grade of C- or ALY 6420 with a minimum grade of C- or ITC 6711 with a minimum grade of C-"
+  },
+  {
+    "id": "ITC 6980#overview",
+    "course": "ITC 6980",
+    "text": "ITC 6980 Informatics Capstone (4 credits). Offers students an opportunity to work on a major IT project sponsored by a real-world business, education institution, government department, or nonprofit organization. Students apply informatics knowledge and software skills to develop an IT product that reflects their master’s program learning experience. Projects focus on information systems, technology, and data management and explore issues involving research and development or business and market strategies. Requires students working in teams to generate a polished report and a cogent final presentation. Strongly encourages students to create a portfolio that can be shown to potential employers or current supervisors."
+  },
+  {
+    "id": "ITC 6980#prereq",
+    "course": "ITC 6980",
+    "text": "ITC 6980 Informatics Capstone prerequisites: ( ITC 6105 with a minimum grade of C- ; ITC 6150 with a minimum grade of C- ; ITC 6205 with a minimum grade of C- ; ITC 6250 with a minimum grade of C- ; PJM 6440 with a minimum grade of C- ) or ( INT 6940 with a minimum grade of C- ; ITC 6000 with a minimum grade of C- ; ITC 6010 with a minimum grade of C- ; ITC 6020 with a minimum grade of C- ; ITC 6035 with a minimum grade of C- ; ITC 6400 with a minimum grade of C- )"
+  },
+  {
+    "id": "ITC 6983#overview",
+    "course": "ITC 6983",
+    "text": "ITC 6983 Special Topics in Informatics (1-4 credits). Covers special topics within the realm of informatics."
+  },
+  {
+    "id": "PJM 6100#overview",
+    "course": "PJM 6100",
+    "text": "PJM 6100 Foundations of Project Management (3 credits). Studies foundational knowledge and concepts in modern project management. Presents insights into various project management methodologies while providing a structured approach to understanding key principles, models, methods, and processes required to manage various project types in the business environment. Introduces project management software programs. Emphasizes the practical application of project management tools to enhance efficiency and productivity. Strongly recommended for students with little or no formal project management experience."
+  },
+  {
+    "id": "PJM 6120#overview",
+    "course": "PJM 6120",
+    "text": "PJM 6120 Project Scope, Schedule and Cost Planning (3 credits). Integrates scope, schedule, and cost planning to offer students a deep dive into project definition, stakeholder needs assessment, cost estimation, and schedule development. Explores practical tools for translating needs into measurable project scope documents, creating resource-loaded schedules, managing trade-offs, and controlling scope creep. Emphasizes developing budget baselines, handling variances, managing project costs, and utilizing earned value analysis for cost and schedule oversight. Offers students an opportunity to obtain the skills to optimize project plans, manage bottlenecks, and establish contingencies, enhancing project management proficiency."
+  },
+  {
+    "id": "PJM 6120#prereq",
+    "course": "PJM 6120",
+    "text": "PJM 6120 Project Scope, Schedule and Cost Planning prerequisites: PJM 6100 with a minimum grade of C- or PJM 5900 with a minimum grade of C-"
+  },
+  {
+    "id": "PJM 6200#overview",
+    "course": "PJM 6200",
+    "text": "PJM 6200 Project Risk Management (3 credits). Explores project risk management in-depth. Emphasizes essential principles, models, methods, and processes for optimizing project outcomes. Introduces the power of quantitative risk assessment, informed decisions through evidence-based approaches, and probabilistic estimates. Provides hands-on experiences with practical risk analytics using state-of-the-art technology. Emphasizes crafting robust risk management plans that prioritize continuous risk monitoring and the proactive management of sustainability risks. Offers students an opportunity to learn how to navigate project uncertainties to increase the likelihood of project success."
+  },
+  {
+    "id": "PJM 6200#prereq",
+    "course": "PJM 6200",
+    "text": "PJM 6200 Project Risk Management prerequisites: PJM 6100 with a minimum grade of C- or PJM 5900 with a minimum grade of C-"
+  },
+  {
+    "id": "PJM 6300#overview",
+    "course": "PJM 6300",
+    "text": "PJM 6300 Project Quality Management (3 credits). Introduces project quality management principles, processes, models, and methods necessary to deliver quality projects and products within organizations. Discusses how to integrate PQM processes into the overall project plan and how to prepare a PQM plan. Offers students an opportunity to work together in a team environment to complete a PQM plan for a project. Topics include quality planning, quality assurance, quality control, statistical process control, process capability analysis, cost of quality, quality analytics, and quality management systems."
+  },
+  {
+    "id": "PJM 6300#prereq",
+    "course": "PJM 6300",
+    "text": "PJM 6300 Project Quality Management prerequisites: PJM 6100 with a minimum grade of C- or PJM 5900 with a minimum grade of C-"
+  },
+  {
+    "id": "PJM 6440#overview",
+    "course": "PJM 6440",
+    "text": "PJM 6440 Leading and Managing Technical Projects (2 credits). Offers students an opportunity to learn about leadership and management skills and strategies needed to succeed in a demanding technical project environment. Many project managers understand the technical aspects of a particular project environment but lack these critical management and leadership skills. Topics covered include understanding the technical environment, managing and motivating team members, understanding organizational culture and interpersonal strategies, and developing a personal leadership approach."
+  }
+]
