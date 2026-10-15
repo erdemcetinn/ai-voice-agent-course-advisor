@@ -3,7 +3,7 @@
 Bir öğrenci telefon numarasını arıyor ve soruyor: *"Gelecek dönem hangi dersleri alabilirim?"*
 Sistem, Northeastern'in gerçek ders kataloğuna ve öğrencinin kendi transkriptine bakarak cevap veriyor.
 
-> **Durum:** Planlama bitti, kod yok (14 Ekim 2026).
+> **Durum:** Faz 0 bitti (hesap, bütçe, Bedrock erişimi, git, Python ortamı). Sırada Faz 1: veri (14 Ekim 2026).
 > Adım adım yapılış rehberi: **[ADIMLAR.md](ADIMLAR.md)**
 > Araştırmada doğrulanan teknik bilgiler: **[ARASTIRMA.md](ARASTIRMA.md)**
 
@@ -70,11 +70,11 @@ Terminalde ise saniyeler içinde deneyebiliyoruz. Beyni terminalde doğru çalı
 
 | Ne için | Teknoloji | Neden bu |
 |---|---|---|
-| Dil | **Python 3.12** | AWS kütüphaneleri (boto3) ve veri işleme için en rahat dil |
+| Dil | **Python 3.11** | AWS kütüphaneleri (boto3) ve veri işleme için en rahat dil |
 | Katalog verisini çekmek | **requests + BeautifulSoup** | Katalog sayfası düz HTML. Sayfayı indirip içinden ders bilgisini ayıklamak için en basit araçlar |
 | Metin yolunda LLM | **Amazon Bedrock, Converse API, Claude** | AWS içinde LLM çağırmanın standart yolu. Converse API, tool kullanımını (modelin "şu fonksiyonu çağır" demesini) destekliyor |
 | Metni sayıya çevirmek | **Bedrock, Titan Text Embeddings V2** | Arama için her metnin "parmak izini" (embedding) çıkarıyor. AWS içinde, ucuz |
-| Benzer metni bulmak | **numpy** | Yaklaşık 70 ders, birkaç yüz parça metin var. Bu kadar az veride basit bir matematik işlemi (kosinüs benzerliği) milisaniyede sonuç veriyor. Veri binleri geçerse FAISS'e geçeriz |
+| Benzer metni bulmak | **numpy** | Yaklaşık 45 ders, birkaç yüz parça metin var. Bu kadar az veride basit bir matematik işlemi (kosinüs benzerliği) milisaniyede sonuç veriyor. Veri binleri geçerse FAISS'e geçeriz |
 | Öğrenci kayıtları | Önce **JSON dosyası**, sonra **DynamoDB** | Yerelde dosya yeterli. AWS'ye taşıyınca DynamoDB: sunucusuz, kullandıkça öde, anahtarla tek kayıt okumak için ideal |
 | Arama verisini saklamak | **S3** | Embedding dosyası ve katalog burada duruyor, Lambda açılırken buradan okuyor |
 | Tool'ları bulutta çalıştırmak | **AWS Lambda** | Sunucu yönetmeden kod çalıştırıyor. Sadece çağrıldığında para ödüyorsun |
@@ -101,7 +101,7 @@ Terminalde ise saniyeler içinde deneyebiliyoruz. Beyni terminalde doğru çalı
 
 | Veri | Kaynak |
 |---|---|
-| Ders kataloğu, ön koşullar, mezuniyet şartları | **Gerçek ve herkese açık:** [catalog.northeastern.edu](https://catalog.northeastern.edu/course-descriptions/info/) |
+| Ders kataloğu, ön koşullar, mezuniyet şartları | **Gerçek ve herkese açık:** [CPS MPS in Informatics, 2026-27 kataloğu](https://catalog.northeastern.edu/graduate/professional-studies/masters-degree-programs/informatics-mps/) |
 | Öğrenci transkriptleri, notlar, isimler, numaralar | **Tamamen uydurma (sentetik):** bir betikle üretiliyor |
 
 Gerçek öğrenci verisi hiç kullanılmıyor. ABD'de öğrenci kayıtları FERPA yasasıyla korunuyor, sentetik veri bu riski tamamen ortadan kaldırıyor.
@@ -122,7 +122,7 @@ Yine de sistem gerçek veriyle çalışıyormuş gibi korunuyor:
 ├── ARASTIRMA.md               # doğrulanmış teknik bilgiler
 ├── requirements.txt
 ├── data/
-│   ├── catalog.json           # gerçek ders kataloğu (~70 INFO dersi)
+│   ├── catalog.json           # mezuniyet kuralları + ~45 ders (ITC, PJM, ALY, DGM, INT)
 │   └── students.json          # 3 sentetik öğrenci
 ├── scripts/
 │   ├── scrape_catalog.py      # kataloğu indir ve ayrıştır

@@ -120,3 +120,31 @@ Eski araştırmada (8 Ekim) yanlış olan ve düzeltilen bilgiler:
 | Lex artık eski bir yol | Lex taşıyıcı katman olarak hala kullanılıyor |
 | Kendi MCP server'ımızı yazmamız gerekiyor | AgentCore Gateway Lambda'yı MCP tool'una çeviriyor |
 | Arama için FAISS | Birkaç yüz parça için numpy yeterli |
+| Dersler INFO kodlu, 32 kredi, ön koşulda B- | CPS Informatics dersleri ITC kodlu, 34 kredi, ön koşulda C- (bölüm 7) |
+
+---
+
+## 7. Katalog: CPS MPS in Informatics (doğrulandı, 14 Ekim 2026)
+
+Kaynak: [program sayfası, 2026-2027 kataloğu](https://catalog.northeastern.edu/graduate/professional-studies/masters-degree-programs/informatics-mps/) ve [ITC ders açıklamaları](https://catalog.northeastern.edu/course-descriptions/itc/). Faz 1'deki betik bunları sayfanın kendisinden tekrar kontrol edecek.
+
+- Ders kodu **ITC.** INFO kodlu dersler (INFO 5100 gibi) mühendislik fakültesinin başka bir programına ait.
+- Program 2026 güzünden itibaren çeyrek (quarter) sisteminden **dönem (semester)** sistemine geçti. Katalogdaki "semester hours" = **kredi.**
+- **Toplam 34 kredi, minimum GPA 3.000.**
+- **Zorunlu (18 kredi):** ITC 6105 (3), ITC 6150 (3), ITC 6205 (3), ITC 6250 (3), PJM 6440 (2), ITC 6980 Capstone (4).
+- **Kalan 16 kredi:** bir konsantrasyon (zorunlu değil) ya da seçmeli seçeneği.
+  - Konsantrasyonlar: AI Systems and Data Management, Analytics, Cloud Computing Application and Management, Human-Centered Informatics, Information Security Management, Project Management.
+  - Seçmeli seçeneği: herhangi bir CPS lisansüstü dersinden 12 kredi + kısıtlı seçmelilerden 4 kredi.
+  - Kısıtlı seçmeliler: INT 6940, ITC 6405, ITC 6415, ITC 6435, ITC 6480, ITC 6680, ITC 6983.
+- **Ön koşullu lisansüstü ITC dersleri** (minimum not hep C-):
+
+  | Ders | Ön koşul |
+  |---|---|
+  | ITC 6640 | ITC 6300 veya ITC 6610 |
+  | ITC 6680 | ITC 6610 ve ITC 6620 |
+  | ITC 6721 | AAI 6600 veya ALY 6420 veya ITC 6150 |
+  | ITC 6730 | AAI 6600 veya ALY 6420 veya ITC 6711 |
+  | ITC 6980 | (ITC 6105, 6150, 6205, 6250, PJM 6440 hepsi) veya (INT 6940, ITC 6000, 6010, 6020, 6035, 6400 hepsi; eski çeyrek sistemi) |
+
+- **Katalogda olmayan bilgiler:** bir dersin iki konsantrasyona sayılıp sayılmadığı (ITC 6630 Cloud ve Security'de var), transfer kredisi, ders tekrarı, dersin hangi dönem açıldığı.
+- **Doğrulanacak:** Lisansüstü not skalasında C- ile F arasında not var mı (sentetik öğrencilerde F kullanmamızın sebebi).
