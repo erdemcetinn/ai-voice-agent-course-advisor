@@ -1,4 +1,4 @@
-"""generate_students.py testleri."""
+"""Tests for generate_students.py."""
 
 import json
 from pathlib import Path
@@ -50,13 +50,13 @@ class TestValidateStudent:
     def test_missing_prereq_is_reported(self):
         terms = [{"term": 1, "courses": [{"course": "ALY 6145", "grade": "A"}]}]
         errors = validate_student(_student(terms=terms), CATALOG)
-        assert any("ALY 6145" in e and "ön koşul" in e for e in errors)
+        assert any("ALY 6145" in e and "prerequisite" in e for e in errors)
 
     def test_unknown_course_option_and_grade_are_reported(self):
         terms = [{"term": 1, "courses": [{"course": "XYZ 1234", "grade": "A"}, {"course": "ITC 6105", "grade": "F"}]}]
-        errors = validate_student(_student(option="Yok", terms=terms), CATALOG)
+        errors = validate_student(_student(option="Missing", terms=terms), CATALOG)
         assert any("XYZ 1234" in e for e in errors)
-        assert any("Yok" in e for e in errors)
+        assert any("Missing" in e for e in errors)
         assert any("F" in e for e in errors)
 
     def test_course_taken_twice_is_reported(self):
@@ -64,7 +64,7 @@ class TestValidateStudent:
             {"term": 1, "courses": [{"course": "ALY 6105", "grade": "A"}]},
             {"term": 2, "courses": [{"course": "ALY 6105", "grade": "B"}]},
         ]
-        assert any("iki kez" in e for e in validate_student(_student(terms=terms), CATALOG))
+        assert any("taken twice" in e for e in validate_student(_student(terms=terms), CATALOG))
 
 
 class TestGpa:

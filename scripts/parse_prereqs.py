@@ -1,16 +1,16 @@
-"""Katalogdaki ön koşul metnini planlayıcının okuyabileceği bir ağaca çevirir (Faz 1.2).
+"""Turns catalog prerequisite text into a tree the planner can read (phase 1.2).
 
-Örnek:
+Example:
     "ITC 6610 with a minimum grade of C- ; ITC 6620 with a minimum grade of C-"
     -> {"and": [{"course": "ITC 6610", "min_grade": "C-", "concurrent": False},
                 {"course": "ITC 6620", "min_grade": "C-", "concurrent": False}]}
 
-Dil kuralları (katalogdaki 19 ön koşul metninden çıkarıldı):
-    ";"  = ve      "or" = veya      "( )" = grup
-    "(may be taken concurrently)" = ders aynı dönemde de alınabilir
+Grammar (derived from the 19 prerequisite texts in the catalog):
+    ";"  = and     "or" = or        "( )" = group
+    "(may be taken concurrently)" = the course may also be taken in the same term
 
-Öncelik: ";" en gevşek bağ. "A ; B or C" = A ve (B veya C).
-Bu bir varsayım, çünkü katalog parantezsiz karışık ifadeyi sadece DGM 6600'de kullanıyor.
+Precedence: ";" binds loosest. "A ; B or C" = A and (B or C).
+This is an assumption, because the catalog uses a mixed expression without parentheses only in DGM 6600.
 """
 
 import re
@@ -36,7 +36,7 @@ class Token(NamedTuple):
 
 
 def tokenize(text: str) -> list[Token]:
-    """Metni parçalara ayırır. Tanımadığı bir şey görürse durur ve nerede olduğunu söyler."""
+    """Splits the text into tokens. Stops on anything it does not recognize and says where."""
     tokens: list[Token] = []
     pos = 0
     while pos < len(text):
@@ -63,17 +63,17 @@ def tokenize(text: str) -> list[Token]:
             tokens.append(Token("RPAREN"))
             pos = m.end()
         else:
-            raise ValueError(f"Tanınmayan ifade: {text[pos:]!r} (tam metin: {text!r})")
+            raise ValueError(f"Unrecognized text: {text[pos:]!r} (full text: {text!r})")
     return tokens
 
 
 def _group(kind: str, children: list[Node]) -> Node:
-    """Tek elemanlı grupları açar: and(A) yerine sadece A."""
+    """Unwraps single-child groups: just A instead of and(A)."""
     return children[0] if len(children) == 1 else {kind: children}
 
 
 def _parse_and(tokens: list[Token], pos: int) -> tuple[Node, int]:
-    """and_ifadesi := or_ifadesi (';' or_ifadesi)*"""
+    """and_expr := or_expr (';' or_expr)*"""
     first, pos = _parse_or(tokens, pos)
     children = [first]
     while pos < len(tokens) and tokens[pos].kind == "AND":
@@ -83,7 +83,7 @@ def _parse_and(tokens: list[Token], pos: int) -> tuple[Node, int]:
 
 
 def _parse_or(tokens: list[Token], pos: int) -> tuple[Node, int]:
-    """or_ifadesi := parça ('or' parça)*"""
+    """or_expr := atom ('or' atom)*"""
     first, pos = _parse_atom(tokens, pos)
     children = [first]
     while pos < len(tokens) and tokens[pos].kind == "OR":
@@ -93,26 +93,26 @@ def _parse_or(tokens: list[Token], pos: int) -> tuple[Node, int]:
 
 
 def _parse_atom(tokens: list[Token], pos: int) -> tuple[Node, int]:
-    """parça := DERS | '(' and_ifadesi ')'"""
+    """atom := COURSE | '(' and_expr ')'"""
     if pos >= len(tokens):
-        raise ValueError("Ön koşul beklenmedik yerde bitti (eksik ders ya da kapanmamış parantez)")
+        raise ValueError("Prerequisite ended unexpectedly (missing course or unclosed parenthesis)")
     token = tokens[pos]
     if token.kind == "COURSE":
         return token.course, pos + 1
     if token.kind == "LPAREN":
         node, pos = _parse_and(tokens, pos + 1)
         if pos >= len(tokens) or tokens[pos].kind != "RPAREN":
-            raise ValueError("Kapanmamış parantez")
+            raise ValueError("Unclosed parenthesis")
         return node, pos + 1
-    raise ValueError(f"Ders ya da '(' beklenirken {token.kind} geldi")
+    raise ValueError(f"Expected a course or '(' but got {token.kind}")
 
 
 def parse_prereq(text: str | None) -> Node | None:
-    """Ön koşul metnini ağaca çevirir. Ön koşul yoksa None döndürür."""
+    """Turns prerequisite text into a tree. Returns None when there is no prerequisite."""
     if not text:
         return None
     tokens = tokenize(text)
     node, pos = _parse_and(tokens, 0)
     if pos != len(tokens):
-        raise ValueError(f"Fazladan kapanan parantez ya da beklenmeyen {tokens[pos].kind}")
+        raise ValueError(f"Extra closing parenthesis or unexpected {tokens[pos].kind}")
     return node

@@ -1,12 +1,12 @@
-"""3 sentetik (uydurma) öğrenciyi katalogla kontrol edip data/students.json'a yazar (Faz 1.5).
+"""Checks 3 synthetic (made-up) students against the catalog and writes data/students.json (phase 1.5).
 
-Kullanım:
+Usage:
     python -m scripts.generate_students
 
-Öğrenciler elle tasarlandı, her biri farklı bir durumu temsil ediyor. Betik veriyi uydurmuyor,
-tutarlı olduğunu kontrol ediyor: dersler katalogda var mı, ön koşullar önceki dönemlerde alınmış mı,
-GPA 3.0'ın üstünde mi. Bütün notlar geçer not (kalan ders senaryosu yok, karar 15 Ekim).
-Dönemler tarih yerine sırayla numaralı (1, 2, 3...). "Gelecek dönem" son numaradan sonraki dönem.
+The students are designed by hand, each one represents a different situation. The script does not
+invent data, it checks that it is consistent: are the courses in the catalog, were prerequisites taken
+in earlier terms, is the GPA above 3.0. All grades are passing grades (no failed-course scenario, by design).
+Terms are numbered (1, 2, 3...) instead of dated. "Next term" is the term after the last number.
 """
 
 import json
@@ -14,11 +14,11 @@ import logging
 import sys
 from pathlib import Path
 
+from src.tools.transcript import GRADE_POINTS, gpa, total_credits
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = PROJECT_ROOT / "data" / "catalog.json"
 OUTPUT_PATH = PROJECT_ROOT / "data" / "students.json"
-
-GRADE_POINTS = {"A": 4.0, "A-": 3.667, "B+": 3.333, "B": 3.0, "B-": 2.667, "C+": 2.333, "C": 2.0, "C-": 1.667}
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def _term(number: int, *courses: tuple[str, str]) -> dict:
 
 STUDENTS = [
     {
-        # Yeni başlamış: 1 dönem. ITC 6620'yi almadığı için ITC 6680'e henüz uygun değil.
+        # Just started: 1 term. Has not taken ITC 6620, so not yet eligible for ITC 6680.
         "student_id": "s001",
         "name": "Maya Okafor",
         "pin": "4821",
@@ -37,7 +37,7 @@ STUDENTS = [
         "terms": [_term(1, ("ITC 6105", "A"), ("ITC 6610", "A-"))],
     },
     {
-        # Ortada: 3 dönem, 20 kredi.
+        # Midway: 3 terms, 20 credits.
         "student_id": "s002",
         "name": "Daniel Reyes",
         "pin": "7350",
@@ -49,7 +49,7 @@ STUDENTS = [
         ],
     },
     {
-        # Mezuniyete yakın: 4 dönem, 28 kredi. Kalan: capstone (ITC 6980) + 2 kredi kısıtlı seçmeli.
+        # Close to graduation: 4 terms, 28 credits. Remaining: capstone (ITC 6980) + 2 credits of restricted electives.
         "student_id": "s003",
         "name": "Lena Fischer",
         "pin": "2694",
@@ -65,7 +65,7 @@ STUDENTS = [
 
 
 def is_satisfied(node: dict | None, done: set[str], same_term: set[str]) -> bool:
-    """Ön koşul ağacı sağlanıyor mu? Aynı dönemde alınan ders sadece "concurrent" ise sayılır."""
+    """Is the prerequisite tree satisfied? A course taken in the same term counts only if "concurrent"."""
     if node is None:
         return True
     if "course" in node:
@@ -80,14 +80,14 @@ def _all_courses(student: dict) -> list[dict]:
 
 
 def validate_student(student: dict, catalog: dict) -> list[str]:
-    """Öğrenci kaydındaki tutarsızlıkları liste olarak döndürür. Boş liste = sorun yok."""
+    """Returns the inconsistencies in a student record as a list. Empty list = no problems."""
     courses = catalog["courses"]
     sid = student["student_id"]
     option_names = {option["name"] for option in catalog["program"]["options"]}
-    errors = [] if student["option"] in option_names else [f"{sid}: bilinmeyen seçenek {student['option']!r}"]
+    errors = [] if student["option"] in option_names else [f"{sid}: unknown option {student['option']!r}"]
 
     codes = [entry["course"] for entry in _all_courses(student)]
-    errors += [f"{sid}: {code} iki kez alınmış" for code in sorted({c for c in codes if codes.count(c) > 1})]
+    errors += [f"{sid}: {code} taken twice" for code in sorted({c for c in codes if codes.count(c) > 1})]
 
     done: set[str] = set()
     for term in student["terms"]:
@@ -95,26 +95,14 @@ def validate_student(student: dict, catalog: dict) -> list[str]:
         for entry in term["courses"]:
             code, grade = entry["course"], entry["grade"]
             if code not in courses:
-                errors.append(f"{sid}: {code} katalogda yok")
+                errors.append(f"{sid}: {code} is not in the catalog")
                 continue
             if grade not in GRADE_POINTS:
-                errors.append(f"{sid}: {code} için geçersiz not {grade!r}")
+                errors.append(f"{sid}: invalid grade {grade!r} for {code}")
             if not is_satisfied(courses[code]["prereq"], done, same_term):
-                errors.append(f"{sid}: {code} dönem {term['term']}'de alınmış ama ön koşulu sağlanmıyor")
+                errors.append(f"{sid}: {code} taken in term {term['term']} but its prerequisite is not met")
         done = done | same_term
     return errors
-
-
-def total_credits(student: dict, catalog: dict) -> int:
-    return sum(catalog["courses"][entry["course"]]["credits"] for entry in _all_courses(student))
-
-
-def gpa(student: dict, catalog: dict) -> float:
-    """Krediye göre ağırlıklı not ortalaması."""
-    entries = _all_courses(student)
-    credits = [catalog["courses"][entry["course"]]["credits"] for entry in entries]
-    points = sum(GRADE_POINTS[entry["grade"]] * credit for entry, credit in zip(entries, credits))
-    return points / sum(credits)
 
 
 def main() -> None:
@@ -123,22 +111,22 @@ def main() -> None:
 
     errors = [error for student in STUDENTS for error in validate_student(student, catalog)]
     if errors:
-        log.error("Öğrenci verisi tutarsız:\n  %s", "\n  ".join(errors))
+        log.error("Student data is inconsistent:\n  %s", "\n  ".join(errors))
         sys.exit(1)
 
     output = {
-        "meta": {"synthetic": True, "note": "Uydurma öğrenciler. Gerçek kişi ya da kayıt değildir."},
+        "meta": {"synthetic": True, "note": "Made-up students. Not real people or records."},
         "students": {student["student_id"]: student for student in STUDENTS},
     }
     OUTPUT_PATH.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     for student in STUDENTS:
         log.info(
-            "%s %-14s %-45s %d dönem, %2d kredi, GPA %.2f",
+            "%s %-14s %-45s %d terms, %2d credits, GPA %.2f",
             student["student_id"], student["name"], student["option"],
             len(student["terms"]), total_credits(student, catalog), gpa(student, catalog),
         )
-    log.info("Yazıldı: %s", OUTPUT_PATH.relative_to(PROJECT_ROOT))
+    log.info("Wrote: %s", OUTPUT_PATH.relative_to(PROJECT_ROOT))
 
 
 if __name__ == "__main__":

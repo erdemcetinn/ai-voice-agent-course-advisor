@@ -1,4 +1,4 @@
-"""check_prereqs.py testleri."""
+"""Tests for check_prereqs.py."""
 
 from scripts.check_prereqs import build_graph, codes_in, find_cycle
 

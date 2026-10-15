@@ -138,11 +138,12 @@ Program: **CPS, MPS in Informatics (Boston), 2026-2027 kataloğu.** Dersler **IT
 
 Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonları yazıp test ediyoruz.
 
-### 2.1 Dosya memuru: `src/tools/transcript.py`
+### 2.1 Dosya memuru: `src/tools/transcript.py` ✅
 - **Ne yapıyoruz:** `get_transcript(student_id)` fonksiyonu. Şimdilik `data/students.json`'dan okuyor.
 - **Neden:** Sekreter "bu öğrenci ne almış" sorusunu buradan cevaplayacak.
 - **Önemli:** Fonksiyon, okuma işini küçük bir ara katman üzerinden yapıyor (`load_student(id)`). Faz 6'da sadece bu ara katmanı DynamoDB'ye çevireceğiz, fonksiyonun geri kalanı değişmeyecek.
 - **Kontrol:** pytest: var olan öğrenci doğru dönüyor, olmayan öğrenci için anlaşılır bir hata dönüyor.
+- **Sonuç (15 Ekim):** Her ders adı ve kredisiyle dönüyor. `credits_completed`, `credits_required` ve `gpa` Python tarafından hesaplanıyor. PIN hiçbir zaman dönmüyor (bunun için test var).
 
 ### 2.2 Katalogu parçala ve embedding çıkar: `scripts/build_index.py`
 - **Ne yapıyoruz:** Her dersi küçük metin parçalarına (chunk) ayırıyoruz: başlık + açıklama bir parça, ön koşul bir parça gibi. Her parçayı Titan ile embedding'e çeviriyoruz. Sonuçları `data/index.npy` (sayılar) ve `data/chunks.json` (metinler) olarak kaydediyoruz.

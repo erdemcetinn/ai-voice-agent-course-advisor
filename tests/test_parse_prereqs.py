@@ -1,4 +1,4 @@
-"""parse_prereqs.py testleri. Metinler data/catalog.json'daki gerçek ön koşullardan alındı."""
+"""Tests for parse_prereqs.py. Texts are taken from real prerequisites in data/catalog.json."""
 
 import pytest
 
@@ -59,8 +59,8 @@ def test_two_big_groups_itc_6980():
 
 
 def test_mixed_without_parentheses_dgm_6600():
-    # VARSAYIM: Katalog parantez koymamış. ";" (ve) en gevşek bağ kabul ediliyor, yani
-    # "A ; B or C or D" = A ve (B veya C veya D). Diğer okunuş "(A ve B) veya C veya D" olurdu.
+    # ASSUMPTION: the catalog uses no parentheses here. ";" (and) is treated as the loosest bond, so
+    # "A ; B or C or D" = A and (B or C or D). The other reading would be "(A and B) or C or D".
     text = (
         f"DGM 5050 {GRADE} ; DGM 5060 {GRADE} or "
         f"DGM 6168 (may be taken concurrently) {GRADE} or "
@@ -84,5 +84,5 @@ def test_unknown_word_raises_clear_error():
 
 
 def test_unbalanced_parentheses_raise_error():
-    with pytest.raises(ValueError, match="parantez"):
+    with pytest.raises(ValueError, match="parenthesis"):
         parse_prereq(f"( ITC 6610 {GRADE} ; ITC 6620 {GRADE}")

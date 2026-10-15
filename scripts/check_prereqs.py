@@ -1,11 +1,11 @@
-"""Ön koşullarda döngü var mı kontrol eder (Faz 1.4).
+"""Checks the prerequisites for cycles (phase 1.4).
 
-Kullanım:
+Usage:
     python -m scripts.check_prereqs
 
-Dersler düğüm, ön koşullar ok: "ITC 6680 -> ITC 6610" demek "6680 için 6610 gerekli".
-Döngü varsa (A, B'yi istiyor, B de A'yı istiyor) hiçbir öğrenci bu dersleri alamaz
-ve planlayıcı takılır. Döngü bulunursa betik hata koduyla çıkar.
+Courses are nodes, prerequisites are edges: "ITC 6680 -> ITC 6610" means "6680 requires 6610".
+If there is a cycle (A requires B and B requires A), no student can take those courses
+and the planner gets stuck. The script exits with an error code when it finds a cycle.
 """
 
 import json
@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 
 def codes_in(node: dict | None) -> list[str]:
-    """Ön koşul ağacındaki bütün ders kodları, sırayla ve tekrarsız."""
+    """All course codes in a prerequisite tree, in order and without duplicates."""
     if node is None:
         return []
     if "course" in node:
@@ -31,12 +31,12 @@ def codes_in(node: dict | None) -> list[str]:
 
 
 def build_graph(courses: dict) -> Graph:
-    """Her ders için ön koşul kodları. Katalogda olmayan eski kodlar dışarıda kalır, onlardan ok çıkmaz."""
+    """Prerequisite codes for each course. Retired codes missing from the catalog are left out, so they add no edges."""
     return {code: [p for p in codes_in(course["prereq"]) if p in courses] for code, course in courses.items()}
 
 
 def find_cycle(graph: Graph) -> list[str] | None:
-    """Bir döngü bulursa yolunu döndürür (ör. ["A", "B", "A"]), yoksa None."""
+    """Returns the path of a cycle if one exists (e.g. ["A", "B", "A"]), otherwise None."""
     done: set[str] = set()
 
     def visit(code: str, path: list[str]) -> list[str] | None:
@@ -64,9 +64,9 @@ def main() -> None:
 
     cycle = find_cycle(graph)
     if cycle:
-        log.error("DÖNGÜ VAR: %s", " -> ".join(cycle))
+        log.error("CYCLE FOUND: %s", " -> ".join(cycle))
         sys.exit(1)
-    log.info("OK: %d ders, %d ön koşul oku, döngü yok.", len(graph), edge_count)
+    log.info("OK: %d courses, %d prerequisite edges, no cycles.", len(graph), edge_count)
 
 
 if __name__ == "__main__":

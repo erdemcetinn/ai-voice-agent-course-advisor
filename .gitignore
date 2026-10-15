@@ -8,7 +8,7 @@ terraform.tfvars
 data/index.npy
 .eski-dokumanlar/
 data/raw/
-# Katalog verisini hazırlayan yerel betik, repoda tutulmuyor
+# Local scripts that prepare the catalog data, not kept in the repo
 scripts/scrape_catalog.py
 tests/test_scrape_catalog.py
 scripts/scrape_program.py
