@@ -14,6 +14,7 @@ import logging
 import sys
 from pathlib import Path
 
+from src.tools.planner import is_satisfied
 from src.tools.transcript import GRADE_POINTS, gpa, total_credits
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -62,17 +63,6 @@ STUDENTS = [
         ],
     },
 ]
-
-
-def is_satisfied(node: dict | None, done: set[str], same_term: set[str]) -> bool:
-    """Is the prerequisite tree satisfied? A course taken in the same term counts only if "concurrent"."""
-    if node is None:
-        return True
-    if "course" in node:
-        return node["course"] in done or (node["concurrent"] and node["course"] in same_term)
-    if "and" in node:
-        return all(is_satisfied(child, done, same_term) for child in node["and"])
-    return any(is_satisfied(child, done, same_term) for child in node["or"])
 
 
 def _all_courses(student: dict) -> list[dict]:

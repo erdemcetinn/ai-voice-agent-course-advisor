@@ -225,11 +225,11 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 
 ## Faz 5: Hesap makinesi (planlayıcı)
 
-### 5.1 Önce testleri yaz: `tests/test_planner.py`
+### 5.1 Önce testleri yaz: `tests/test_planner.py` ✅
 - **Ne yapıyoruz:** Planlayıcı kodundan önce testleri yazıyoruz. Örnek: "s001 ITC 6620'yi almamış, o zaman ITC 6680 önerilmemeli." "PJM 6440'ı almamış öğrenci capstone'a (ITC 6980) uygun sayılmamalı."
 - **Neden:** Testler planlayıcının ne yapması gerektiğinin tarifi. Önce tarifi yazınca kodun neyi sağlaması gerektiği netleşiyor.
 
-### 5.2 Planlayıcı: `src/tools/planner.py`
+### 5.2 Planlayıcı: `src/tools/planner.py` ✅
 - **Ne yapıyoruz:** `plan_next_semester()` fonksiyonu. Öğrencinin aldığı dersleri ve notlarını alıyor, her ders için ön koşulların sağlanıp sağlanmadığını kontrol ediyor ve uygun dersleri **nedenleriyle** birlikte döndürüyor.
 - **Planlayıcının cevaplayacağı üç soru (Faz 4 sınavından çıkan dersler):**
   1. **Ön koşul sağlanıyor mu?** (her ders için evet/hayır ve nedeni)
@@ -239,9 +239,11 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 - **Yeni kavram:** **Deterministik kod.** Aynı girdi her zaman aynı çıktıyı verir. LLM böyle değil.
 - **Kontrol:** 5.1'deki testler geçiyor.
 
-### 5.3 Tool olarak ekle ve tekrar ölç
+### 5.3 Tool olarak ekle ve tekrar ölç ✅
 - **Ne yapıyoruz:** Planlayıcıya bir tool kartı yazıp döngüye ekliyoruz. Prompt'a "uygunluk sorularında her zaman planlayıcıyı kullan" kuralını ekliyoruz. Sınavı tekrar yapıyoruz.
 - **Kontrol:** `evals/results/planner.md` oluşuyor. `baseline.md` ile yan yana koy. Ön koşul ve kredi hatalarının azalmasını, özellikle q07 ve q19'un düzelmesini bekliyoruz. **Azalmadıysa** nedenine bak: LLM planlayıcıyı çağırmıyor olabilir ya da sonucunu yanlış anlatıyor olabilir.
+
+- **Sonuç (16 Ekim):** Planlayıcı yazıldı (18 test) ve ajana üçüncü tool olarak eklendi. Kredi ve "mezuniyete sayılır mı" soruları artık doğru (q07 ve q19 düzeldi). Toplam puan aynı kaldı (93/99), çünkü iki soruda LLM planlayıcının sonucunu biraz yanlış anlattı. Erdem'in kararı: bu tür doğruluk ayarları production öncesinin işi, şimdilik üzerinde durmuyoruz. Öncelik uçtan uca çalışan ürün.
 
 **Bu noktada telefon hariç tam çalışan bir danışmanın var.**
 

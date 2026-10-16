@@ -8,6 +8,7 @@ cannot ask for another student's record.
 """
 
 from src.tools.catalog_search import search_catalog
+from src.tools.planner import plan_next_semester
 from src.tools.transcript import get_transcript
 
 
@@ -34,6 +35,16 @@ TOOL_SPECS = [
         {"query": {"type": "string", "description": "A course code or a short English search phrase."}},
         ["query"],
     ),
+    _spec(
+        "plan_next_semester",
+        "Deterministic rule check for the current student. With course_code: whether they can take that course now, "
+        "which prerequisites are missing, and whether it counts toward a remaining graduation requirement. "
+        "Without course_code: everything still needed to graduate (courses and credits), the courses they can take "
+        "next semester that count, and needed courses still blocked by prerequisites. Use it for every question about "
+        "eligibility, remaining requirements, remaining credits, or what to take next.",
+        {"course_code": {"type": "string", "description": "Optional course code, e.g. 'ITC 6680'."}},
+        [],
+    ),
 ]
 
 
@@ -43,4 +54,6 @@ def run_tool(name: str, tool_input: dict, student_id: str) -> dict:
         return get_transcript(student_id)
     if name == "search_catalog":
         return search_catalog(tool_input.get("query", ""))
+    if name == "plan_next_semester":
+        return plan_next_semester(student_id, tool_input.get("course_code"))
     raise ValueError(f"Unknown tool: {name}")

@@ -27,6 +27,9 @@ class TestRunTool:
     def test_search_catalog_passes_the_query(self):
         assert run_tool("search_catalog", {"query": "ITC 6680"}, student_id="s001")["mode"] == "exact"
 
+    def test_plan_next_semester_uses_the_session_student(self):
+        assert run_tool("plan_next_semester", {"course_code": "ITC 6680", "student_id": "s003"}, student_id="s001")["missing_prerequisites"] == "ITC 6620"
+
     def test_unknown_tool_raises(self):
         with pytest.raises(ValueError, match="Unknown tool"):
             run_tool("delete_everything", {}, student_id="s001")
@@ -95,4 +98,4 @@ class TestRunTurn:
         request = client.requests[0]
         assert "haiku" in request["modelId"]
         assert request["system"][0]["text"]
-        assert {t["toolSpec"]["name"] for t in request["toolConfig"]["tools"]} == {"get_transcript", "search_catalog"}
+        assert {t["toolSpec"]["name"] for t in request["toolConfig"]["tools"]} == {"get_transcript", "search_catalog", "plan_next_semester"}
