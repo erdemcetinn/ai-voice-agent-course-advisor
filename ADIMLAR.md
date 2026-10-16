@@ -199,7 +199,7 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 
 ## Faz 4: Ölçüm (sınav)
 
-### 4.1 Soru seti: `evals/questions.jsonl`
+### 4.1 Soru seti: `evals/questions.jsonl` ✅
 - **Ne yapıyoruz:** Cevabını kesin bildiğimiz yaklaşık 30 soru yazıyoruz. Her satır bir soru:
   ```json
   {"id": "q01", "student": "s001", "q": "ITC 6680 alabilir miyim?", "expect": "no", "why": "ITC 6620 alınmamış"}
@@ -209,10 +209,17 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 - **Soru türleri:** ön koşul tuzakları, kredi hesabı, katalog bilgisi, kapsam dışı sorular, başka öğrencinin bilgisini isteme, kandırma denemeleri.
 - **Neden:** "Sistem iyi çalışıyor" bir his. "30 sorudan 24'ü doğru" bir ölçüm. Ölçmeden neyi düzelteceğini bilemezsin.
 
-### 4.2 Puanlayıcı: `evals/run_evals.py`
+### 4.2 Puanlayıcı: `evals/run_evals.py` ✅
 - **Ne yapıyoruz:** Her soruyu sisteme sorup cevabı beklenenle karşılaştıran betik. Sonuç olarak her kategori için doğru sayısını içeren bir tablo üretiyor.
 - **Yeni kavram:** **Eval (değerlendirme).** LLM cevapları her seferinde birebir aynı çıkmaz. Bu yüzden "evet/hayır doğru mu", "şu ders kodu cevapta geçiyor mu" gibi kontrol edilebilir şeylere bakıyoruz.
-- **Kontrol:** `evals/results/once.md` dosyası oluşuyor. **Bu dosyayı sakla, Faz 5'te karşılaştıracağız.**
+- **Kontrol:** `evals/results/baseline.md` dosyası oluşuyor. **Bu dosyayı sakla, Faz 5'te karşılaştıracağız.**
+- **Sonuç (16 Ekim):** 33 soru, 6 kategori, her soru 3 kez (`python -m evals.run_evals --label baseline --runs 3`). Puanlayıcı Claude Sonnet 4.6 (LLM-as-judge), gizlilik sorularında ayrıca kodla yasaklı kelime kontrolü.
+  - **93 / 99 doğru (%94).** Katalog, kapsam dışı, katalogda olmayan bilgi ve gizlilik: hepsi tam. Ön koşul 36/39, ilerleme 18/21.
+  - **Gerçek hatalar (her 3 denemede de):** q07 (ALY 6620 "alabilirsin, yerin var" dedi, ama ders mezuniyete sayılmıyor) ve q19 (capstone'u 3 kredi sandı, kalan şartı yanlış tarif etti ama toplamı 6 tutturdu). İkisi de Faz 5'te planlayıcının işi.
+  - **Tutarlılık:** Hiçbir soruda 3 deneme arasında fark yok (temperature 0).
+  - **Süre:** medyan yaklaşık 3-5 saniye, p90 yaklaşık 10-12 saniye. Telefon için uzun, Faz 7'de dikkat.
+  - **Öğrendiğimiz:** Puanlayıcı da yanılabiliyor. q03'te ajan doğruydu, ama benim yazdığım beklenen cevap eksik olduğu için iki kez yanlış sayıldı. Beklenen cevapları düzelttik. **Eval'in kendisini de kontrol etmek gerekiyor.**
+  - **Dürüst not:** %94 yüksek, çünkü soruların çoğu tek bir derse bakan basit sorular. Planlayıcının farkını göstermek için Faz 5'te daha zor sorular da ekleyeceğiz: "Gelecek dönem hangi dersleri alabilirim?" gibi, 47 dersin hepsini kontrol etmeyi gerektiren sorular.
 
 ---
 
@@ -224,13 +231,17 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 
 ### 5.2 Planlayıcı: `src/tools/planner.py`
 - **Ne yapıyoruz:** `plan_next_semester()` fonksiyonu. Öğrencinin aldığı dersleri ve notlarını alıyor, her ders için ön koşulların sağlanıp sağlanmadığını kontrol ediyor ve uygun dersleri **nedenleriyle** birlikte döndürüyor.
+- **Planlayıcının cevaplayacağı üç soru (Faz 4 sınavından çıkan dersler):**
+  1. **Ön koşul sağlanıyor mu?** (her ders için evet/hayır ve nedeni)
+  2. **Bu ders mezuniyetine sayılır mı?** Öğrencinin kalan şartlarından hangisini dolduruyor: zorunlu ders, konsantrasyon dersi, seçim grubu, kısıtlı seçmeli ya da **hiçbiri.** (q07: Lena'ya ALY 6620 "alabilirsin, yerin var" dendi. Ama seçim grubunu ALY 6610 ile zaten tamamlamış, ALY 6620 mezuniyetine hiçbir şey katmıyor. Öğrenci boşuna ücret öder. Planlayıcı "uygun ama mezuniyete sayılmaz" diyebilmeli.)
+  3. **Mezuniyet için ne kaldı?** Ders kodları ve kredileriyle birlikte. (q19: Haiku capstone'u 3 kredi sandı ve kalan şartı yanlış tarif etti, ama toplamı 6 tutturdu. Kalanı Python hesaplayacak.)
 - **Neden:** Kesin kurallar kodla kontrol edilince her seferinde aynı ve doğru sonuç çıkıyor.
 - **Yeni kavram:** **Deterministik kod.** Aynı girdi her zaman aynı çıktıyı verir. LLM böyle değil.
 - **Kontrol:** 5.1'deki testler geçiyor.
 
 ### 5.3 Tool olarak ekle ve tekrar ölç
 - **Ne yapıyoruz:** Planlayıcıya bir tool kartı yazıp döngüye ekliyoruz. Prompt'a "uygunluk sorularında her zaman planlayıcıyı kullan" kuralını ekliyoruz. Sınavı tekrar yapıyoruz.
-- **Kontrol:** `evals/results/sonra.md` oluşuyor. `once.md` ile yan yana koy. Ön koşul ve not hatalarının azalmasını bekliyoruz. **Azalmadıysa** nedenine bak: LLM planlayıcıyı çağırmıyor olabilir ya da sonucunu yanlış anlatıyor olabilir.
+- **Kontrol:** `evals/results/planner.md` oluşuyor. `baseline.md` ile yan yana koy. Ön koşul ve kredi hatalarının azalmasını, özellikle q07 ve q19'un düzelmesini bekliyoruz. **Azalmadıysa** nedenine bak: LLM planlayıcıyı çağırmıyor olabilir ya da sonucunu yanlış anlatıyor olabilir.
 
 **Bu noktada telefon hariç tam çalışan bir danışmanın var.**
 

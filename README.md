@@ -3,7 +3,7 @@
 A student calls a phone number and asks: *"Which courses can I take next semester?"*
 The agent answers from Northeastern's real course catalog and the student's own transcript, and it never guesses on the rules.
 
-> **Status (October 2026):** the agent answers in the terminal with real catalog data. Evaluation set next.
+> **Status (October 2026):** the agent answers in the terminal with real catalog data, and a baseline evaluation is in. Deterministic planner next.
 > Built on AWS: Amazon Bedrock, Amazon Connect, AgentCore Gateway, Lambda, DynamoDB, S3.
 
 ---
@@ -21,6 +21,8 @@ So the system splits the work:
 | Rules | `plan_next_semester` | Checks prerequisites and graduation requirements deterministically |
 
 This is a hypothesis, not a slogan. The plan is to **measure it**: run an evaluation set with the LLM alone, then add the planner and run the same set again.
+
+**Baseline (LLM alone, Claude Haiku 4.5):** 93 / 99 on 33 questions asked 3 times each. Both failures are rule reasoning: it called a course "a good fit" that would not count toward graduation, and it got the capstone's credits wrong while still landing on the right total. Details in [evals/results/baseline.md](evals/results/baseline.md).
 
 ---
 
@@ -63,7 +65,7 @@ Iterating in a terminal takes seconds; iterating over phone calls takes minutes.
 | 1 | Data: 47 real courses, parsed prerequisite trees, graduation rules, cycle check, 3 synthetic students | ✅ |
 | 2 | Tools: `get_transcript`, Titan V2 embedding index (76 chunks), `search_catalog` (exact code lookup + semantic search) | ✅ |
 | 3 | Tool loop (Bedrock Converse, Claude Haiku 4.5) and terminal chat | ✅ |
-| 4 | Evaluation set, baseline with the LLM alone | ⏳ |
+| 4 | Evaluation set (33 questions x 3 runs, LLM-as-judge), baseline with the LLM alone: **93 / 99** | ✅ |
 | 5 | Deterministic planner, re-run the evaluation | ⏳ |
 | 6 | Move to AWS: S3, DynamoDB, Lambda | ⏳ |
 | 7 | Phone: Amazon Connect with AgentCore Gateway | ⏳ |
@@ -138,6 +140,7 @@ No real student data is used (student records in the US are protected by FERPA).
 │   ├── agent/                tools.py (tool definitions), prompts.py, loop.py (tool loop)
 │   ├── cli.py                terminal chat
 │   └── tools/                transcript.py (get_transcript), catalog_search.py (search_catalog)
+├── evals/                    questions.jsonl, run_evals.py, judge.py, results/
 └── tests/
 ```
 
