@@ -8,20 +8,13 @@ Two paths:
 Embeddings are normalized, so cosine similarity is a plain dot product (see src/embeddings.py).
 """
 
-import json
 import re
-from functools import lru_cache
-from pathlib import Path
 from typing import Callable
 
 import numpy as np
 
+from src.data import load_catalog, load_index
 from src.embeddings import embed_text, make_client
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-CATALOG_PATH = PROJECT_ROOT / "data" / "catalog.json"
-INDEX_PATH = PROJECT_ROOT / "data" / "index.npy"
-CHUNKS_PATH = PROJECT_ROOT / "data" / "chunks.json"
 
 DEFAULT_TOP_K = 5
 SCORE_DECIMALS = 3
@@ -30,19 +23,6 @@ CODE_RE = re.compile(r"\b([A-Za-z]{2,5})[\s-]?(\d{4})\b")
 
 Embedder = Callable[[str], list[float]]
 Index = tuple[np.ndarray, list[dict]]
-
-
-@lru_cache(maxsize=1)
-def load_catalog() -> dict:
-    """Read once per process. On Lambda this survives between calls while the container stays warm."""
-    return json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
-
-
-@lru_cache(maxsize=1)
-def load_index() -> Index:
-    if not INDEX_PATH.exists():
-        raise FileNotFoundError(f"{INDEX_PATH.name} is missing. Run: python -m scripts.build_index")
-    return np.load(INDEX_PATH), json.loads(CHUNKS_PATH.read_text(encoding="utf-8"))
 
 
 def _known_subjects() -> set[str]:

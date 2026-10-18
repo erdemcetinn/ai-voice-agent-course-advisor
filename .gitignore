@@ -13,3 +13,4 @@ scripts/scrape_catalog.py
 tests/test_scrape_catalog.py
 scripts/scrape_program.py
 tests/test_scrape_program.py
+dist/

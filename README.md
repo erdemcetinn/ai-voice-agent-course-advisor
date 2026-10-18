@@ -3,7 +3,7 @@
 A student calls a phone number and asks: *"Which courses can I take next semester?"*
 The agent answers from Northeastern's real course catalog and the student's own transcript, and it never guesses on the rules.
 
-> **Status (October 2026):** the full agent (conversation, RAG search, deterministic planner) runs end to end in the terminal. Next: deploy to AWS and connect the phone line.
+> **Status (October 2026):** the full agent runs end to end in the terminal, and its tools are deployed to AWS Lambda. Next: connect the phone line.
 > Built on AWS: Amazon Bedrock (Claude Haiku 4.5, Titan Embeddings V2), Amazon Connect, AgentCore Gateway, Lambda, DynamoDB, S3.
 
 ---
@@ -90,7 +90,7 @@ Iterating in a terminal takes seconds; iterating over phone calls takes minutes.
 | 3 | Tool loop (Bedrock Converse, Claude Haiku 4.5) and terminal chat | ✅ |
 | 4 | Automated test set: 33 scripted conversations scored by an LLM judge | ✅ |
 | 5 | `plan_next_semester`: deterministic prerequisite, requirement and credit checks | ✅ |
-| 6 | Move to AWS: S3, DynamoDB, Lambda | ⏳ |
+| 6 | Deployed to AWS: data in S3, students in DynamoDB, all three tools in one Lambda | ✅ |
 | 7 | Phone: Amazon Connect with AgentCore Gateway | ⏳ |
 
 ---
@@ -162,7 +162,10 @@ No real student data is used (student records in the US are protected by FERPA).
 │   ├── embeddings.py         shared Titan embedding call
 │   ├── agent/                tools.py (tool definitions), prompts.py, loop.py (tool loop)
 │   ├── cli.py                terminal chat
+│   ├── lambda_handler.py     single Lambda entry point for the three tools
+│   ├── data.py               reads data locally or from S3 on Lambda
 │   └── tools/                transcript.py, catalog_search.py, planner.py (the three tools)
+├── infra/                    IAM trust and permission policies for the Lambda
 ├── evals/                    questions.jsonl, run_evals.py, judge.py, results/
 └── tests/
 ```

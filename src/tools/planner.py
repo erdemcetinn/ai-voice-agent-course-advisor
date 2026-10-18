@@ -10,7 +10,7 @@ a course that fills no requirement does not bring the student closer to graduati
 A completed course satisfies a prerequisite; minimum grades are not checked (all grades are passing by design).
 """
 
-from src.tools.catalog_search import load_catalog
+from src.data import load_catalog
 from src.tools.transcript import load_student
 
 NOT_COUNTING_NOTE = "Eligible, but it does not count toward any remaining graduation requirement."

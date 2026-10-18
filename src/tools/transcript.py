@@ -3,15 +3,22 @@
 Returns the student's courses, total credits and GPA. Python calculates credits and GPA,
 the LLM only reads the finished numbers. The PIN is never returned.
 
-Reading goes through load_student(). In phase 6 only this function will switch to DynamoDB.
+Reading goes through load_student(): from data/students.json by default, or from DynamoDB when
+the STUDENTS_TABLE environment variable names a table (set on Lambda, phase 6.2).
 """
 
 import json
+import os
+from decimal import Decimal
 from pathlib import Path
+
+import boto3
+
+from src.data import load_catalog
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 STUDENTS_PATH = PROJECT_ROOT / "data" / "students.json"
-CATALOG_PATH = PROJECT_ROOT / "data" / "catalog.json"
+STUDENTS_TABLE_ENV = "STUDENTS_TABLE"
 
 GRADE_POINTS = {"A": 4.0, "A-": 3.667, "B+": 3.333, "B": 3.0, "B-": 2.667, "C+": 2.333, "C": 2.0, "C-": 1.667}
 GPA_DECIMALS = 2
@@ -25,12 +32,31 @@ def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _students_table(name: str):
+    return boto3.resource("dynamodb").Table(name)
+
+
+def _plain(value):
+    """DynamoDB returns numbers as Decimal; turn them back into int or float so they serialize as JSON."""
+    if isinstance(value, Decimal):
+        return int(value) if value == value.to_integral_value() else float(value)
+    if isinstance(value, list):
+        return [_plain(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _plain(item) for key, item in value.items()}
+    return value
+
+
 def load_student(student_id: str) -> dict:
     """The raw student record (including the PIN). Use only inside this module."""
-    students = _read_json(STUDENTS_PATH)["students"]
-    if student_id not in students:
+    table_name = os.environ.get(STUDENTS_TABLE_ENV)
+    if table_name:
+        record = _students_table(table_name).get_item(Key={"student_id": student_id}).get("Item")
+    else:
+        record = _read_json(STUDENTS_PATH)["students"].get(student_id)
+    if record is None:
         raise StudentNotFoundError(f"Student not found: {student_id}")
-    return students[student_id]
+    return _plain(record)
 
 
 def _all_courses(student: dict) -> list[dict]:
@@ -57,7 +83,7 @@ def _describe(entry: dict, courses: dict) -> dict:
 def get_transcript(student_id: str) -> dict:
     """The transcript sent to the LLM. The session supplies student_id, not the LLM."""
     student = load_student(student_id)
-    catalog = _read_json(CATALOG_PATH)
+    catalog = load_catalog()
     return {
         "student_id": student["student_id"],
         "name": student["name"],

@@ -251,17 +251,19 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 
 ## Faz 6: Buluta taşıma
 
-### 6.1 Veriyi S3'e koy
+### 6.1 Veriyi S3'e koy ✅
 - **Ne yapıyoruz:** Bir S3 bucket oluşturup `catalog.json`, `chunks.json` ve `index.npy` dosyalarını yüklüyoruz.
 - **Neden:** Lambda senin bilgisayarındaki dosyaları göremez. Dosyaları bulutta bir yere koymamız gerekiyor.
+- **Sonuç (17 Ekim):** Bucket `course-advisor-data-452383571300` (us-east-1, herkese kapalı). İçinde catalog.json, chunks.json, index.npy. Komutları Erdem çalıştırdı.
 
-### 6.2 Öğrencileri DynamoDB'ye koy
+### 6.2 Öğrencileri DynamoDB'ye koy ✅
 - **Ne yapıyoruz:** `students` tablosu oluşturup (anahtar: `student_id`) 3 öğrenciyi yüklüyoruz. `load_student()` ara katmanını DynamoDB'den okuyacak şekilde değiştiriyoruz.
 - **Neden:** Gerçek bir sistemde öğrenci kayıtları dosyada değil, veritabanında durur.
 - **Yeni kavram:** **Anahtar-değer veritabanı.** DynamoDB'de bir kaydı anahtarıyla milisaniyede okursun. SQL gibi karmaşık sorgulara gerek yok.
 - **Kontrol:** Faz 2'deki testler hala geçiyor.
+- **Sonuç (17 Ekim):** Tablo `course-advisor-students` (on-demand). Erdem tabloyu ve s001'i konsoldan JSON view ile ekledi, s002 ve s003'ü `python -m scripts.load_students` yükledi (betik tablo yoksa oluşturuyor). `load_student()` artık `STUDENTS_TABLE` ortam değişkeni varsa DynamoDB'den, yoksa dosyadan okuyor. DynamoDB sayıları Decimal döndürdüğü için int'e çevriliyor. Deneme: `STUDENTS_TABLE=course-advisor-students` ile get_transcript('s003') → Lena, 28 kredi, GPA 3.68.
 
-### 6.3 Lambda: `src/lambda_handler.py`
+### 6.3 Lambda: `src/lambda_handler.py` ✅
 - **Ne yapıyoruz:** Üç tool'u da çalıştırabilen tek bir Lambda fonksiyonu. Gelen istekte hangi tool'un istendiğine bakıp ilgili fonksiyonu çağırıyor.
 - **Neden:** Telefon tarafı tool'larımızı bulutta çalıştırabilmeli.
 - **Önemli:**
@@ -270,6 +272,7 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
   - Lambda'nın IAM rolü sadece gereken izinleri almalı: bu bucket'tan okuma, bu tablodan okuma, Titan'ı çağırma.
 - **Yeni kavram:** **Cold start.** Lambda bir süre çağrılmazsa kapanır ve ilk çağrıda yeniden açılması birkaç saniye sürer.
 - **Kontrol:** `aws lambda invoke` ile her tool'u elle çağır, doğru cevap dönsün.
+- **Sonuç (17 Ekim):** `course-advisor-tools` (Python 3.11, 512 MB, 30 sn). Rol `course-advisor-tools-lambda`: S3 okuma, DynamoDB GetItem, Titan çağırma (izinler `infra/` klasöründe). Veri `src/data.py` ile S3'ten `/tmp`'ye bir kez iniyor. Paket `python -m scripts.package_lambda` (numpy 2.2.6 Linux sürümü, Python 3.11 Lambda ortamı daha yenisini desteklemiyor). Lambda'yı Erdem kurdu. Beş elle çağrının hepsi doğru: get_transcript (DynamoDB'den Lena), search_catalog kodla ve anlamsal (Titan), plan_next_semester, bilinmeyen tool hatası. İlk çağrı yaklaşık 2,8 sn (cold start), sonrakiler 0,6-1,1 sn.
 
 ---
 
