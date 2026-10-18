@@ -1,0 +1,54 @@
+[
+  {
+    "name": "get_transcript",
+    "description": "Returns the current student's completed courses with grades and credits, plus credits completed, credits required and GPA (already calculated). Use it whenever the answer depends on what this student has taken. It always returns the student in this session; it cannot look up anyone else.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "student_id": {
+          "type": "string",
+          "description": "Set by the system for the verified caller. Never ask the caller for it and never fill it in yourself."
+        }
+      },
+      "required": [
+        "student_id"
+      ]
+    }
+  },
+  {
+    "name": "search_catalog",
+    "description": "Searches the official course catalog of the MPS in Informatics program: course descriptions, credits, prerequisites, and graduation rules (required courses, concentrations, electives). If you know a course code, include it (e.g. 'ITC 6680') for an exact lookup. Otherwise write a short English search phrase (e.g. 'data visualization course'), even if the student wrote in another language.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "A course code or a short English search phrase."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "plan_next_semester",
+    "description": "Deterministic rule check for the current student. With course_code: whether they can take that course now, which prerequisites are missing, and whether it counts toward a remaining graduation requirement. Without course_code: everything still needed to graduate (courses and credits), the courses they can take next semester that count, and needed courses still blocked by prerequisites. Use it for every question about eligibility, remaining requirements, remaining credits, or what to take next.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "course_code": {
+          "type": "string",
+          "description": "Optional course code, e.g. 'ITC 6680'."
+        },
+        "student_id": {
+          "type": "string",
+          "description": "Set by the system for the verified caller. Never ask the caller for it and never fill it in yourself."
+        }
+      },
+      "required": [
+        "student_id"
+      ]
+    }
+  }
+]

@@ -12,10 +12,23 @@ def test_manual_event_runs_the_tool():
     assert response["result"]["results"][0]["title"] == "CISSP Preparation"
 
 
-def test_gateway_style_context_is_understood():
-    context = SimpleNamespace(client_context=SimpleNamespace(custom={"bedrockAgentCoreToolName": "advisor___get_transcript"}))
-    response = handler({"student_id": "s002"}, context)
+def _gateway(tool: str) -> SimpleNamespace:
+    return SimpleNamespace(client_context=SimpleNamespace(custom={"bedrockAgentCoreToolName": f"advisor-tools___{tool}"}))
+
+
+def test_gateway_call_passes_arguments_directly():
+    response = handler({"student_id": "s002"}, _gateway("get_transcript"))
     assert response["result"]["student_id"] == "s002"
+
+
+def test_gateway_arguments_reach_the_tool_without_student_id():
+    response = handler({"course_code": "ITC 6680", "student_id": "s001"}, _gateway("plan_next_semester"))
+    assert response["result"]["missing_prerequisites"] == "ITC 6620"
+
+
+def test_gateway_search_has_no_student_id():
+    response = handler({"query": "ITC 6680"}, _gateway("search_catalog"))
+    assert response["result"]["mode"] == "exact"
 
 
 def test_errors_are_returned_not_raised():

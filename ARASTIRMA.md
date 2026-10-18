@@ -59,7 +59,14 @@ Kaynak: [3p-apps-mcp-server](https://docs.aws.amazon.com/connect/latest/admingui
 - **Allowed audiences:** gateway'in kendi ID'si olmalı. Connect'in gönderdiği token'da bu ID var, eksikse gateway isteği reddediyor. Doldurulması zorunlu olan tek alan bu.
 - **Supported versions:** `2025-03-26` (Connect'in desteklediği MCP sürümü) listede olmalı.
 - Bir gateway sadece bir Connect instance'ına bağlanabiliyor.
-- **Doğrulanacak:** Lambda hedefinde Gateway'in çağrılan tool'un adını Lambda'ya nasıl ilettiği.
+- **Lambda hedefine gelen istek (dokümandan doğrulandı, 17 Ekim):** Kaynak: [gateway-add-target-lambda](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-add-target-lambda.html)
+  - **Event:** tool'un parametrelerinin kendisi, ör. `{"query": "ITC 6680"}`. Etrafında başka alan yok.
+  - **Tool adı:** `context.client_context.custom["bedrockAgentCoreToolName"]`, biçimi `<target adı>___<tool adı>` (üç alt çizgi). Önekin Lambda'da elle atılması gerekiyor.
+  - Context'te ayrıca gateway ID, target ID, istek ve MCP mesaj ID'leri var.
+  - Lambda geçerli bir JSON döndürmeli.
+  - Tool şeması target eklenirken satır içi (inline) ya da S3'ten veriliyor. Her tool: `name`, `description`, `inputSchema` (ve isteğe bağlı `outputSchema`).
+  - **Hâlâ canlı testte bakılacak:** İlk gerçek çağrıda CloudWatch loglarında `tool=... input=...` satırına bakıp gerçekten bu biçimde geldiğini görmek.
+- **Öğrenci numarası:** Gateway sadece tool parametrelerini iletiyor. Bu yüzden `get_transcript` ve `plan_next_semester` şemalarına `student_id` parametresi eklendi (`connect/gateway-tools.json`). Connect'te "override input values" ile sabitlenecek (önce test için `s001`, sonra PIN doğrulamasından gelen contact attribute). Override'ın contact attribute okuyup okuyamadığı hâlâ doğrulanacak.
 
 ### Başkasının deneyiminden uyarılar
 Kaynak: [Classmethod blog yazısı](https://dev.classmethod.jp/articles/amazon-connect-ai-agent-mcp-bedrock-agentcore-gateway/) (API Gateway hedefi ile denenmiş, Lambda ile değil)
