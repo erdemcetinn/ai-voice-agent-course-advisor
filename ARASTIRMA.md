@@ -44,7 +44,8 @@ Kaynak: [ai-agent-mcp-tools](https://docs.aws.amazon.com/connect/latest/admingui
 - Her tool'a ek talimat yazılabiliyor, **girdi değerleri sabitlenebiliyor (override input values)**, çıktı filtrelenebiliyor.
 - **Bir tool çağrısı en fazla 30 saniye sürebilir.**
 - Hangi tool'lara erişilebileceğini **security profile** belirliyor. Bu, insan çalışanlar için kullanılan sistemle aynı.
-- **Doğrulanacak:** Override'ın bir contact attribute'tan (ör. doğrulanmış `studentId`) değer okuyup okuyamadığı.
+- **Override (18 Ekim, API modelinden bakıldı):** `overrideInputValues[].value` altında sadece `constant` (type + value) var. Yani override, contact attribute'u doğrudan okuyamıyor gibi görünüyor. Test için `student_id = s001` sabitlendi ve çalışıyor.
+  - **PIN doğrulaması (7.9) için olası çözüm:** Prompt'ta `{{$.contactId}}` ve `{{$.instanceId}}` sistem değişkenleri var. Tool'a bir `contact_id` parametresi eklenir, Lambda `connect:GetContactAttributes` ile PIN adımında yazılan `studentId`'yi okur. LLM başka bir canlı aramanın rastgele UUID'sini tahmin edemeyeceği için demo için yeterli. 7.9'da denenecek.
 
 ---
 
@@ -65,7 +66,7 @@ Kaynak: [3p-apps-mcp-server](https://docs.aws.amazon.com/connect/latest/admingui
   - Context'te ayrıca gateway ID, target ID, istek ve MCP mesaj ID'leri var.
   - Lambda geçerli bir JSON döndürmeli.
   - Tool şeması target eklenirken satır içi (inline) ya da S3'ten veriliyor. Her tool: `name`, `description`, `inputSchema` (ve isteğe bağlı `outputSchema`).
-  - **Hâlâ canlı testte bakılacak:** İlk gerçek çağrıda CloudWatch loglarında `tool=... input=...` satırına bakıp gerçekten bu biçimde geldiğini görmek.
+  - **Canlı testte doğrulandı (18 Ekim):** İlk chat testinde Lambda log'u `tool=get_transcript input={}` yazdı. Tool adı öneki ayıklandı, `student_id` Connect override'ından (`s001`) geldi ve parametrelerden çıkarıldı.
 - **Öğrenci numarası:** Gateway sadece tool parametrelerini iletiyor. Bu yüzden `get_transcript` ve `plan_next_semester` şemalarına `student_id` parametresi eklendi (`connect/gateway-tools.json`). Connect'te "override input values" ile sabitlenecek (önce test için `s001`, sonra PIN doğrulamasından gelen contact attribute). Override'ın contact attribute okuyup okuyamadığı hâlâ doğrulanacak.
 
 ### Başkasının deneyiminden uyarılar

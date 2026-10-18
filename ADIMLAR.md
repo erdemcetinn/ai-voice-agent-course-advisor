@@ -280,6 +280,24 @@ Bu fazda tool'lar düz Python fonksiyonları. Henüz LLM yok, sadece fonksiyonla
 
 Telefon tarafının büyük kısmı Connect konsolunda tıklayarak yapılıyor. Yaptığın ayarları (prompt, flow) `connect/` klasörüne kopyala ki kaybolmasın.
 
+**Durum (18 Ekim):** Sohbet testinde uçtan uca çalışıyor. Üç tool da Gateway üzerinden gerçek veriyle cevap veriyor. Kalan: PIN doğrulama (7.9), telefon numarası (7.2), gerçek arama (7.12), temizlik.
+
+| Parça | Ad / ID | Not |
+|---|---|---|
+| Instance | `erdem-advisor-east` (us-east-1) | İlk deneme yanlışlıkla Oregon'daydı, silindi |
+| AI agents domain | `course-advisor` (assistant `1ec727f6...`) | AWS konsolu → instance → AI Agents → Add domain |
+| AI ajanı | `course-advisor-agent` (Orchestration, SelfServiceOrchestratorVoice kopyası) | Varsayılan self-service orkestratör |
+| Prompt | `course-advisor-orchestration` (Haiku 4.5) | `connect/orchestration-prompt.yaml` |
+| Gateway | `course-advisor-gateway-qwjqhkxzt6` | JWT: discovery URL + audience = gateway ID, **allowed clients kapalı**. Log'lar CloudWatch'ta |
+| Gateway hedefi | `advisor-tools` → Lambda | `connect/gateway-tools.json` |
+| MCP entegrasyonu | `Course Advisor Tools` | Third-party applications |
+| Security profile | `course-advisor-ai-agent` | Üç tool'a izin |
+| Tool override | `student_id = s001` (constant) | API sadece sabit değer destekliyor |
+| Bot | `course-advisor-bot` | AMAZON.QInConnectIntent, agentic voice |
+| Flow | `course-advisor-flow` | `connect/contact-flow.json`. **Connect assistant bloğu şart** |
+
+**Öğrenilenler:** Tool'lar görünmüyorsa Gateway log'una bak (bizde `insufficient_scope`, sebep allowed clients'ta kalan `pending`). Kod değişince `aws lambda update-function-code` çalıştırmayı unutma (search_catalog bu yüzden başta boş sorgu aldı). Ajan telefon için ayarlı olduğundan sohbette de rakamları yazıyla yazıyor.
+
 ### 7.1 Connect instance oluştur ve Connect Customer'ı aç
 - **Ne yapıyoruz:** `us-east-1`'de bir Amazon Connect instance oluşturuyoruz ve instance'ta **Amazon Connect Customer** özelliğini açıyoruz.
 - **Neden:** AI agent'lar ve agentic voice bu özellik açık olmadan çalışmıyor.

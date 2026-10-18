@@ -3,7 +3,7 @@
 A student calls a phone number and asks: *"Which courses can I take next semester?"*
 The agent answers from Northeastern's real course catalog and the student's own transcript, and it never guesses on the rules.
 
-> **Status (October 2026):** the full agent runs end to end in the terminal, and its tools are deployed to AWS Lambda. Next: connect the phone line.
+> **Status (October 2026):** the agent runs end to end on Amazon Connect (tested over chat): Connect AI agent, AgentCore Gateway, Lambda tools, DynamoDB and S3. Next: the phone number and caller verification.
 > Built on AWS: Amazon Bedrock (Claude Haiku 4.5, Titan Embeddings V2), Amazon Connect, AgentCore Gateway, Lambda, DynamoDB, S3.
 
 ---
@@ -91,7 +91,7 @@ Iterating in a terminal takes seconds; iterating over phone calls takes minutes.
 | 4 | Automated test set: 33 scripted conversations scored by an LLM judge | ✅ |
 | 5 | `plan_next_semester`: deterministic prerequisite, requirement and credit checks | ✅ |
 | 6 | Deployed to AWS: data in S3, students in DynamoDB, all three tools in one Lambda | ✅ |
-| 7 | Phone: Amazon Connect with AgentCore Gateway | ⏳ |
+| 7 | Amazon Connect AI agent with AgentCore Gateway: working over chat; phone number and PIN verification next | ⏳ |
 
 ---
 

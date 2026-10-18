@@ -1,0 +1,246 @@
+{
+    "Version": "2019-10-30",
+    "StartAction": "6ed0615b-53d4-4d6e-9b36-1b52f60c5b1b",
+    "Metadata": {
+        "entryPointPosition": {
+            "x": -166.4,
+            "y": 41.6
+        },
+        "ActionMetadata": {
+            "587b8f3c-751e-4d5c-b3d2-e8edd55a107c": {
+                "position": {
+                    "x": 1165.6,
+                    "y": 113.6
+                }
+            },
+            "6ed0615b-53d4-4d6e-9b36-1b52f60c5b1b": {
+                "position": {
+                    "x": -52,
+                    "y": 36.8
+                }
+            },
+            "8c2becac-5763-46a6-b093-caa3e96380b3": {
+                "position": {
+                    "x": 173.6,
+                    "y": 27.2
+                }
+            },
+            "286fcf44-f46c-4751-b765-35608ab45441": {
+                "position": {
+                    "x": 911.2,
+                    "y": 51.2
+                },
+                "parameters": {
+                    "LexV2Bot": {
+                        "AliasArn": {
+                            "displayName": "TestBotAlias",
+                            "useLexBotDropdown": true,
+                            "lexV2BotName": "course-advisor-bot"
+                        }
+                    }
+                },
+                "useLexBotDropdown": true,
+                "lexV2BotName": "course-advisor-bot",
+                "lexV2BotAliasName": "TestBotAlias",
+                "conditionMetadata": []
+            },
+            "4f360289-e7c8-412d-8c90-e1c0c73b1972": {
+                "position": {
+                    "x": 418.4,
+                    "y": 36.8
+                },
+                "children": [
+                    "d1a0d1cc-ff1c-4284-a2fe-94ecdd7d17ea"
+                ],
+                "parameters": {
+                    "TextToSpeechVoice": {
+                        "languageCode": "en-US"
+                    },
+                    "TextToSpeechEngine": {
+                        "voiceProvider": "connect:agentic"
+                    }
+                },
+                "overrideConsoleVoice": true,
+                "fragments": {
+                    "SetContactData": "d1a0d1cc-ff1c-4284-a2fe-94ecdd7d17ea"
+                },
+                "overrideLanguageAttribute": true
+            },
+            "d1a0d1cc-ff1c-4284-a2fe-94ecdd7d17ea": {
+                "position": {
+                    "x": 418.4,
+                    "y": 36.8
+                },
+                "dynamicParams": []
+            },
+            "0e386e0b-4bca-4fa5-abff-95a85334efda": {
+                "position": {
+                    "x": 668,
+                    "y": 43.2
+                },
+                "children": [
+                    "32b7e345-9bfd-48d2-aea8-cb4bc7dd5bcf"
+                ],
+                "fragments": {
+                    "SetContactData": "32b7e345-9bfd-48d2-aea8-cb4bc7dd5bcf"
+                }
+            },
+            "32b7e345-9bfd-48d2-aea8-cb4bc7dd5bcf": {
+                "position": {
+                    "x": 668,
+                    "y": 43.2
+                },
+                "dynamicParams": []
+            }
+        },
+        "Annotations": []
+    },
+    "Actions": [
+        {
+            "Parameters": {},
+            "Identifier": "587b8f3c-751e-4d5c-b3d2-e8edd55a107c",
+            "Type": "DisconnectParticipant",
+            "Transitions": {}
+        },
+        {
+            "Parameters": {
+                "FlowLoggingBehavior": "Enabled"
+            },
+            "Identifier": "6ed0615b-53d4-4d6e-9b36-1b52f60c5b1b",
+            "Type": "UpdateFlowLoggingBehavior",
+            "Transitions": {
+                "NextAction": "8c2becac-5763-46a6-b093-caa3e96380b3"
+            }
+        },
+        {
+            "Parameters": {
+                "VoiceBehavior": {
+                    "VoiceRecordingBehavior": {
+                        "RecordedParticipants": [
+                            "Agent",
+                            "Customer"
+                        ],
+                        "IVRRecordingBehavior": "Enabled"
+                    },
+                    "VoiceAnalyticsBehavior": {
+                        "Enabled": "True",
+                        "AnalyticsLanguage": "en-US",
+                        "AnalyticsModes": [
+                            "RealTime",
+                            "AutomatedInteraction"
+                        ],
+                        "ConversationalAnalyticsRedactionConfiguration": {
+                            "Enabled": "False"
+                        },
+                        "SentimentConfiguration": {
+                            "Enabled": "True"
+                        }
+                    }
+                }
+            },
+            "Identifier": "8c2becac-5763-46a6-b093-caa3e96380b3",
+            "Type": "UpdateContactRecordingAndAnalyticsBehavior",
+            "Transitions": {
+                "NextAction": "4f360289-e7c8-412d-8c90-e1c0c73b1972",
+                "Errors": [
+                    {
+                        "NextAction": "4f360289-e7c8-412d-8c90-e1c0c73b1972",
+                        "ErrorType": "NoMatchingError"
+                    },
+                    {
+                        "NextAction": "4f360289-e7c8-412d-8c90-e1c0c73b1972",
+                        "ErrorType": "ChannelMismatch"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "Text": "Hi, this is the Northeastern course advisor. How can I help you today?",
+                "LexV2Bot": {
+                    "AliasArn": "arn:aws:lex:us-east-1:452383571300:bot-alias/A5ILJO8QDH/TSTALIASID"
+                }
+            },
+            "Identifier": "286fcf44-f46c-4751-b765-35608ab45441",
+            "Type": "ConnectParticipantWithLexBot",
+            "Transitions": {
+                "NextAction": "587b8f3c-751e-4d5c-b3d2-e8edd55a107c",
+                "Errors": [
+                    {
+                        "NextAction": "587b8f3c-751e-4d5c-b3d2-e8edd55a107c",
+                        "ErrorType": "NoMatchingCondition"
+                    },
+                    {
+                        "NextAction": "587b8f3c-751e-4d5c-b3d2-e8edd55a107c",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "TextToSpeechVoice": "CAROLINE",
+                "TextToSpeechEngine": "connect:agentic"
+            },
+            "Identifier": "4f360289-e7c8-412d-8c90-e1c0c73b1972",
+            "Type": "UpdateContactTextToSpeechVoice",
+            "Transitions": {
+                "NextAction": "d1a0d1cc-ff1c-4284-a2fe-94ecdd7d17ea",
+                "Errors": [
+                    {
+                        "NextAction": "0e386e0b-4bca-4fa5-abff-95a85334efda",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "LanguageCode": "en-US"
+            },
+            "Identifier": "d1a0d1cc-ff1c-4284-a2fe-94ecdd7d17ea",
+            "Type": "UpdateContactData",
+            "Transitions": {
+                "NextAction": "0e386e0b-4bca-4fa5-abff-95a85334efda",
+                "Errors": [
+                    {
+                        "NextAction": "0e386e0b-4bca-4fa5-abff-95a85334efda",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "WisdomAssistantArn": "arn:aws:wisdom:us-east-1:452383571300:assistant/1ec727f6-29db-4eb5-b458-26f71e22f6e2"
+            },
+            "Identifier": "0e386e0b-4bca-4fa5-abff-95a85334efda",
+            "Type": "CreateWisdomSession",
+            "Transitions": {
+                "NextAction": "32b7e345-9bfd-48d2-aea8-cb4bc7dd5bcf",
+                "Errors": [
+                    {
+                        "NextAction": "286fcf44-f46c-4751-b765-35608ab45441",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "WisdomSessionArn": "$.Wisdom.SessionArn"
+            },
+            "Identifier": "32b7e345-9bfd-48d2-aea8-cb4bc7dd5bcf",
+            "Type": "UpdateContactData",
+            "Transitions": {
+                "NextAction": "286fcf44-f46c-4751-b765-35608ab45441",
+                "Errors": [
+                    {
+                        "NextAction": "286fcf44-f46c-4751-b765-35608ab45441",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        }
+    ]
+}
