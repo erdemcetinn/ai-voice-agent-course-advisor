@@ -1,4 +1,4 @@
-"""Creates the DynamoDB students table (if missing) and loads data/students.json into it (phase 6.2).
+"""Creates the DynamoDB students table (if missing) and loads data/students.json into it.
 
 Usage:
     source env.sh

@@ -1,9 +1,9 @@
-"""The single Lambda that runs all three tools for the phone path (phase 6.3).
+"""The single Lambda that runs all three tools for the phone path.
 
 Event for a manual test (aws lambda invoke):
     {"tool": "search_catalog", "input": {"query": "ITC 6680"}, "student_id": "s001"}
 
-Event from AgentCore Gateway (phase 7): the tool's arguments themselves, e.g. {"query": "ITC 6680"},
+Event from AgentCore Gateway: the tool's arguments themselves, e.g. {"query": "ITC 6680"},
 with the tool name in context.client_context.custom["bedrockAgentCoreToolName"] as "<target>___<tool>".
 The gateway tool schemas declare student_id; Connect pins it with "override input values" so the
 model never chooses it. It is taken out of the arguments before the tool runs.

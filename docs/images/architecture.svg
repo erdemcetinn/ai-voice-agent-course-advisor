@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <style>
+    .t { font-size: 15px; font-weight: 600; fill: #1d2430; }
+    .s { font-size: 12px; fill: #5b6676; }
+    .m { font-size: 11px; fill: #5b6676; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .zone { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; }
+    .lbl { font-size: 11.5px; fill: #5b6676; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5b6676"/></marker>
+    <marker id="arrowC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c2622f"/></marker>
+  </defs>
+
+  <rect width="1200" height="660" rx="16" fill="#f7f8fa"/>
+
+  <!-- Caller -->
+  <rect x="24" y="214" width="140" height="96" rx="12" fill="#ffffff" stroke="#1d2430" stroke-width="2"/>
+  <text class="t" x="94" y="252" text-anchor="middle">Student</text>
+  <text class="s" x="94" y="272" text-anchor="middle">phone call</text>
+  <text class="s" x="94" y="290" text-anchor="middle">or web chat</text>
+
+  <!-- Amazon Connect zone -->
+  <rect x="194" y="40" width="470" height="410" rx="14" fill="#fdf3ed" stroke="#c2622f" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text class="zone" x="214" y="66" fill="#c2622f">AMAZON CONNECT</text>
+
+  <rect x="214" y="84" width="430" height="74" rx="10" fill="#ffffff" stroke="#c2622f" stroke-width="2"/>
+  <text class="t" x="234" y="113">Contact flow</text>
+  <text class="s" x="234" y="135">logging · real-time analytics · voice · AI agent session</text>
+
+  <rect x="214" y="188" width="430" height="74" rx="10" fill="#ffffff" stroke="#c2622f" stroke-width="2"/>
+  <text class="t" x="234" y="217">Conversational AI bot (Amazon Lex V2)</text>
+  <text class="s" x="234" y="239">agentic voice: speech recognition and text to speech</text>
+
+  <rect x="214" y="292" width="430" height="134" rx="10" fill="#ffffff" stroke="#c2622f" stroke-width="2"/>
+  <text class="t" x="234" y="322">Connect AI agent (orchestration)</text>
+  <text class="s" x="234" y="345">Claude Haiku 4.5 on Amazon Bedrock</text>
+  <text class="s" x="234" y="366">course advisor system prompt</text>
+  <text class="s" x="234" y="387">security profile: only the three advisor tools</text>
+  <text class="s" x="234" y="408">student_id pinned by Connect, never chosen by the model</text>
+
+  <path d="M164,262 C180,262 182,121 212,121" fill="none" stroke="#c2622f" stroke-width="2" marker-end="url(#arrowC)"/>
+  <line x1="429" y1="158" x2="429" y2="186" stroke="#c2622f" stroke-width="2" marker-end="url(#arrowC)"/>
+  <line x1="429" y1="262" x2="429" y2="290" stroke="#c2622f" stroke-width="2" marker-end="url(#arrowC)"/>
+
+  <!-- Gateway -->
+  <rect x="704" y="300" width="214" height="118" rx="12" fill="#ffffff" stroke="#c2622f" stroke-width="2"/>
+  <text class="t" x="811" y="334" text-anchor="middle">AgentCore Gateway</text>
+  <text class="s" x="811" y="356" text-anchor="middle">Lambda exposed as MCP tools</text>
+  <text class="s" x="811" y="376" text-anchor="middle">JWT from the Connect instance</text>
+  <text class="m" x="811" y="398" text-anchor="middle">MCP 2025-03-26</text>
+  <line x1="644" y1="359" x2="702" y2="359" stroke="#c2622f" stroke-width="2" marker-end="url(#arrowC)"/>
+  <text class="lbl" x="683" y="349" text-anchor="middle">MCP</text>
+
+  <!-- Lambda -->
+  <rect x="958" y="300" width="218" height="118" rx="12" fill="#ffffff" stroke="#1f6f78" stroke-width="2"/>
+  <text class="t" x="1067" y="334" text-anchor="middle">AWS Lambda</text>
+  <text class="m" x="1067" y="356" text-anchor="middle">course-advisor-tools</text>
+  <text class="s" x="1067" y="376" text-anchor="middle">one function, three tools</text>
+  <text class="s" x="1067" y="396" text-anchor="middle">least-privilege IAM role</text>
+  <line x1="918" y1="359" x2="956" y2="359" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+  <text class="lbl" x="937" y="349" text-anchor="middle">IAM</text>
+
+  <!-- Tools -->
+  <path d="M1067,418 L1067,466 L571,466 L571,486" fill="none" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="811" y1="466" x2="811" y2="486" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1067" y1="466" x2="1067" y2="486" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="460" y="488" width="222" height="66" rx="10" fill="#e3f1f1" stroke="#1f6f78" stroke-width="2"/>
+  <text class="t" x="571" y="516" text-anchor="middle">get_transcript</text>
+  <text class="s" x="571" y="537" text-anchor="middle">courses, credits, GPA</text>
+
+  <rect x="700" y="488" width="222" height="66" rx="10" fill="#e3f1f1" stroke="#1f6f78" stroke-width="2"/>
+  <text class="t" x="811" y="516" text-anchor="middle">search_catalog</text>
+  <text class="s" x="811" y="537" text-anchor="middle">exact code lookup + RAG</text>
+
+  <rect x="956" y="488" width="222" height="66" rx="10" fill="#e3f1f1" stroke="#1f6f78" stroke-width="2"/>
+  <text class="t" x="1067" y="516" text-anchor="middle">plan_next_semester</text>
+  <text class="s" x="1067" y="537" text-anchor="middle">deterministic rules engine</text>
+
+  <!-- Data -->
+  <line x1="571" y1="554" x2="571" y2="578" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="811" y1="554" x2="811" y2="578" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1067" y1="554" x2="1067" y2="578" stroke="#5b6676" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="460" y="580" width="222" height="56" rx="10" fill="#ffffff" stroke="#1f6f78" stroke-width="1.5"/>
+  <text class="t" x="571" y="603" text-anchor="middle">Amazon DynamoDB</text>
+  <text class="s" x="571" y="622" text-anchor="middle">student records</text>
+
+  <rect x="700" y="580" width="222" height="56" rx="10" fill="#f2ebf8" stroke="#7a4b9c" stroke-width="1.5"/>
+  <text class="t" x="811" y="603" text-anchor="middle">Titan Embeddings V2</text>
+  <text class="s" x="811" y="622" text-anchor="middle">query embedding</text>
+
+  <rect x="956" y="580" width="222" height="56" rx="10" fill="#ffffff" stroke="#1f6f78" stroke-width="1.5"/>
+  <text class="t" x="1067" y="603" text-anchor="middle">Amazon S3</text>
+  <text class="s" x="1067" y="622" text-anchor="middle">catalog, rules, vector index</text>
+
+  <!-- Developer harness -->
+  <rect x="24" y="488" width="400" height="148" rx="12" fill="#ffffff" stroke="#9aa3b0" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="zone" x="44" y="514" fill="#5b6676">DEVELOPER HARNESS</text>
+  <text class="t" x="44" y="542">Terminal agent</text>
+  <text class="s" x="44" y="562">same tools, Bedrock Converse tool loop</text>
+  <text class="t" x="44" y="592">Evaluation suite</text>
+  <text class="s" x="44" y="612">scripted conversations scored by an LLM judge</text>
+  <line x1="424" y1="521" x2="458" y2="521" stroke="#5b6676" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+</svg>

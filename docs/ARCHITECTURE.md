@@ -1,177 +1,137 @@
 # Architecture
 
-This document explains how the pieces fit together and why each design choice was made.
-For the overview, see the [README](../README.md).
+Design notes for the AI voice agent. For the overview, see the [README](../README.md).
 
-1. [Tool use: the LLM asks, our code runs](#1-tool-use-the-llm-asks-our-code-runs)
-2. [The tool loop](#2-the-tool-loop)
-3. [The phone path: how Connect knows about our tools](#3-the-phone-path-how-connect-knows-about-our-tools)
-4. [One Lambda, several tools](#4-one-lambda-several-tools)
-5. [Retrieval (RAG)](#5-retrieval-rag)
-6. [Why not Bedrock Knowledge Bases](#6-why-not-bedrock-knowledge-bases)
+1. [Request lifecycle](#1-request-lifecycle)
+2. [Amazon Connect layer](#2-amazon-connect-layer)
+3. [AgentCore Gateway](#3-agentcore-gateway)
+4. [Tools Lambda](#4-tools-lambda)
+5. [Rules engine](#5-rules-engine)
+6. [Retrieval](#6-retrieval)
 7. [Data model](#7-data-model)
-8. [Security boundaries](#8-security-boundaries)
-9. [Open questions](#9-open-questions)
-10. [Future: an agent that acts](#10-future-an-agent-that-acts)
+8. [Security model](#8-security-model)
+9. [Developer harness and evaluation](#9-developer-harness-and-evaluation)
+10. [Design decisions](#10-design-decisions)
 
 ---
 
-## 1. Tool use: the LLM asks, our code runs
-
-An LLM cannot execute code or reach a database. It only produces text. Tool use works by giving the model a menu of **tool definitions** (name, description, input schema) and letting it respond with a structured request instead of an answer:
+## 1. Request lifecycle
 
 ```text
-Student:  "Can I take ITC 6680?"
+Student: "Can I take ITC 6680 next semester?"
 
-LLM   ->  tool request: get_transcript
-Code  ->  runs get_transcript("s001")      -> ITC 6105 (A), ITC 6610 (A-)
-LLM   ->  tool request: search_catalog("ITC 6680")
-Code  ->  runs the search                  -> prerequisites: ITC 6610 AND ITC 6620
-LLM   ->  "Not yet. You still need ITC 6620."
+Contact flow   -> opens an AI agent session for the contact (Connect assistant block)
+Lex V2 bot     -> speech to text, hands the turn to the AI agent (AMAZON.QInConnectIntent)
+AI agent       -> Claude Haiku 4.5 decides: call plan_next_semester(course_code = "ITC 6680")
+Gateway        -> validates the Connect JWT, adds the pinned student_id, invokes Lambda
+Lambda         -> loads the student from DynamoDB and the catalog from S3, runs the rules engine
+               -> { eligible_now: false, missing_prerequisites: "ITC 6620", counts_toward: ["restricted elective"] }
+AI agent       -> "No, you're not eligible yet. You need I T C sixty-six twenty first..."
+Lex V2 bot     -> text to speech
 ```
 
-The model never sees the tool's code, only its definition. The quality of the description directly affects whether the model picks the right tool.
+The model never sees the tool code, only the tool definitions, and it never computes eligibility itself.
 
-## 2. The tool loop
+## 2. Amazon Connect layer
 
-In the terminal path, `src/agent/loop.py` sits between the model and the tools. It uses Claude Haiku 4.5 on Bedrock with temperature 0:
+**Contact flow** (`connect/contact-flow.json`)
 
-```text
-1. Send the conversation and the tool definitions to Bedrock (Converse API)
-2. Look at the response:
-     plain text    -> done, show it to the student
-     tool request  -> go to 3
-3. Run the requested Python function (inject the session's student ID if needed)
-4. Append the tool result to the conversation, go back to 2
-```
-
-Two guards are part of the design:
-- **Turn limit.** If the model keeps requesting tools, the loop stops after a fixed number of turns. No infinite loops, no runaway cost.
-- **Errors become messages.** A failing tool does not crash the session. The error goes back to the model, which can tell the student it cannot check right now.
-
-The loop is written by hand on purpose. A managed agent runtime would hide every step; writing it makes the mechanics visible and measurable.
-
-**Retrieval is agentic.** The model decides when to search and what to search for. Greetings and transcript questions trigger no search at all, and the model can search more than once in a single answer.
-
-## 3. The phone path: how Connect knows about our tools
-
-On the phone, Amazon Connect runs the same loop internally. It is a **cascaded** pipeline: speech recognition, then the LLM, then text-to-speech. It is not a speech-to-speech model.
-
-Connect is configured with the same three things the terminal loop uses:
-
-| What | Terminal | Phone |
-|---|---|---|
-| Instructions (system prompt) | `prompts.py` | AI agent configuration in Connect |
-| Tool definitions | Sent by `loop.py` to Bedrock | Discovered from **AgentCore Gateway** |
-| Where tools run | Local Python | **AWS Lambda** (same Python code) |
-
-Connect speaks to tools over **MCP**. Lambda does not speak MCP, so AgentCore Gateway sits in between and exposes the Lambda as MCP tools. No custom MCP server is written.
-
-```text
-Connect  -> "which tools exist?"  -> Gateway -> tool definitions
-Connect  -> call get_transcript   -> Gateway -> Lambda -> result back the same way
-```
-
-Prompt and tool definitions are tuned in the terminal first and then carried over to Connect almost unchanged.
-
-## 4. One Lambda, several tools
-
-The three tools share one Lambda that routes on the requested tool name:
-
-```python
-def handler(event, context):
-    tool = requested_tool_name(event, context)
-    if tool == "get_transcript":     return get_transcript(...)
-    if tool == "search_catalog":     return search_catalog(...)
-    if tool == "plan_next_semester": return plan_next_semester(...)
-```
-
-| One Lambda per tool | One Lambda for all tools (chosen) |
+| Block | Purpose |
 |---|---|
-| Least privilege per tool (only the transcript tool can read student records) | One package, one deployment, one place to debug |
-| Independent deploys and memory settings | Fits three small tools and a single developer |
+| Set logging behavior | Flow logs to CloudWatch |
+| Set recording and analytics behavior | Real-time conversational analytics, required for AI agents on voice |
+| Set voice | English (US), generative voice |
+| Connect assistant | Associates the contact with the AI agents domain and opens the agent session |
+| Get customer input | Invokes the Lex V2 bot with the AI agent intent |
+| Disconnect | Ends the contact when the agent returns control (`Complete` or `Escalate`) |
 
-The tool code does not depend on this choice, so splitting later is cheap.
+**Bot.** A Lex V2 bot created in Connect with the `AMAZON.QInConnectIntent` enabled and the agentic voice speech model (advanced speech recognition, configurable end-of-turn threshold and timeout).
 
-## 5. Retrieval (RAG)
+**AI agent.** An orchestration agent derived from the system self-service voice orchestrator and set as the instance's default self-service orchestrator. Its tools are the three MCP tools from the Gateway plus the built-in `Complete` and `Escalate` return-to-control tools.
 
-RAG is a method: **R**etrieve relevant text, **A**ugment the prompt with it, let the model **G**enerate an answer grounded in it.
+**Prompt** (`connect/orchestration-prompt.yaml`). The system voice orchestration prompt with a course-advisor section on top: scope, which tool answers which question, "lead with the yes or no conclusion", how to say course codes aloud, and privacy rules. The base prompt contributes the voice output rules and the `<message>` tag contract that Connect uses to decide what is spoken.
 
-### Indexing (once, `scripts/build_index.py`)
+**Voice-first output.** Every answer is written to be read aloud: no markdown, no lists, and course codes spelled as letters and digits ("I T C six six eight zero") so text to speech pronounces them correctly.
 
-```text
-catalog.json -> 76 chunks -> Titan Text Embeddings V2 -> data/index.npy  (76 x 1024 numbers)
-                          \-------------------------> data/chunks.json  (the texts)
-```
+## 3. AgentCore Gateway
 
-Chunks follow natural boundaries instead of a fixed size:
-- one overview chunk per course (code, title, credits, description)
-- one prerequisite chunk per course that has prerequisites
-- program chunks: general rules, required courses, each concentration, restricted electives
+The Gateway is the bridge between Connect, which speaks the Model Context Protocol, and the Lambda function, which does not.
 
-The two files line up row by row. Row *i* of `index.npy` is the embedding of row *i* of `chunks.json`. The numbers only answer "which rows are closest?"; the texts are what reaches the model.
+| Setting | Value |
+|---|---|
+| Protocol | MCP, including version `2025-03-26` (the version Connect uses) |
+| Inbound auth | Custom JWT authorizer with the Connect instance discovery URL (`https://<instance>.my.connect.aws/.well-known/openid-configuration`) |
+| Allowed audience | The Gateway ID (Connect puts it in the token's `aud` claim) |
+| Allowed clients | Not set |
+| Target | Lambda, inline tool schemas from `connect/gateway-tools.json` |
+| Outbound auth | Gateway IAM role, allowed only `lambda:InvokeFunction` on the tools function |
+| Observability | Application logs delivered to CloudWatch Logs |
 
-### Searching (every call, `src/tools/catalog_search.py`)
+Tools appear in Connect with the target as a prefix, for example `advisor_tools___get_transcript`. `scripts/setup_gateway.py` creates or updates the Gateway and target idempotently.
 
-```text
-query has a course code ("ITC 6680")  -> exact lookup in catalog.json, no embedding
-otherwise ("data visualization")      -> embed the query -> compare with every row -> top rows -> texts
-```
+## 4. Tools Lambda
 
-The text that gets embedded is the model's search query, not the student's raw sentence. The model turns a rambling spoken question into a short, focused query, which improves retrieval.
+One function, `course-advisor-tools`, serves all three tools.
 
-Embeddings are **normalized** to length 1, so cosine similarity is a single dot product. Both indexing and search go through `src/embeddings.py`; using the same model and settings on both sides is what makes the numbers comparable.
+**Event shape.** The Gateway passes the tool arguments as the event (`{"query": "ITC 6680"}`) and the tool name in `context.client_context.custom["bedrockAgentCoreToolName"]` as `<target>___<tool>`. The handler strips the prefix, removes `student_id` from the arguments, and dispatches through the same `run_tool` used by the terminal agent. A manual event shape (`{"tool": ..., "input": {...}, "student_id": ...}`) is accepted for direct testing.
 
-### Why numpy
+**Data access.** `src/data.py` reads the catalog and the vector index from S3 into `/tmp` once per container; `load_student` reads DynamoDB when `STUDENTS_TABLE` is set. Only a cold start pays for the downloads.
 
-76 vectors compare in well under a millisecond with one matrix product. A vector database or FAISS adds setup and, for some managed options, an idle cost, with no benefit at this size. If the corpus grows into the thousands, FAISS is the next step.
+**Errors.** Tool failures return `{"ok": false, "error": ...}` instead of raising, so the agent can recover gracefully in conversation.
 
-## 6. Why not Bedrock Knowledge Bases
+**Packaging.** `scripts/package_lambda.py` builds a zip with the source and a Linux build of NumPy compatible with the Python 3.11 runtime. boto3 comes from the runtime.
 
-A Bedrock Knowledge Base is the managed version of section 5: upload documents to S3, pick an embedding model and a vector store, press Sync, then call `retrieve`.
+## 5. Rules engine
 
-The mechanism is identical. Embeddings are still computed (by AWS instead of our code), and the model still does not search by itself: a tool or an integration calls the Knowledge Base on its behalf.
+`src/tools/planner.py` (`plan_next_semester`) answers three questions deterministically.
 
-It was not used here for design reasons:
-- **It hides the parts worth understanding.** Chunking, embedding and similarity search all happen out of sight.
-- **It needs a vector store.** Some store options bill while idle, which does not fit a small budget.
-- **The corpus is tiny.** 76 chunks fit in one numpy file.
+1. **Can the student take this course now?** Prerequisite trees are evaluated against completed courses. Courses marked "may be taken concurrently" are reported as eligible together with their co-requisite.
+2. **Does it count toward the degree?** Completed courses are allocated to requirements in order: core, concentration required courses, choice groups, restricted electives, and free electives for the electives option. A course is reported as counting only if it fills a requirement that is still open.
+3. **What is left?** Missing core and concentration courses, open choice-group credits and elective credits, and the total credits remaining.
 
-The structured catalog (`catalog.json`) would be needed either way. A Knowledge Base only searches text; the planner needs prerequisite trees and credit rules.
+Credits remaining are computed from open requirements, not from "34 minus credits taken", so a course that fills nothing never moves the student closer to graduation. Without a course code the engine returns the full plan: everything still needed, the courses the student can take now that count, and needed courses still blocked by prerequisites.
+
+## 6. Retrieval
+
+**Index.** `scripts/build_index.py` turns the catalog into 76 chunks along natural boundaries: one overview chunk per course, one prerequisite chunk per course that has prerequisites, and program chunks for general rules, required courses, each concentration and restricted electives. Each chunk is embedded with Titan Text Embeddings V2 (1024 dimensions, normalized) and stored as `index.npy` with `chunks.json` row-aligned.
+
+**Search.** `search_catalog` resolves course codes (`ITC 6680`, `itc6680`, `ALY-6145`) with an exact lookup that also reports the course's role in the program. Other queries are embedded with the same model and ranked by dot product, returning the top five chunks with scores. The tool definition asks the model to write search phrases in English, which matches the catalog's language and scores higher.
+
+**Why an in-memory index.** Seventy-six vectors rank in well under a millisecond with one matrix product. A managed vector store would add cost and moving parts without improving results at this scale.
 
 ## 7. Data model
 
 **`data/catalog.json`**
-- `courses`: 47 courses with title, credits, description, original prerequisite text (`prereq_text`) and the parsed tree (`prereq`).
-- `program`: total credits (34), minimum GPA (3.0), required courses, six concentrations plus an electives option, restricted electives, and `notes` for special cases that are documented but not computed.
+- `courses`: 47 courses with title, credits (fixed or ranged), description, the original prerequisite text and the parsed tree.
+- `program`: total credits (34), minimum GPA (3.0), required courses, six concentrations plus the electives option (required courses, choice groups, restricted elective credits, free elective credits), restricted electives, and documented special cases.
 
-Prerequisite trees use `and` / `or` nodes with course leaves. In the catalog, `;` binds more loosely than `or`, so `A ; B or C` means `A and (B or C)`. A cycle check runs over the prerequisite graph before the data is used.
+Prerequisite text is parsed with an operator precedence that matches the catalog: `;` binds more loosely than `or`, so `A ; B or C` means `A and (B or C)`. A cycle check runs over the prerequisite graph.
 
-**`data/students.json`**: three synthetic students at different stages (first term, mid-program, near graduation). Terms are numbered instead of dated, and every record is validated against the catalog: courses exist, prerequisites were completed in an earlier term, no course is taken twice.
+**`data/students.json`** holds synthetic students at different stages of the program, each validated against the catalog: courses exist, prerequisites were completed in an earlier term, no course repeats. The same records are loaded into DynamoDB with `scripts/load_students.py`.
 
-The catalog is static and read as a whole, so it lives in a file (S3 in the cloud). Student records change and are read one at a time by key, so they move to DynamoDB in phase 6.
+## 8. Security model
 
-## 8. Security boundaries
+- **Identity is bound outside the model.** Tools that read a student's record take `student_id`, which Connect pins through the tool's input override; the model cannot choose or change it.
+- **No secrets in responses.** `get_transcript` never returns the PIN.
+- **Least privilege.** Gateway role: invoke one Lambda. Lambda role: read one S3 bucket, `GetItem` on one table, invoke one embedding model. AI agent security profile: three tools.
+- **Authenticated tool calls.** The Gateway accepts only JWTs issued by the Connect instance and addressed to this Gateway.
+- **Scope control.** The prompt restricts the agent to course planning, and prompt-injection attempts are covered by the evaluation suite.
 
-- The student ID comes from the session, never from the model. `get_transcript` has no ID parameter in its tool definition; the code injects it.
-- `get_transcript` never returns the PIN.
-- On the phone, the caller authenticates with ID and PIN in the contact flow before the AI agent starts.
-- If the phone path cannot bind the student ID outside the model (see open questions), `get_transcript` stays disabled on the phone and the agent answers catalog questions only. Privacy wins over features.
+## 9. Developer harness and evaluation
 
-## 9. Open questions
+**Terminal agent.** `src/cli.py` runs the same tools with a tool loop on the Bedrock Converse API (`src/agent/loop.py`): bounded turns, tool errors returned to the model, every tool call printed with its input and latency.
 
-These are unverified and will be tested in phase 7:
-- How AgentCore Gateway passes the requested tool name to a Lambda target.
-- Whether Connect's "override input values" can fill a tool parameter from a contact attribute (the authenticated student ID).
+**Evaluation suite.** `evals/` contains scripted conversations across prerequisites, degree progress, catalog facts, out-of-scope requests, unknown information and privacy. `evals/run_evals.py` asks each question several times in fresh conversations; `evals/judge.py` scores answers with a stronger model and checks privacy leaks in code before any model is consulted.
 
-## 10. Future: an agent that acts
+**Tests.** 130 pytest tests cover parsing, the rules engine, retrieval, the tool loop, the Lambda handler and the data layer, without calling AWS.
 
-Today the agent only reads. Letting it register a student for courses would add one tool, `register_course(course_code)`, backed by the registrar's system. The tool is the easy part; the safety design is the real work:
+## 10. Design decisions
 
-- **The model never acts alone.** It proposes; the student confirms explicitly (on the phone, with a keypad press rather than a spoken "yes" that speech recognition can mishear); only then does the code act.
-- **Python re-checks right before the write:** prerequisites, seats, registration holds. The model saying "eligible" is not enough.
-- **The session supplies the student ID**, exactly like `get_transcript`.
-- **Every action is logged and reversible** (who, when, which course, which confirmation; a drop path exists).
-
-Prompt injection matters more here. In a read-only agent the worst case is a wrong answer; in an agent that writes, it is a real change to a real record. A demo with a mock registration system is planned as an optional extra.
-
+| Decision | Reasoning |
+|---|---|
+| Deterministic rules engine instead of LLM reasoning | Eligibility answers must be consistent and auditable; the model explains, the code decides |
+| Tools over a Connect knowledge base integration | A knowledge base retrieves text but cannot evaluate prerequisite trees or credit rules; tools also run unchanged in the terminal harness |
+| AgentCore Gateway instead of a custom MCP server | The Gateway turns a Lambda into MCP tools with managed auth and logging |
+| One Lambda for three tools | One package and one deployment; the tool code does not depend on it, so splitting later is cheap |
+| Claude Haiku 4.5 | Fast responses matter on a phone call, and the heavy lifting is done by the rules engine |
+| In-memory vector index | Faster and simpler than a vector database for a corpus of this size |

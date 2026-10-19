@@ -1,7 +1,7 @@
-"""System prompt for the advisor (phase 3.3).
+"""System prompt for the advisor.
 
-Phase 5 added plan_next_semester and the rule below that sends every eligibility and
-remaining-requirements question to it. The phase 4 baseline ran without both.
+Eligibility and remaining-requirement questions always go to plan_next_semester, so the
+model explains deterministic results instead of reasoning about the rules itself.
 """
 
 SYSTEM_PROMPT = """You are a course advisor for Northeastern University's MPS in Informatics program (College of Professional Studies, Boston, 2026-27 catalog).

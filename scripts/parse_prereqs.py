@@ -1,4 +1,4 @@
-"""Turns catalog prerequisite text into a tree the planner can read (phase 1.2).
+"""Turns catalog prerequisite text into a tree the planner can read.
 
 Example:
     "ITC 6610 with a minimum grade of C- ; ITC 6620 with a minimum grade of C-"

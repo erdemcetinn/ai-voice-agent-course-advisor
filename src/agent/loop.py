@@ -1,4 +1,4 @@
-"""The tool loop: the go-between for the LLM and the tools (phase 3.2).
+"""The tool loop: the go-between for the LLM and the tools.
 
 1. Send the conversation and the tool definitions to Bedrock (Converse API).
 2. Plain text back: done. Tool request back: run the tool, send the result, repeat.

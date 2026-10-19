@@ -1,4 +1,4 @@
-"""Creates the AgentCore Gateway that exposes the tools Lambda to Amazon Connect as MCP tools (phase 7.6).
+"""Creates the AgentCore Gateway that exposes the tools Lambda to Amazon Connect as MCP tools.
 
 Usage:
     source env.sh

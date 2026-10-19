@@ -1,4 +1,4 @@
-"""Calculator: the plan_next_semester tool (phase 5).
+"""Calculator: the plan_next_semester tool.
 
 Deterministic rule checks, so the LLM no longer reasons about prerequisites and credits itself:
   1. Can the student take a course? If not, which prerequisites are missing?

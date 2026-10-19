@@ -1,10 +1,10 @@
-"""Records clerk: the get_transcript tool (phase 2.1).
+"""Records clerk: the get_transcript tool.
 
 Returns the student's courses, total credits and GPA. Python calculates credits and GPA,
 the LLM only reads the finished numbers. The PIN is never returned.
 
 Reading goes through load_student(): from data/students.json by default, or from DynamoDB when
-the STUDENTS_TABLE environment variable names a table (set on Lambda, phase 6.2).
+the STUDENTS_TABLE environment variable names a table (set on Lambda).
 """
 
 import json

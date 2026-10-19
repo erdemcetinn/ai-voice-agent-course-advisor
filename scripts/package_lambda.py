@@ -1,4 +1,4 @@
-"""Builds dist/lambda.zip for the tools Lambda (phase 6.3).
+"""Builds dist/lambda.zip for the tools Lambda.
 
 Usage:
     python -m scripts.package_lambda

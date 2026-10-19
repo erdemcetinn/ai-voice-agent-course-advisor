@@ -1,4 +1,4 @@
-"""Checks the prerequisites for cycles (phase 1.4).
+"""Checks the prerequisites for cycles.
 
 Usage:
     python -m scripts.check_prereqs

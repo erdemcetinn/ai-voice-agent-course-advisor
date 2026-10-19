@@ -1,4 +1,4 @@
-"""Librarian: the search_catalog tool (phase 2.3).
+"""Librarian: the search_catalog tool.
 
 Two paths:
   1. The query contains a course code ("ITC 6680"): exact lookup in catalog.json, no embedding.

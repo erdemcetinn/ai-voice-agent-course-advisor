@@ -1,4 +1,4 @@
-"""Checks 3 synthetic (made-up) students against the catalog and writes data/students.json (phase 1.5).
+"""Checks 3 synthetic (made-up) students against the catalog and writes data/students.json.
 
 Usage:
     python -m scripts.generate_students

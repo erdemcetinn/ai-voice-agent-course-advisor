@@ -1,4 +1,4 @@
-"""Where the tools read the catalog and the search index from (phase 6.3).
+"""Where the tools read the catalog and the search index from.
 
 Locally the files are in data/. On Lambda the DATA_BUCKET environment variable names the S3
 bucket: each file is downloaded to /tmp once per container and reused while the container stays

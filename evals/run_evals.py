@@ -1,4 +1,4 @@
-"""Runs the evaluation set against the agent and writes a report (phase 4.2).
+"""Runs the evaluation set against the agent and writes a report.
 
 Usage:
     source env.sh

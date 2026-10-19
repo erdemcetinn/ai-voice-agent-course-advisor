@@ -1,4 +1,4 @@
-"""Splits the catalog into chunks and creates an embedding for each chunk (phase 2.2).
+"""Splits the catalog into chunks and creates an embedding for each chunk.
 
 Usage:
     source env.sh

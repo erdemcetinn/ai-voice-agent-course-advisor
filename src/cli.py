@@ -1,4 +1,4 @@
-"""Chat with the advisor in the terminal (phase 3.4).
+"""Chat with the advisor in the terminal.
 
 Usage:
     source env.sh

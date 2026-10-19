@@ -1,4 +1,4 @@
-"""Tool definitions the LLM sees, and the dispatcher that runs them (phase 3.1).
+"""Tool definitions the LLM sees, and the dispatcher that runs them.
 
 The model never sees the Python code, only these definitions. The descriptions decide whether it
 picks the right tool, so they say when to use each one and how to phrase the input.
